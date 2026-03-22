@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect, Suspense } from "react";
+import { useState, Suspense } from "react";
 import { useSearchParams } from "next/navigation";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -49,14 +49,9 @@ export default function BookPage() {
 function BookPageContent() {
   const searchParams = useSearchParams();
   const [submitted, setSubmitted] = useState(false);
-  const [selectedPackage, setSelectedPackage] = useState("");
-
-  useEffect(() => {
-    const pkg = searchParams.get("package");
-    if (pkg) {
-      setSelectedPackage(pkg);
-    }
-  }, [searchParams]);
+  const [selectedPackage, setSelectedPackage] = useState(
+    searchParams.get("package") || ""
+  );
 
   async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();

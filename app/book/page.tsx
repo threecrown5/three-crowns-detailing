@@ -49,12 +49,16 @@ export default function BookPage() {
 function BookPageContent() {
   const searchParams = useSearchParams();
   const [submitted, setSubmitted] = useState(false);
+  const [submitting, setSubmitting] = useState(false);
+  const [error, setError] = useState(false);
   const [selectedPackage, setSelectedPackage] = useState(
     searchParams.get("package") || ""
   );
 
   async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
+    setSubmitting(true);
+    setError(false);
     const form = e.currentTarget;
     const formData = new FormData(form);
     formData.append("_subject", `New Detail Request - ${selectedPackage || "No package selected"}`);
@@ -62,14 +66,17 @@ function BookPageContent() {
     formData.append("_template", "table");
 
     try {
-      await fetch("https://formsubmit.co/ajax/threecrowns.detailing@gmail.com", {
+      const res = await fetch("https://formsubmit.co/ajax/threecrowns.detailing@gmail.com", {
         method: "POST",
         headers: { Accept: "application/json" },
         body: formData,
       });
+      if (!res.ok) throw new Error();
       setSubmitted(true);
     } catch {
-      setSubmitted(true);
+      setError(true);
+    } finally {
+      setSubmitting(false);
     }
   }
 
@@ -135,10 +142,16 @@ function BookPageContent() {
 
                 <Button
                   type="submit"
-                  className="bg-gold! text-white! px-10 py-2.5 h-auto! tracking-wider uppercase text-xs font-semibold hover:bg-gold-soft! transition-all"
+                  disabled={submitting}
+                  className="bg-gold! text-white! px-10 py-2.5 h-auto! tracking-wider uppercase text-xs font-semibold hover:bg-gold-soft! transition-all disabled:opacity-50"
                 >
-                  Submit
+                  {submitting ? "Submitting..." : "Submit"}
                 </Button>
+                {error && (
+                  <p className="text-red-400 text-xs mt-2">
+                    Something went wrong. Please try again or call (818) 296-7347.
+                  </p>
+                )}
                 <p className="text-xs opacity-50">
                   No payment required to request your appointment.
                 </p>

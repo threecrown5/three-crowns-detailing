@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect, useCallback } from "react";
 import Image from "next/image";
 import { PageHeader } from "@/components/PageHeader";
 
@@ -21,6 +21,21 @@ const galleryImages = [
 
 export default function GalleryPage() {
   const [selectedImage, setSelectedImage] = useState<string | null>(null);
+
+  const closeLightbox = useCallback(() => setSelectedImage(null), []);
+
+  useEffect(() => {
+    if (!selectedImage) return;
+    document.body.style.overflow = "hidden";
+    const handleKey = (e: KeyboardEvent) => {
+      if (e.key === "Escape") closeLightbox();
+    };
+    window.addEventListener("keydown", handleKey);
+    return () => {
+      document.body.style.overflow = "";
+      window.removeEventListener("keydown", handleKey);
+    };
+  }, [selectedImage, closeLightbox]);
 
   return (
     <>
@@ -43,6 +58,7 @@ export default function GalleryPage() {
                 alt={image.alt}
                 width={600}
                 height={400}
+                sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 25vw"
                 className="w-full h-auto block transition-transform duration-400 group-hover:scale-105"
               />
             </div>

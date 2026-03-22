@@ -66,6 +66,7 @@ export default function ContactPage() {
             <div className="rounded-xl overflow-hidden shadow-[0_20px_50px_rgba(0,0,0,0.6)] border border-gold/20">
               <iframe
                 src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d84835.74318049081!2d-118.27430970679536!3d34.199222397635985!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x80c2c032c8f083a9%3A0xe53fa19efec926a6!2sGlendale%2C%20CA!5e1!3m2!1sen!2sus!4v1772947521983!5m2!1sen!2sus"
+                title="Three Crowns Mobile Detailing service area map"
                 width="100%"
                 height="400"
                 style={{ border: 0 }}

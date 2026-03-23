@@ -21,7 +21,7 @@ export function Header() {
 
   return (
     <header
-      className={`w-full z-50 flex items-center justify-between px-6 md:px-20 h-[90px] ${
+      className={`w-full z-50 flex items-center justify-between px-6 md:px-20 h-[70px] md:h-[90px] ${
         isHome
           ? "absolute top-0 left-0 bg-transparent"
           : "fixed top-0 left-0 bg-black/35 backdrop-blur-[8px]"
@@ -33,7 +33,7 @@ export function Header() {
           alt="Three Crowns Logo"
           width={180}
           height={60}
-          className="h-[60px] w-auto"
+          className="h-[40px] md:h-[60px] w-auto"
           priority
         />
       </Link>

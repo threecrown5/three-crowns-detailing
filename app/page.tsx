@@ -5,7 +5,7 @@ import { MapPin } from "lucide-react";
 export default function HomePage() {
   return (
     <section
-      className="relative flex-1 flex items-center bg-cover bg-center bg-no-repeat"
+      className="relative min-h-svh flex items-center bg-cover bg-center bg-no-repeat"
       style={{ backgroundImage: 'url("/images/Classic Benz.jpg")' }}
     >
       {/* Overlay */}

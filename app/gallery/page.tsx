@@ -5,18 +5,27 @@ import Image from "next/image";
 import { PageHeader } from "@/components/PageHeader";
 
 const galleryImages = [
+  { src: "/galleryC/WhiteM32.jpg", alt: "White BMW M3 Mobile Detailing" },
   { src: "/galleryC/chevybelair.jpeg", alt: "Exterior Detailing on Classic Chevrolet" },
   { src: "/galleryC/benzwheel.jpeg", alt: "Mercedes Wheel and Tire Detailing" },
+  { src: "/galleryC/GraySRT2.jpg", alt: "Dodge Challenger Detailing" },
+  { src: "/galleryC/WhiteM3wheel.jpg", alt: "BMW M3 Wheel and Tire Cleaning" },
   { src: "/galleryC/Blackbmw.jpeg", alt: "BMW Mobile Detailing Glendale, CA" },
   { src: "/galleryC/RedHellcat.jpeg", alt: "Dodge Hellcat Exterior Mobile Detailing" },
   { src: "/galleryC/BenzDriverSide.jpeg", alt: "Mercedes Benz Interior Detailing Transformation" },
   { src: "/galleryC/RedBike.jpeg", alt: "Dirt Bike Mobile Detailing" },
   { src: "/galleryC/Cyan65Mustang.jpg", alt: "Classic 1965 Mustang Detailing" },
+  { src: "/galleryC/GraySRTRwheel.jpg", alt: "Dodge Challenger Tire Cleaning" },
+  { src: "/galleryC/WhiteM33.jpg", alt: "M3 Comp Mobile Paint Correction" },
   { src: "/galleryC/HemiEngineBay.jpeg", alt: "Hemi Engine Bay Detailing" },
   { src: "/galleryC/BlueMatteBenz.jpeg", alt: "Matte Blue Mercedes Detailing" },
   { src: "/galleryC/InteriorBeforeAndAfter.jpeg", alt: "Interior Before and After" },
   { src: "/galleryC/GrayMustang.jpeg", alt: "Gray Mustang Detailing" },
   { src: "/galleryC/WhiteLexus.jpeg", alt: "White Lexus Detailing" },
+  { src: "/galleryC/WhiteGMC3.jpg", alt: "White GMC Truck Mobile Detailing" },
+  { src: "/galleryC/GraySRTFWheel.jpg", alt: "Dodge Charger Wheel Detailing" },
+  { src: "/galleryC/GraySienna.jpg", alt: "Toyota Sienna Mobile Detailing" },
+  { src: "/galleryC/GraySRT3.jpg", alt: "Dodge Challenger Mobile Detailing" },
 ];
 
 export default function GalleryPage() {

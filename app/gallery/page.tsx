@@ -24,7 +24,7 @@ const galleryImages = [
   { src: "/galleryC/WhiteLexus.jpeg", alt: "White Lexus Detailing" },
   { src: "/galleryC/WhiteGMC3.jpg", alt: "White GMC Truck Mobile Detailing" },
   { src: "/galleryC/GraySRTFWheel.jpg", alt: "Dodge Charger Wheel Detailing" },
-  { src: "/galleryC/GraySienna.jpg", alt: "Toyota Sienna Mobile Detailing" },
+  { src: "/galleryC/GraySienna.jpeg", alt: "Toyota Sienna Mobile Detailing" },
   { src: "/galleryC/GraySRT3.jpg", alt: "Dodge Challenger Mobile Detailing" },
 ];
 

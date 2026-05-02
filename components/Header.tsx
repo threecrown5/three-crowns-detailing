@@ -52,7 +52,7 @@ export function Header() {
         ))}
 
         {/* Phone number — desktop */}
-        
+        <a
           href="tel:+18182967347"
           className="font-medium tracking-wide text-gold hover:opacity-80 transition-opacity"
         >
@@ -93,7 +93,7 @@ export function Header() {
             ))}
 
             {/* Phone number — mobile */}
-            
+            <a
               href="tel:+18182967347"
               onClick={() => setOpen(false)}
               className="text-lg font-medium tracking-wide text-gold hover:opacity-80 transition-opacity"

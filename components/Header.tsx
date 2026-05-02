@@ -1,5 +1,4 @@
 "use client";
-
 import Link from "next/link";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
@@ -51,6 +50,15 @@ export function Header() {
             {link.label}
           </Link>
         ))}
+
+        {/* Phone number — desktop */}
+        
+          href="tel:+18182967347"
+          className="font-medium tracking-wide text-gold hover:opacity-80 transition-opacity"
+        >
+          (818) 296-7347
+        </a>
+
         <Button
           asChild
           className="ml-2 tracking-wide bg-gold! text-white! rounded-full px-6 py-2 font-semibold hover:bg-gold-soft! hover:-translate-y-0.5 transition-all"
@@ -83,6 +91,16 @@ export function Header() {
                 {link.label}
               </Link>
             ))}
+
+            {/* Phone number — mobile */}
+            
+              href="tel:+18182967347"
+              onClick={() => setOpen(false)}
+              className="text-lg font-medium tracking-wide text-gold hover:opacity-80 transition-opacity"
+            >
+              (818) 296-7347
+            </a>
+
             <Button
               asChild
               className="bg-gold text-white rounded-full px-6 py-2 font-semibold hover:bg-gold-soft"

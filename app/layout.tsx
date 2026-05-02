@@ -75,27 +75,30 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={montserrat.variable}>
-      <body className="font-[family-name:var(--font-montserrat)]">
+  <html lang="en" className={montserrat.variable}>
+    <body className="font-[family-name:var(--font-montserrat)]">
 
-        <!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=AW-17812920864">
-</script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
+      {/* Google Tag */}
+      <Script
+        src="https://www.googletagmanager.com/gtag/js?id=AW-xxxxxxxxx"
+        strategy="afterInteractive"
+      />
+      <Script id="google-tag">
+        {`
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+          gtag('config', 'AW-xxxxxxxxx');
+        `}
+      </Script>
 
-  gtag('config', 'AW-17812920864');
-</script>
-          
-        <StructuredData />
-        <TooltipProvider>
-          <Header />
-          {children}
-          <Footer />
-        </TooltipProvider>
-      </body>
-    </html>
-  );
+      <StructuredData />
+      <TooltipProvider>
+        <Header />
+        {children}
+        <Footer />
+      </TooltipProvider>
+    </body>
+  </html>
+);
 }

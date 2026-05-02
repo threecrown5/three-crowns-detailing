@@ -5,6 +5,7 @@ import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
 import { StructuredData } from "@/components/StructuredData";
 import "./globals.css";
+import Script from "next/script";
 
 const montserrat = Montserrat({
   subsets: ["latin"],

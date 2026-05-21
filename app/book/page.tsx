@@ -83,7 +83,7 @@ function BookPageContent() {
       <PageHeader
         label="APPOINTMENT"
         heading="We'll take care of it."
-        subtitle="Handled. Every time."
+        subtitle="We come to your home or office in Glendale, Pasadena, and Burbank. No drop-off needed."
       />
 
       <section className="pb-20 px-6 md:px-20 w-full min-w-0 max-w-[1200px] mx-auto">

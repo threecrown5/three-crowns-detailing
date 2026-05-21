@@ -12,7 +12,7 @@ export function PageHeader({
       <p className="tracking-[6px] text-xs text-gold opacity-80 mb-3">
         {label}
       </p>
-      <h1 className="text-4xl md:text-5xl font-medium mb-4">{heading}</h1>
+      <h1 className="text-4xl md:text-5xl font-light mb-4">{heading}</h1>
       <p className="opacity-60 leading-relaxed max-w-[500px]">{subtitle}</p>
     </div>
   );

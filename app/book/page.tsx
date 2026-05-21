@@ -26,7 +26,7 @@ const trustItems = [
   },
   {
     title: "Fast Response",
-    description: "We'll reach out to you within the hour to confirm.",
+    description: "We'll reach out within the hour to confirm.",
     icon: Clock,
   },
   {
@@ -100,7 +100,7 @@ function BookPageContent() {
                   Get a free quote in seconds.
                 </p>
                 <p className="text-xs tracking-[3px] uppercase text-gold opacity-70">
-                  We'll reach out to you within the hour
+                  We'll reach out within the hour
                 </p>
 
                 {/* Name */}
@@ -164,7 +164,7 @@ function BookPageContent() {
                 <CheckCircle className="mx-auto mb-4 text-gold" size={48} />
                 <h2 className="text-2xl text-gold font-semibold mb-3">You're all set.</h2>
                 <p className="opacity-70">
-                  We'll call you shortly to confirm your appointment.<br />
+                  We'll reach out shortly to confirm your appointment.<br />
                   Questions? Call or text (818) 296-7347.
                 </p>
               </div>

@@ -200,7 +200,7 @@ function BookPageContent() {
  
           {/* ── RIGHT: What to Expect ── */}
           <div className="lg:col-span-2 lg:self-start lg:mt-0 lg:pt-0">
-            <div className="lg:border-l lg:border-gold/15 lg:pl-16 pt-0">
+            <div className="lg:border-l lg:border-gold/15 lg:pl-16 lg:pt-0 mt-0 pt-0">
               <h3 className="text-xs tracking-[4px] uppercase text-gold opacity-80 mb-8">
                 What to Expect
               </h3>

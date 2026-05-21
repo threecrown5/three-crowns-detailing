@@ -26,7 +26,7 @@ const trustItems = [
   },
   {
     title: "Fast Response",
-    description: "We'll reach out you within the hour to confirm.",
+    description: "We'll reach out to you within the hour to confirm.",
     icon: Clock,
   },
   {
@@ -100,7 +100,7 @@ function BookPageContent() {
                   Get a free quote in seconds.
                 </p>
                 <p className="text-xs tracking-[3px] uppercase text-gold opacity-70">
-                  We'll call you within the hour
+                  We'll reach out to you within the hour
                 </p>
 
                 {/* Name */}

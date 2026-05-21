@@ -26,7 +26,7 @@ const trustItems = [
   },
   {
     title: "Fast Response",
-    description: "We'll call you within the hour to confirm.",
+    description: "We'll reach out you within the hour to confirm.",
     icon: Clock,
   },
   {

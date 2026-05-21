@@ -3,8 +3,8 @@ import { Button } from "@/components/ui/button";
 import { MapPin, Star, CheckCircle } from "lucide-react";
 
 const reviews = [
-  { name: "Thunder Butt", text: "The work is meticulous, and the wax has lasted over a month and still looks great. They listened and made it right without any hassle." },
-  { name: "Luke", text: "They went above and beyond and paid attention to details most people would skip. The car looked absolutely amazing inside and out." },
+  { name: "Cheryl L.", text: "The work is meticulous, and the wax has lasted over a month and still looks great. They listened and made it right without any hassle." },
+  { name: "Luke K.", text: "They went above and beyond and paid attention to details most people would skip. The car looked absolutely amazing inside and out." },
   { name: "Jessica C.", text: "Professional, punctual, and extremely thorough. Both the interior and exterior were left spotless." },
 ];
 
@@ -29,20 +29,22 @@ export default function HomePage() {
         className="relative min-h-svh flex items-center bg-cover bg-center bg-no-repeat"
         style={{ backgroundImage: 'url("/images/Classic Benz.jpg")' }}
       >
-        {/* Horizontal overlay — heavy left where text lives */}
+        {/* Horizontal overlay */}
         <div className="absolute inset-0 bg-gradient-to-r from-black/85 via-black/55 to-transparent" />
-        {/* Vertical overlay — bumped for mobile legibility per C2 suggestion */}
+        {/* Vertical overlay — mobile legibility */}
         <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-black/40" />
+        {/* Bottom fade — smooth transition into next section */}
+        <div className="absolute bottom-0 left-0 right-0 h-40 bg-gradient-to-t from-[#070E08] to-transparent" />
 
         <div className="relative z-10 w-full max-w-[1200px] mx-auto px-6 md:px-20 py-32 md:py-0">
           <div className="max-w-[680px] text-center md:text-left">
 
             <p className="text-gold text-xs tracking-[6px] font-medium mb-6 uppercase opacity-80">
-              Mobile Detailing · Glendale · Pasadena · Burbank
+              Glendale · Pasadena · Burbank
             </p>
 
             <h1 className="text-4xl md:text-[clamp(52px,5vw,80px)] font-light tracking-wide leading-[1.1] mb-6">
-              Your car.<br className="hidden md:block" /> We handle it.
+              Your car.<br className="hidden md:block" /> We'll handle it.
             </h1>
 
             <p className="text-white/65 text-base md:text-lg leading-relaxed max-w-[520px] mb-4 mx-auto md:mx-0">

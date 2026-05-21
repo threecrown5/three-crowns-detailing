@@ -4,7 +4,6 @@ import { useState, Suspense } from "react";
 import { useSearchParams } from "next/navigation";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { Textarea } from "@/components/ui/textarea";
 import {
   Select,
   SelectContent,
@@ -12,31 +11,8 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { CheckCircle, Truck, ShieldCheck, Clock, Sparkles } from "lucide-react";
+import { CheckCircle, Phone, MessageCircle, Star, MapPin, Clock } from "lucide-react";
 import { PageHeader } from "@/components/PageHeader";
-
-const trustItems = [
-  {
-    title: "Mobile Convenience",
-    description: "We come directly to your home or workplace.",
-    icon: Truck,
-  },
-  {
-    title: "Professional Products",
-    description: "Safe for all paint types and interior materials.",
-    icon: Sparkles,
-  },
-  {
-    title: "Fast Response",
-    description: "Most booking requests are confirmed within 1-2 hours.",
-    icon: Clock,
-  },
-  {
-    title: "Satisfaction Guaranteed",
-    description: "If something isn't right, we'll make it right.",
-    icon: ShieldCheck,
-  },
-];
 
 export default function BookPage() {
   return (
@@ -84,121 +60,143 @@ function BookPageContent() {
     <>
       <PageHeader
         label="APPOINTMENT"
-        heading="Request Your Detail"
-        subtitle="Request your mobile detailing appointment. We will contact you shortly to confirm."
+        heading="We'll take care of it."
+        subtitle="Handled. Every time."
       />
-      <section className="pb-20 px-6 md:px-20 w-full min-w-0 max-w-[1200px] mx-auto">
-        <div className="grid grid-cols-1 lg:grid-cols-5 gap-16">
-          {/* Left: Form */}
-          <div className="lg:col-span-3">
-            {!submitted ? (
-              <form onSubmit={handleSubmit} className="space-y-5">
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
-                  <Input
-                    type="text"
-                    name="name"
-                    placeholder="Full Name"
-                    required
-                    className="bg-black/35 border-white/15 text-white placeholder:text-white/60 focus:border-gold focus:ring-gold h-14"
-                  />
-                  <Input
-                    type="tel"
-                    name="phone"
-                    placeholder="Phone Number"
-                    required
-                    className="bg-black/35 border-white/15 text-white placeholder:text-white/60 focus:border-gold focus:ring-gold h-14"
-                  />
-                </div>
 
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
-                  <Input
-                    type="text"
-                    name="vehicle"
-                    placeholder="Vehicle Year / Make / Model"
-                    className="bg-black/35 border-white/15 text-white placeholder:text-white/60 focus:border-gold focus:ring-gold h-14"
-                  />
-                  <Select
-                    name="package"
-                    value={selectedPackage}
-                    onValueChange={setSelectedPackage}
-                  >
-                    <SelectTrigger className="bg-black/35 border-white/15 text-white h-14 focus:border-gold focus:ring-gold">
-                      <SelectValue placeholder="Select Package" />
-                    </SelectTrigger>
-                    <SelectContent className="bg-viridian-dark border-gold/20 text-white">
-                      <SelectItem value="Prince Detail">Prince Detail</SelectItem>
-                      <SelectItem value="King Detail">King Detail</SelectItem>
-                      <SelectItem value="Queen Detail">Queen Detail</SelectItem>
-                    </SelectContent>
-                  </Select>
-                </div>
+      <section className="pb-20 px-6 md:px-20 w-full min-w-0 max-w-[800px] mx-auto">
 
-                <Textarea
-                  name="details"
-                  rows={4}
-                  placeholder="Address & Additional Details"
-                  className="bg-black/35 border-white/15 text-white placeholder:text-white/60 focus:border-gold focus:ring-gold"
-                />
-
-                <Button
-                  type="submit"
-                  disabled={submitting}
-                  className="bg-gold! text-white! px-10 py-2.5 h-auto! tracking-wider uppercase text-xs font-semibold hover:bg-gold-soft! transition-all disabled:opacity-50"
-                >
-                  {submitting ? "Submitting..." : "Submit"}
-                </Button>
-                {error && (
-                  <p className="text-red-400 text-xs mt-2">
-                    Something went wrong. Please try again or call (818) 296-7347.
-                  </p>
-                )}
-                <p className="text-xs opacity-50">
-                  No payment required to request your appointment.
-                </p>
-              </form>
-            ) : (
-              <div className="text-center py-16 px-8 border border-gold/20 rounded-xl bg-black/30 animate-in fade-in slide-in-from-bottom-3 duration-400">
-                <CheckCircle className="mx-auto mb-4 text-gold" size={48} />
-                <h2 className="text-2xl text-gold font-semibold mb-3">
-                  Booking Request Sent
-                </h2>
-                <p className="opacity-70">
-                  Thank you for choosing Three Crowns. We will contact you
-                  shortly.
-                </p>
+        {/* ── PRIMARY CTAs — Call & Text ── */}
+        <div className="mb-10">
+          <p className="text-xs tracking-[3px] uppercase text-gold opacity-70 text-center mb-5">
+            Fastest way to book
+          </p>
+          <div className="grid grid-cols-2 gap-4">
+            <a
+              href="tel:8182967347"
+              className="flex items-center justify-center gap-3 bg-gold text-black font-semibold text-sm tracking-wide uppercase px-6 py-5 rounded-sm hover:bg-gold/90 transition-all hover:-translate-y-0.5 hover:shadow-lg hover:shadow-gold/20"
+            >
+              <Phone size={16} />
+              <div className="flex flex-col items-start">
+                <span className="text-sm font-semibold">Call Us</span>
+                <span className="text-xs font-normal opacity-70">(818) 296-7347</span>
               </div>
-            )}
-          </div>
-
-          {/* Right: What to Expect */}
-          <div className="lg:col-span-2">
-            <div className="lg:border-l lg:border-gold/15 lg:pl-16">
-              <h3 className="text-xs tracking-[4px] uppercase text-gold opacity-80 mb-8">
-                What to Expect
-              </h3>
-              <div className="space-y-8">
-                {trustItems.map((item) => {
-                  const Icon = item.icon;
-                  return (
-                    <div key={item.title} className="flex items-start gap-4">
-                      <div className="w-10 h-10 rounded-full bg-gold/10 border border-gold/20 flex items-center justify-center shrink-0">
-                        <Icon size={16} className="text-gold" />
-                      </div>
-                      <div>
-                        <h4 className="font-semibold tracking-wide text-sm mb-1">
-                          {item.title}
-                        </h4>
-                        <p className="opacity-50 text-sm leading-relaxed">
-                          {item.description}
-                        </p>
-                      </div>
-                    </div>
-                  );
-                })}
+            </a>
+            <a
+              href="sms:8182967347&body=Hi, I'd like to get a quote for a detail."
+              className="flex items-center justify-center gap-3 border border-gold/40 text-gold text-sm tracking-wide uppercase px-6 py-5 rounded-sm hover:border-gold hover:bg-gold/5 transition-all hover:-translate-y-0.5"
+            >
+              <MessageCircle size={16} />
+              <div className="flex flex-col items-start">
+                <span className="text-sm font-semibold">Text Us</span>
+                <span className="text-xs font-normal opacity-70">Quick quote</span>
               </div>
-            </div>
+            </a>
           </div>
         </div>
+
+        {/* ── OR DIVIDER ── */}
+        <div className="flex items-center gap-4 mb-10">
+          <div className="flex-1 h-px bg-white/8" />
+          <span className="text-xs tracking-[3px] uppercase text-white/30">or leave your info</span>
+          <div className="flex-1 h-px bg-white/8" />
+        </div>
+
+        {/* ── FORM ── */}
+        <div className="max-w-[560px]">
+          <p className="text-xs tracking-[3px] uppercase text-gold opacity-70 mb-6">
+            We'll call you within the hour
+          </p>
+
+          {!submitted ? (
+            <form onSubmit={handleSubmit} className="space-y-4">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <Input
+                  type="text"
+                  name="name"
+                  placeholder="Your name"
+                  required
+                  className="bg-black/35 border-white/15 text-white placeholder:text-white/40 focus:border-gold focus:ring-gold h-14"
+                />
+                <Input
+                  type="tel"
+                  name="phone"
+                  placeholder="Phone number"
+                  required
+                  className="bg-black/35 border-white/15 text-white placeholder:text-white/40 focus:border-gold focus:ring-gold h-14"
+                />
+              </div>
+
+              <Select
+                name="package"
+                value={selectedPackage}
+                onValueChange={setSelectedPackage}
+              >
+                <SelectTrigger className="bg-black/35 border-white/15 text-white h-14 focus:border-gold focus:ring-gold">
+                  <SelectValue placeholder="Which package interests you? (optional)" />
+                </SelectTrigger>
+                <SelectContent className="bg-viridian-dark border-gold/20 text-white">
+                  <SelectItem value="Prince Detail">Prince — From $170</SelectItem>
+                  <SelectItem value="King Detail">King — From $270</SelectItem>
+                  <SelectItem value="Queen Detail">Queen — From $350</SelectItem>
+                  <SelectItem value="Crown Refresh">Crown Refresh — Maintenance wash</SelectItem>
+                  <SelectItem value="Not sure">Not sure yet — just want a quote</SelectItem>
+                </SelectContent>
+              </Select>
+
+              <Button
+                type="submit"
+                disabled={submitting}
+                className="w-full bg-transparent! border border-gold/30 text-white! px-10 py-2.5 h-14! tracking-wider uppercase text-xs font-semibold hover:border-gold/60 hover:bg-gold/5! transition-all disabled:opacity-50"
+              >
+                {submitting ? "Submitting..." : "Request a Quote →"}
+              </Button>
+
+              {error && (
+                <p className="text-red-400 text-xs mt-2">
+                  Something went wrong. Please try again or call (818) 296-7347.
+                </p>
+              )}
+              <p className="text-xs opacity-40">
+                No payment required. We'll reach out to confirm timing and answer any questions.
+              </p>
+            </form>
+          ) : (
+            <div className="text-center py-16 px-8 border border-gold/20 rounded-xl bg-black/30 animate-in fade-in slide-in-from-bottom-3 duration-400">
+              <CheckCircle className="mx-auto mb-4 text-gold" size={48} />
+              <h2 className="text-2xl text-gold font-semibold mb-3">You're all set.</h2>
+              <p className="opacity-70">
+                We'll call you shortly to confirm your appointment.<br />
+                Questions? Call or text (818) 296-7347.
+              </p>
+            </div>
+          )}
+        </div>
+
+        {/* ── TRUST BAR ── */}
+        <div className="grid grid-cols-3 border border-gold/10 rounded-sm overflow-hidden mt-12 max-w-[560px]">
+          <div className="flex flex-col items-center justify-center py-5 px-4 bg-black/20 border-r border-gold/10 text-center">
+            <Star size={14} className="text-gold mb-2 opacity-70" />
+            <span className="text-gold font-light text-xl" style={{ fontFamily: 'var(--font-cormorant, serif)' }}>31</span>
+            <span className="text-xs opacity-40 mt-1 tracking-wide">5-Star Reviews</span>
+          </div>
+          <div className="flex flex-col items-center justify-center py-5 px-4 bg-black/20 border-r border-gold/10 text-center">
+            <Clock size={14} className="text-gold mb-2 opacity-70" />
+            <span className="text-gold font-light text-xl" style={{ fontFamily: 'var(--font-cormorant, serif)' }}>1hr</span>
+            <span className="text-xs opacity-40 mt-1 tracking-wide">Avg. Response</span>
+          </div>
+          <div className="flex flex-col items-center justify-center py-5 px-4 bg-black/20 text-center">
+            <MapPin size={14} className="text-gold mb-2 opacity-70" />
+            <span className="text-gold font-light text-xl" style={{ fontFamily: 'var(--font-cormorant, serif)' }}>$0</span>
+            <span className="text-xs opacity-40 mt-1 tracking-wide">Drop-off needed</span>
+          </div>
+        </div>
+
+        {/* ── SERVICE AREA ── */}
+        <p className="text-xs text-center opacity-30 tracking-widest mt-6 max-w-[560px]">
+          GLENDALE · PASADENA · BURBANK · AND SURROUNDING AREAS
+        </p>
+
       </section>
     </>
   );

@@ -88,7 +88,7 @@ function BookPageContent() {
       />
  
       <section className="pb-20 px-6 md:px-20 w-full min-w-0 max-w-[1200px] mx-auto">
-        <div className="grid grid-cols-1 lg:grid-cols-5 gap-16">
+        <div className="grid grid-cols-1 lg:grid-cols-5 gap-16 lg:items-start">
  
           {/* ── LEFT: Call/Text + Form ── */}
           <div className="lg:col-span-3">
@@ -135,7 +135,7 @@ function BookPageContent() {
                 <p className="text-xs tracking-[3px] uppercase text-gold opacity-70">
                   We'll call you within the hour
                 </p>
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
+                <div className="grid grid-cols-1 gap-5">
                   <Input
                     type="text"
                     name="name"

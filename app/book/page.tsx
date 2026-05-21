@@ -10,7 +10,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { CheckCircle, Phone, MessageCircle, Truck, Sparkles, Clock, ShieldCheck } from "lucide-react";
+import { CheckCircle, Phone, MessageCircle, Truck, Sparkles, Clock, ShieldCheck, Star } from "lucide-react";
 import { PageHeader } from "@/components/PageHeader";
 
 const trustItems = [
@@ -33,6 +33,25 @@ const trustItems = [
     title: "Satisfaction Guaranteed",
     description: "If something isn't right, we'll make it right.",
     icon: ShieldCheck,
+  },
+];
+
+const reviews = [
+  {
+    name: "Thunder Butt",
+    text: "They respond quickly, scheduling is super flexible, and pricing is very reasonable. The work is meticulous, and the wax has lasted over a month and still looks great. I also really appreciate how professionally they addressed a small complaint — they listened and made it right without any hassle.",
+  },
+  {
+    name: "Jessica C.",
+    text: "Professional, punctual, and extremely thorough. Both the interior and exterior were left spotless. You can tell they take pride in their work.",
+  },
+  {
+    name: "Luke",
+    text: "They went above and beyond what was required and paid attention to details most people would skip. The car looked absolutely amazing when they were done, inside and out.",
+  },
+  {
+    name: "Haroutyun S.",
+    text: "JP was professional and did a great job. He was kind enough to come out within an hour of my call. I would definitely recommend him to others.",
   },
 ];
 
@@ -89,13 +108,11 @@ function BookPageContent() {
       <section className="pb-20 px-6 md:px-20 w-full min-w-0 max-w-[1200px] mx-auto">
         <div className="grid grid-cols-1 lg:grid-cols-5 gap-16 lg:items-start">
 
-          {/* ── LEFT: Form + Call/Text ── */}
+          {/* ── LEFT: Form + Call/Text + Reviews ── */}
           <div className="lg:col-span-3">
 
             {!submitted ? (
               <form onSubmit={handleSubmit} className="space-y-4">
-
-                {/* Mini headline + label */}
                 <p className="text-lg font-light text-white">
                   Get a free quote in seconds.
                 </p>
@@ -103,7 +120,6 @@ function BookPageContent() {
                   We'll reach out within the hour
                 </p>
 
-                {/* Name */}
                 <Input
                   type="text"
                   name="name"
@@ -112,7 +128,6 @@ function BookPageContent() {
                   className="bg-black/35 border-white/15 text-white placeholder:text-white/40 focus:border-gold focus:ring-gold h-14"
                 />
 
-                {/* Phone */}
                 <Input
                   type="tel"
                   name="phone"
@@ -121,7 +136,6 @@ function BookPageContent() {
                   className="bg-black/35 border-white/15 text-white placeholder:text-white/40 focus:border-gold focus:ring-gold h-14"
                 />
 
-                {/* Package — optional */}
                 <Select
                   name="package"
                   value={selectedPackage}
@@ -139,7 +153,6 @@ function BookPageContent() {
                   </SelectContent>
                 </Select>
 
-                {/* Submit */}
                 <button
                   type="submit"
                   disabled={submitting}
@@ -157,7 +170,6 @@ function BookPageContent() {
                 <p className="text-xs opacity-60">
                   No payment required. We'll reach out to confirm timing and answer any questions.
                 </p>
-
               </form>
             ) : (
               <div className="text-center py-16 px-8 border border-gold/20 rounded-xl bg-black/30 animate-in fade-in slide-in-from-bottom-3 duration-400">
@@ -177,7 +189,7 @@ function BookPageContent() {
               <div className="flex-1 h-px bg-white/10" />
             </div>
 
-            {/* Call & Text — secondary */}
+            {/* Call & Text */}
             <div className="grid grid-cols-2 gap-4">
               <a
                 href="tel:8182967347"
@@ -199,6 +211,38 @@ function BookPageContent() {
                   <span className="text-xs font-normal opacity-60">Quick quote</span>
                 </div>
               </a>
+            </div>
+
+            {/* ── Review Strip ── */}
+            <div className="mt-12">
+              <div className="flex items-center gap-3 mb-6">
+                <div className="flex gap-0.5">
+                  {[...Array(5)].map((_, i) => (
+                    <Star key={i} size={12} className="text-gold fill-gold" />
+                  ))}
+                </div>
+                <span className="text-xs tracking-[3px] uppercase text-gold opacity-70">
+                  31 Google Reviews
+                </span>
+              </div>
+              <div className="space-y-4">
+                {reviews.map((review) => (
+                  <div
+                    key={review.name}
+                    className="border border-white/8 bg-black/20 rounded-sm px-5 py-4"
+                  >
+                    <div className="flex items-center gap-2 mb-2">
+                      <div className="flex gap-0.5">
+                        {[...Array(5)].map((_, i) => (
+                          <Star key={i} size={10} className="text-gold fill-gold" />
+                        ))}
+                      </div>
+                      <span className="text-xs font-medium text-white opacity-70">{review.name}</span>
+                    </div>
+                    <p className="text-sm opacity-50 leading-relaxed">{review.text}</p>
+                  </div>
+                ))}
+              </div>
             </div>
 
           </div>

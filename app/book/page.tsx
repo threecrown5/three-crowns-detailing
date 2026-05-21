@@ -1,5 +1,5 @@
 "use client";
-
+ 
 import { useState, Suspense } from "react";
 import { useSearchParams } from "next/navigation";
 import { Button } from "@/components/ui/button";
@@ -13,7 +13,7 @@ import {
 } from "@/components/ui/select";
 import { CheckCircle, Phone, MessageCircle, Truck, Sparkles, Clock, ShieldCheck } from "lucide-react";
 import { PageHeader } from "@/components/PageHeader";
-
+ 
 const trustItems = [
   {
     title: "Mobile Convenience",
@@ -36,7 +36,7 @@ const trustItems = [
     icon: ShieldCheck,
   },
 ];
-
+ 
 export default function BookPage() {
   return (
     <Suspense>
@@ -44,7 +44,7 @@ export default function BookPage() {
     </Suspense>
   );
 }
-
+ 
 function BookPageContent() {
   const searchParams = useSearchParams();
   const [submitted, setSubmitted] = useState(false);
@@ -53,7 +53,7 @@ function BookPageContent() {
   const [selectedPackage, setSelectedPackage] = useState(
     searchParams.get("package") || ""
   );
-
+ 
   async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
     setSubmitting(true);
@@ -63,7 +63,7 @@ function BookPageContent() {
     formData.append("_subject", `New Detail Request - ${selectedPackage || "No package selected"}`);
     formData.append("_captcha", "false");
     formData.append("_template", "table");
-
+ 
     try {
       const res = await fetch("https://formsubmit.co/ajax/threecrowns.detailing@gmail.com", {
         method: "POST",
@@ -78,7 +78,7 @@ function BookPageContent() {
       setSubmitting(false);
     }
   }
-
+ 
   return (
     <>
       <PageHeader
@@ -86,19 +86,19 @@ function BookPageContent() {
         heading="We'll take care of it."
         subtitle="Handled. Every time."
       />
-
+ 
       <section className="pb-20 px-6 md:px-20 w-full min-w-0 max-w-[1200px] mx-auto">
         <div className="grid grid-cols-1 lg:grid-cols-5 gap-16">
-
+ 
           {/* ── LEFT: Call/Text + Form ── */}
           <div className="lg:col-span-3">
-
+ 
             {/* Call & Text buttons */}
             <div className="mb-8">
               <p className="text-xs tracking-[3px] uppercase text-gold opacity-70 mb-4">
                 Fastest way to book
               </p>
-              <div className="grid grid-cols-2 gap-4">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <a
                   href="tel:8182967347"
                   className="flex items-center justify-center gap-3 bg-gold text-black font-semibold text-sm tracking-wide uppercase px-6 py-5 rounded-sm hover:bg-gold/90 transition-all hover:-translate-y-0.5 hover:shadow-lg hover:shadow-gold/20"
@@ -121,14 +121,14 @@ function BookPageContent() {
                 </a>
               </div>
             </div>
-
+ 
             {/* OR divider */}
             <div className="flex items-center gap-4 mb-8">
               <div className="flex-1 h-px bg-white/10" />
               <span className="text-xs tracking-[3px] uppercase text-white/30">or leave your info</span>
               <div className="flex-1 h-px bg-white/10" />
             </div>
-
+ 
             {/* Form */}
             {!submitted ? (
               <form onSubmit={handleSubmit} className="space-y-5">
@@ -151,7 +151,7 @@ function BookPageContent() {
                     className="bg-black/35 border-white/15 text-white placeholder:text-white/60 focus:border-gold focus:ring-gold h-14"
                   />
                 </div>
-
+ 
                 <Select
                   name="package"
                   value={selectedPackage}
@@ -168,7 +168,7 @@ function BookPageContent() {
                     <SelectItem value="Not sure">Not sure yet — just want a quote</SelectItem>
                   </SelectContent>
                 </Select>
-
+ 
                 <Button
                   type="submit"
                   disabled={submitting}
@@ -176,7 +176,7 @@ function BookPageContent() {
                 >
                   {submitting ? "Submitting..." : "Request a Quote →"}
                 </Button>
-
+ 
                 {error && (
                   <p className="text-red-400 text-xs mt-2">
                     Something went wrong. Please try again or call (818) 296-7347.
@@ -197,10 +197,10 @@ function BookPageContent() {
               </div>
             )}
           </div>
-
+ 
           {/* ── RIGHT: What to Expect ── */}
-          <div className="lg:col-span-2">
-            <div className="lg:border-l lg:border-gold/15 lg:pl-16">
+          <div className="lg:col-span-2 lg:self-start">
+            <div className="lg:border-l lg:border-gold/15 lg:pl-16 pt-0">
               <h3 className="text-xs tracking-[4px] uppercase text-gold opacity-80 mb-8">
                 What to Expect
               </h3>
@@ -224,7 +224,7 @@ function BookPageContent() {
                   );
                 })}
               </div>
-
+ 
               {/* Trust bar — desktop only */}
               <div className="hidden lg:grid grid-cols-3 border border-gold/10 rounded-sm overflow-hidden mt-12">
                 <div className="flex flex-col items-center justify-center py-4 px-3 bg-black/20 border-r border-gold/10 text-center">
@@ -242,7 +242,7 @@ function BookPageContent() {
               </div>
             </div>
           </div>
-
+ 
         </div>
       </section>
     </>

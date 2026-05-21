@@ -98,7 +98,7 @@ function BookPageContent() {
               <p className="text-xs tracking-[3px] uppercase text-gold opacity-70 mb-4">
                 Fastest way to book
               </p>
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              <div className="grid grid-cols-1 gap-4">
                 <a
                   href="tel:8182967347"
                   className="flex items-center justify-center gap-3 bg-gold text-black font-semibold text-sm tracking-wide uppercase px-6 py-5 rounded-sm hover:bg-gold/90 transition-all hover:-translate-y-0.5 hover:shadow-lg hover:shadow-gold/20"
@@ -199,7 +199,7 @@ function BookPageContent() {
           </div>
  
           {/* ── RIGHT: What to Expect ── */}
-          <div className="lg:col-span-2 lg:self-start">
+          <div className="lg:col-span-2 lg:self-start lg:mt-0 lg:pt-0">
             <div className="lg:border-l lg:border-gold/15 lg:pl-16 pt-0">
               <h3 className="text-xs tracking-[4px] uppercase text-gold opacity-80 mb-8">
                 What to Expect

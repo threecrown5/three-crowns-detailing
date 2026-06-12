@@ -2,6 +2,7 @@ import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { Phone, Mail, Instagram, MapPin } from "lucide-react";
 import { PageHeader } from "@/components/PageHeader";
+import { PhoneLink } from "@/components/PhoneLink";
 
 const contactDetails = [
   { label: "Call Or Text", value: "(818) 296-7347", icon: Phone, href: "tel:8182967347" },
@@ -40,6 +41,14 @@ export default function ContactPage() {
                     </div>
                   </div>
                 );
+
+                if (item.label === "Call Or Text") {
+                  return (
+                    <PhoneLink key={item.label} className="block hover:opacity-80 transition-opacity">
+                      {content}
+                    </PhoneLink>
+                  );
+                }
 
                 if (item.href) {
                   return (

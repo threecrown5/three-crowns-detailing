@@ -1,11 +1,48 @@
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { MapPin, Star, CheckCircle } from "lucide-react";
+import {
+  Accordion,
+  AccordionContent,
+  AccordionItem,
+  AccordionTrigger,
+} from "@/components/ui/accordion";
 
 const reviews = [
   { name: "Cheryl L.", text: "The work is meticulous, and the wax has lasted over a month and still looks great. They listened and made it right without any hassle." },
   { name: "Luke K.", text: "They went above and beyond and paid attention to details most people would skip. The car looked absolutely amazing inside and out." },
   { name: "Jessica C.", text: "Professional, punctual, and extremely thorough. Both the interior and exterior were left spotless." },
+];
+
+const faqs = [
+  {
+    q: "Do I need to be home during the appointment?",
+    a: "Nope. As long as we have access to your vehicle and a place to park and work, you're free to go about your day. Many clients are at work or running errands while we detail.",
+  },
+  {
+    q: "Do you need access to water or power?",
+    a: "No — we bring our own water tank and generator, so we're fully self-sufficient. You don't need to provide anything.",
+  },
+  {
+    q: "How long does a detail take?",
+    a: "A Prince Detail typically runs 1.5–2 hours. King and Queen packages take longer depending on your vehicle's size and condition. We'll give you a realistic time estimate when we confirm your booking.",
+  },
+  {
+    q: "What if it's raining on the day of my appointment?",
+    a: "We'll reach out to reschedule at no extra cost. Exterior work needs dry conditions to be done right, so we'd rather wait than rush it.",
+  },
+  {
+    q: "What areas do you serve?",
+    a: "Glendale, Pasadena, Burbank, Altadena, La Cañada Flintridge, and Tujunga. If you're nearby but not sure, just ask — we're flexible.",
+  },
+  {
+    q: "Do I have to pay anything to book?",
+    a: "No payment required up front. We'll confirm timing and details with you first, and handle payment once the job is done.",
+  },
+  {
+    q: "What if I'm not happy with the result?",
+    a: "If something isn't right within 48 hours of your detail, we'll come back and make it right — free, no questions asked.",
+  },
 ];
 
 const steps = [
@@ -161,6 +198,29 @@ export default function HomePage() {
             </div>
           ))}
         </div>
+      </section>
+
+      {/* ── FAQ ── */}
+      <section className="py-20 px-6 md:px-20 max-w-[800px] mx-auto w-full">
+        <p className="text-xs tracking-[4px] uppercase text-gold opacity-70 mb-2 text-center">
+          Questions
+        </p>
+        <h2 className="text-3xl md:text-4xl font-light mb-10 text-center">
+          Good to know.
+        </h2>
+
+        <Accordion type="single" collapsible className="w-full">
+          {faqs.map((faq, i) => (
+            <AccordionItem key={faq.q} value={`faq-${i}`} className="border-white/10">
+              <AccordionTrigger className="text-base font-medium hover:no-underline hover:text-gold py-5">
+                {faq.q}
+              </AccordionTrigger>
+              <AccordionContent className="text-sm opacity-50 leading-relaxed">
+                {faq.a}
+              </AccordionContent>
+            </AccordionItem>
+          ))}
+        </Accordion>
       </section>
 
       {/* ── BOTTOM CTA ── */}

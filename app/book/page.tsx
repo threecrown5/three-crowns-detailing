@@ -12,6 +12,8 @@ import {
 } from "@/components/ui/select";
 import { CheckCircle, Phone, MessageCircle, Truck, Sparkles, Clock, ShieldCheck, Star } from "lucide-react";
 import { PageHeader } from "@/components/PageHeader";
+import { PhoneLink } from "@/components/PhoneLink";
+import { trackConversion, CONVERSIONS } from "@/lib/gtag";
 
 const trustItems = [
   {
@@ -38,7 +40,7 @@ const trustItems = [
 
 const reviews = [
   {
-    name: "Thunder Butt",
+    name: "Cheryl L.",
     text: "They respond quickly, scheduling is super flexible, and pricing is very reasonable. The work is meticulous, and the wax has lasted over a month and still looks great. I also really appreciate how professionally they addressed a small complaint — they listened and made it right without any hassle.",
   },
   {
@@ -90,6 +92,7 @@ function BookPageContent() {
       });
       if (!res.ok) throw new Error();
       setSubmitted(true);
+      trackConversion(CONVERSIONS.formSubmission);
     } catch {
       setError(true);
     } finally {
@@ -191,16 +194,14 @@ function BookPageContent() {
 
             {/* Call & Text */}
             <div className="grid grid-cols-2 gap-4">
-              <a
-                href="tel:8182967347"
-                className="flex items-center justify-center gap-3 border border-gold/40 text-gold text-sm uppercase px-6 py-4 rounded-sm hover:border-gold hover:bg-gold/5 transition-all"
-              >
+              <PhoneLink className="flex items-center justify-center gap-3 border border-gold/40 text-gold text-sm uppercase px-6 py-4 rounded-sm hover:border-gold hover:bg-gold/5 transition-all">
                 <Phone size={15} />
                 <div className="flex flex-col items-start">
                   <span className="text-sm font-semibold">Call Us</span>
                   <span className="text-xs font-normal opacity-60">(818) 296-7347</span>
                 </div>
-              </a>
+              </PhoneLink>
+
               <a
                 href="sms:8182967347&body=Hi, I'd like to get a quote for a detail."
                 className="flex items-center justify-center gap-3 border border-gold/40 text-gold text-sm uppercase px-6 py-4 rounded-sm hover:border-gold hover:bg-gold/5 transition-all"

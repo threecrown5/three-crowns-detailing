@@ -201,8 +201,7 @@ function BookPageContent() {
                   <span className="text-xs font-normal opacity-60">(818) 296-7347</span>
                 </div>
               </PhoneLink>
-
-              <a
+              
                 href="sms:8182967347&body=Hi, I'd like to get a quote for a detail."
                 className="flex items-center justify-center gap-3 border border-gold/40 text-gold text-sm uppercase px-6 py-4 rounded-sm hover:border-gold hover:bg-gold/5 transition-all"
               >
@@ -216,15 +215,25 @@ function BookPageContent() {
 
             {/* ── Review Strip ── */}
             <div className="mt-12">
-              <div className="flex items-center gap-3 mb-6">
-                <div className="flex gap-0.5">
-                  {[...Array(5)].map((_, i) => (
-                    <Star key={i} size={12} className="text-gold fill-gold" />
-                  ))}
+              <div className="flex items-center justify-between mb-6 flex-wrap gap-2">
+                <div className="flex items-center gap-3">
+                  <div className="flex gap-0.5">
+                    {[...Array(5)].map((_, i) => (
+                      <Star key={i} size={12} className="text-gold fill-gold" />
+                    ))}
+                  </div>
+                  <span className="text-xs tracking-[3px] uppercase text-gold opacity-70">
+                    34 Google Reviews
+                  </span>
                 </div>
-                <span className="text-xs tracking-[3px] uppercase text-gold opacity-70">
-                  31 Google Reviews
-                </span>
+                
+                  href="https://www.google.com/search?q=Three+Crowns+Detailing&kgmid=/g/11ysl2zrrr"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-xs tracking-[2px] uppercase text-gold/70 hover:text-gold transition-colors"
+                >
+                  See all →
+                </a>
               </div>
               <div className="space-y-4">
                 {reviews.map((review) => (
@@ -278,7 +287,7 @@ function BookPageContent() {
               {/* Trust bar */}
               <div className="grid grid-cols-3 border border-gold/10 rounded-sm overflow-hidden mt-12">
                 <div className="flex flex-col items-center justify-center py-4 px-3 bg-black/20 border-r border-gold/10 text-center">
-                  <span className="text-gold text-xl font-light">31</span>
+                  <span className="text-gold text-xl font-light">34</span>
                   <span className="text-xs opacity-40 mt-1">5-Star Reviews</span>
                 </div>
                 <div className="flex flex-col items-center justify-center py-4 px-3 bg-black/20 border-r border-gold/10 text-center">

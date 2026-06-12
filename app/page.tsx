@@ -95,7 +95,7 @@ export default function HomePage() {
                   <Star key={i} size={13} className="text-gold fill-gold" />
                 ))}
               </div>
-              <span className="text-white/45 text-xs tracking-wide">31 five-star reviews on Google</span>
+              <span className="text-white/45 text-xs tracking-wide">34 five-star reviews on Google</span>
             </div>
 
             <div className="flex flex-row gap-4 justify-center md:justify-start mb-10">
@@ -176,7 +176,7 @@ export default function HomePage() {
         <div className="flex items-center justify-between mb-10 flex-wrap gap-4">
           <div>
             <p className="text-xs tracking-[4px] uppercase text-gold opacity-70 mb-2">What clients say</p>
-            <h2 className="text-3xl font-light">31 five-star reviews.</h2>
+            <h2 className="text-3xl font-light">34 five-star reviews.</h2>
           </div>
           <div className="flex gap-0.5">
             {[...Array(5)].map((_, i) => (
@@ -185,7 +185,7 @@ export default function HomePage() {
           </div>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-5 mb-8">
           {reviews.map((r) => (
             <div key={r.name} className="border border-white/8 bg-black/20 rounded-sm px-5 py-5">
               <div className="flex gap-0.5 mb-3">
@@ -197,6 +197,17 @@ export default function HomePage() {
               <p className="text-xs opacity-40 tracking-wide">{r.name}</p>
             </div>
           ))}
+        </div>
+
+        <div className="text-center">
+          
+            href="https://www.google.com/search?q=Three+Crowns+Detailing&kgmid=/g/11ysl2zrrr"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-xs tracking-[2px] uppercase text-gold opacity-70 hover:opacity-100 transition-opacity"
+          >
+            See all 34 reviews on Google →
+          </a>
         </div>
       </section>
 

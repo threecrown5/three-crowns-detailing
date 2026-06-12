@@ -5,6 +5,7 @@ import { usePathname } from "next/navigation";
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Sheet, SheetContent, SheetTrigger, SheetTitle } from "@/components/ui/sheet";
+import { PhoneLink } from "@/components/PhoneLink";
 
 const navLinks = [
   { href: "/", label: "Home" },
@@ -52,12 +53,9 @@ export function Header() {
         ))}
 
         {/* Phone number — desktop */}
-        <a
-          href="tel:+18182967347"
-          className="font-medium tracking-wide text-gold hover:opacity-80 transition-opacity"
-        >
+        <PhoneLink className="font-medium tracking-wide text-gold hover:opacity-80 transition-opacity">
           (818) 296-7347
-        </a>
+        </PhoneLink>
 
         <Button
           asChild
@@ -93,13 +91,12 @@ export function Header() {
             ))}
 
             {/* Phone number — mobile */}
-            <a
-              href="tel:+18182967347"
-              onClick={() => setOpen(false)}
+            <PhoneLink
               className="text-lg font-medium tracking-wide text-gold hover:opacity-80 transition-opacity"
+              onClick={() => setOpen(false)}
             >
               (818) 296-7347
-            </a>
+            </PhoneLink>
 
             <Button
               asChild

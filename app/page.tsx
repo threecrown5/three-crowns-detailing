@@ -201,7 +201,7 @@ export default function HomePage() {
 
         <div className="text-center">
           
-            href="https://www.google.com/search?q=Three+Crowns+Detailing&kgmid=/g/11ysl2zrrr"
+            <a href="https://www.google.com/search?q=Three+Crowns+Detailing&kgmid=/g/11ysl2zrrr"
             target="_blank"
             rel="noopener noreferrer"
             className="text-xs tracking-[2px] uppercase text-gold opacity-70 hover:opacity-100 transition-opacity"

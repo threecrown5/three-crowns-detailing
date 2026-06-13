@@ -202,6 +202,7 @@ function BookPageContent() {
                 </div>
               </PhoneLink>
               
+                <a
                 href="sms:8182967347&body=Hi, I'd like to get a quote for a detail."
                 className="flex items-center justify-center gap-3 border border-gold/40 text-gold text-sm uppercase px-6 py-4 rounded-sm hover:border-gold hover:bg-gold/5 transition-all"
               >
@@ -227,6 +228,7 @@ function BookPageContent() {
                   </span>
                 </div>
                 
+                  <a 
                   href="https://www.google.com/search?q=Three+Crowns+Detailing&kgmid=/g/11ysl2zrrr"
                   target="_blank"
                   rel="noopener noreferrer"

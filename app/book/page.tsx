@@ -132,6 +132,13 @@ function BookPageContent() {
                 />
 
                 <Input
+                  type="email"
+                  name="email"
+                  placeholder="Email (optional)"
+                  className="bg-black/35 border-white/15 text-white placeholder:text-white/40 focus:border-gold focus:ring-gold h-14"
+                />
+
+                <Input
                   type="tel"
                   name="phone"
                   placeholder="Phone number"

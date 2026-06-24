@@ -1,287 +1,360 @@
+"use client";
+
+import { useState } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { Button } from "@/components/ui/button";
 import { PageHeader } from "@/components/PageHeader";
-import { Crown } from "lucide-react";
+
+const tiers = [
+  {
+    label: "Sedan / Sport",
+    sub: "Mustang GT · BMW 3 Series · Mercedes C-Class\nCoupes & Sport Sedans",
+    icon: "/images/icon_sedan.png",
+    prices: { prince: "$185", king: "$290", queen: "$400" },
+    tierLabel: "Sedan · Sport · Coupe",
+  },
+  {
+    label: "SUV / Truck",
+    sub: "BMW X5 · Mercedes GLE · Range Rover Sport\nF-150 · Silverado · Tacoma",
+    icon: "/images/icon_suv.png",
+    prices: { prince: "$225", king: "$350", queen: "$480" },
+    tierLabel: "SUV · Truck",
+  },
+  {
+    label: "XL / Full-Size SUV",
+    sub: "Cadillac Escalade · Lincoln Navigator · Land Rover Defender 110\nTahoe · Expedition · 3-Row SUVs",
+    icon: "/images/icon_xl.png",
+    prices: { prince: "$270", king: "$425", queen: "$580" },
+    tierLabel: "XL · Full-Size SUV",
+  },
+];
 
 const packages = [
   {
-    key: "prince",
+    key: "prince" as const,
     name: "Prince",
-    price: "$170",
-    tagline: "The clean slate. Every new client starts here.",
+    tagline: "The clean slate.\nEvery new client starts here.",
     popular: false,
-    cta: "Book Prince Detail",
     interior: [
-      "All Surface Cleaning",
-      "Crack & Crevice Air Purge",
-      "Deep Interior Vacuum",
-      "Streak-Free Glass and Screens",
-      "Floor Mat Cleaning",
+      { text: "All Surface Cleaning", upgrade: false },
+      { text: "Crack & Crevice Air Purge", upgrade: false },
+      { text: "Deep Interior Vacuum", upgrade: false },
+      { text: "Streak-Free Glass and Screens", upgrade: false },
+      { text: "Floor Mat Cleaning", upgrade: false },
     ],
     exterior: [
-      "Pre-Soak Foam Bath",
-      "Foam Bath and Contact Wash",
-      "Wheel & Tires Cleaned and Dressed",
-      "Polymer Wax Protection",
+      { text: "Pre-Soak Foam Bath", upgrade: false },
+      { text: "Foam Bath and Contact Wash", upgrade: false },
+      { text: "Wheel & Tires Cleaned and Dressed", upgrade: false },
+      { text: "Polymer Wax Protection", upgrade: false },
     ],
-    bonuses: [
+    included: [
       "Vehicle Health Check Card",
       "Keep It Clean Maintenance Guide",
       "Priority Rebooking Slot",
     ],
-    interiorUpgrades: [] as string[],
-    exteriorUpgrades: [] as string[],
   },
   {
-    key: "king",
+    key: "king" as const,
     name: "King",
-    price: "$270",
-    tagline: "For those who take their car seriously.",
+    tagline: "For those who take\ntheir car seriously.",
     popular: true,
-    cta: "Book King Detail",
     interior: [
-      "All Surface Cleaning",
-      "Crack & Crevice Air Purge",
-      "Deep Interior Vacuum",
-      "Streak-Free Glass and Screens",
-      "Floor Mat Cleaning",
-    ],
-    interiorUpgrades: [
-      "Leather Conditioning",
-      "Carpet and Upholstery Shampoo",
-      "Anti-Static and UV Protectant",
+      { text: "All Surface Cleaning", upgrade: false },
+      { text: "Crack & Crevice Air Purge", upgrade: false },
+      { text: "Deep Interior Vacuum", upgrade: false },
+      { text: "Streak-Free Glass and Screens", upgrade: false },
+      { text: "Floor Mat Cleaning", upgrade: false },
+      { text: "Leather Conditioning", upgrade: true },
+      { text: "Carpet and Upholstery Shampoo", upgrade: true },
+      { text: "Anti-Static and UV Protectant", upgrade: true },
     ],
     exterior: [
-      "Pre-Soak Foam Bath",
-      "Foam Bath and Contact Wash",
-      "Wheel & Tires Cleaned and Dressed",
+      { text: "Pre-Soak Foam Bath", upgrade: false },
+      { text: "Foam Bath and Contact Wash", upgrade: false },
+      { text: "Wheel & Tires Cleaned and Dressed", upgrade: false },
+      { text: "Clay Bar Decontamination", upgrade: true },
+      { text: "Iron Remover Treatment", upgrade: true },
+      { text: "Ceramic Spray Sealant", upgrade: true },
     ],
-    exteriorUpgrades: [
-      "Clay Bar Decontamination",
-      "Iron Remover Treatment",
-      "Ceramic Spray Sealant",
-    ],
-    bonuses: [
-      "Complimentary Crown Refresh Within 30 Days",
+    included: [
+      "Vehicle Health Check Card",
       "Priority Rebooking Slot",
+      "50% Off First Crown Refresh",
     ],
   },
   {
-    key: "queen",
+    key: "queen" as const,
     name: "Queen",
-    price: "$350",
-    tagline: "The full experience. Nothing held back.",
+    tagline: "The full experience.\nNothing held back.",
     popular: false,
-    cta: "Go Premium",
     interior: [
-      "All Surface Cleaning",
-      "Crack & Crevice Air Purge",
-      "Deep Interior Vacuum",
-      "Streak-Free Glass and Screens",
-      "Floor Mat Cleaning",
-      "Leather Conditioning",
-      "Carpet and Upholstery Shampoo",
-      "Anti-Static and UV Protectant",
+      { text: "All Surface Cleaning", upgrade: false },
+      { text: "Crack & Crevice Air Purge", upgrade: false },
+      { text: "Deep Interior Vacuum", upgrade: false },
+      { text: "Streak-Free Glass and Screens", upgrade: false },
+      { text: "Floor Mat Cleaning", upgrade: false },
+      { text: "Leather Conditioning", upgrade: false },
+      { text: "Carpet and Upholstery Shampoo", upgrade: false },
+      { text: "Anti-Static and UV Protectant", upgrade: false },
+      { text: "One-Step Paint Correction & Gloss Enhancement", upgrade: true },
     ],
-    interiorUpgrades: [],
     exterior: [
-      "Pre-Soak Foam Bath",
-      "Foam Bath and Contact Wash",
-      "Wheel & Tires Cleaned and Dressed",
-      "Clay Bar Decontamination",
-      "Iron Remover Treatment",
-      "Ceramic Spray Sealant",
+      { text: "Pre-Soak Foam Bath", upgrade: false },
+      { text: "Foam Bath and Contact Wash", upgrade: false },
+      { text: "Wheel & Tires Cleaned and Dressed", upgrade: false },
+      { text: "Clay Bar Decontamination", upgrade: false },
+      { text: "Iron Remover Treatment", upgrade: false },
+      { text: "Ceramic Spray Sealant", upgrade: false },
     ],
-    exteriorUpgrades: [
-      "One-Step Paint Correction & Gloss Enhancement",
-    ],
-    bonuses: [
-      "2 Complimentary Crown Refreshes Within 60 Days",
-      "Certified Detail Card",
+    included: [
+      "1 Complimentary Crown Refresh within 30 days",
       "Fragrance Selection",
       "Priority Rebooking Slot",
     ],
   },
 ];
 
+function CrownIcon({ color }: { color: string }) {
+  return (
+    <svg width="18" height="16" viewBox="0 0 22 18" fill="none" style={{ marginBottom: 10 }}>
+      <path
+        d="M1 14 L4.5 6 L8.5 10.5 L11 2 L13.5 10.5 L17.5 6 L21 14 Z"
+        stroke={color}
+        strokeWidth="1.5"
+        strokeLinejoin="round"
+      />
+      <line x1="1" y1="16.5" x2="21" y2="16.5" stroke={color} strokeWidth="1.5" strokeLinecap="round" />
+    </svg>
+  );
+}
+
 export default function ServicesPage() {
+  const [tierIdx, setTierIdx] = useState(0);
+  const tier = tiers[tierIdx];
+
   return (
     <>
       <PageHeader
-        label="SERVICES"
+        label="Services & Pricing"
         heading="Detailing Packages"
-        subtitle="Professional mobile detailing brought to your driveway. No drop-off. No waiting around."
+        subtitle={"Mobile detailing at your driveway.\nNo drop-off. No waiting."}
       />
 
-      {/* Main Packages */}
-      <section className="pt-8 pb-12 px-6 md:px-20 max-w-[1200px] mx-auto w-full min-w-0 flex-1">
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-          {packages.map((pkg) => (
-            <div
-              key={pkg.key}
-              className={`relative rounded-xl border p-8 md:p-10 flex flex-col transition-all ${
-                pkg.popular
-                  ? "border-gold/40 bg-gold/5 lg:scale-105 lg:-my-4 shadow-[0_0_60px_rgba(198,161,74,0.08)]"
-                  : "border-white/10 bg-black/20"
-              }`}
-            >
-              {pkg.popular && (
-                <div className="absolute -top-3 left-1/2 -translate-x-1/2 bg-gold text-black text-[9px] tracking-[2px] uppercase font-bold px-3 py-1 rounded-full flex items-center gap-1.5 whitespace-nowrap">
-                  <Crown size={10} />
-                  Most Popular
-                </div>
-              )}
+      <div className="max-w-[1020px] mx-auto px-5 pb-24">
 
-              {/* Header */}
-              <div className="mb-6">
-                <h2 className="text-2xl font-semibold tracking-[4px] uppercase mb-1">
+        {/* VEHICLE SELECTOR */}
+        <div className="mb-12">
+          <p className="text-center text-[11px] text-[#2e5c3a] tracking-[0.1em] uppercase mb-[18px]">
+            Select your vehicle — pricing updates
+          </p>
+          <div className="grid grid-cols-3 gap-2.5 sm:gap-[10px]">
+            {tiers.map((t, i) => {
+              const active = i === tierIdx;
+              return (
+                <button
+                  key={t.label}
+                  onClick={() => setTierIdx(i)}
+                  className={[
+                    "cursor-pointer rounded-xl border p-5 pb-3.5 text-center transition-all duration-200",
+                    active
+                      ? "bg-gradient-to-br from-[#162e1f] to-[#0e2218] border-[#C9A84C] shadow-[0_0_0_1px_rgba(201,168,76,0.25),0_8px_28px_rgba(201,168,76,0.09)]"
+                      : "bg-[#0d1f16] border-[#1a3020] hover:-translate-y-0.5",
+                  ].join(" ")}
+                >
+                  <div className="h-20 flex items-center justify-center mb-2.5">
+                    <Image
+                      src={t.icon}
+                      alt={t.label}
+                      width={160}
+                      height={80}
+                      className="max-h-full w-auto"
+                      style={{ opacity: active ? 1 : 0.3, transition: "opacity 0.22s" }}
+                    />
+                  </div>
+                  <div
+                    className="text-[12px] font-semibold mb-[3px] transition-colors duration-200"
+                    style={{ color: active ? "#f0ebe0" : "#3d6b48" }}
+                  >
+                    {t.label}
+                  </div>
+                  <div
+                    className="text-[10px] leading-[1.5] whitespace-pre-line transition-colors duration-200"
+                    style={{ color: active ? "#4a7a55" : "#2a4a32" }}
+                  >
+                    {t.sub}
+                  </div>
+                </button>
+              );
+            })}
+          </div>
+        </div>
+
+        {/* PACKAGES GRID */}
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-3.5 items-start mb-4">
+          {packages.map((pkg) => {
+            const price = tier.prices[pkg.key];
+            return (
+              <div
+                key={pkg.key}
+                className={[
+                  "relative rounded-[14px] border p-7 flex flex-col",
+                  pkg.popular
+                    ? "bg-gradient-to-br from-[#162e20] to-[#0d1f16] border-[#6a5120]"
+                    : "bg-[#0d1f16] border-[#1a3020]",
+                ].join(" ")}
+              >
+                {pkg.popular && (
+                  <div className="absolute -top-px right-[22px] bg-[#C9A84C] text-[#091810] text-[9px] font-bold tracking-[0.14em] uppercase px-[11px] py-1 rounded-b-lg">
+                    Most Popular
+                  </div>
+                )}
+
+                <CrownIcon color={pkg.popular ? "#C9A84C" : "#3d6b48"} />
+
+                <div
+                  className="font-['Cormorant_Garamond',serif] text-[30px] font-bold text-[#f0ebe0] leading-none mb-1"
+                >
                   {pkg.name}
-                </h2>
-                <p className="text-white/40 text-xs mb-4 leading-relaxed">
-                  {pkg.tagline}
-                </p>
-                <div className="flex items-baseline gap-1">
-                  <span className="text-3xl md:text-4xl font-bold text-gold">
-                    {pkg.price}
-                  </span>
-                  <span className="text-white/40 text-sm">starting</span>
                 </div>
-              </div>
+                <div className="text-[11px] text-[#3d6b48] leading-[1.55] mb-5 whitespace-pre-line">
+                  {pkg.tagline}
+                </div>
 
-              {/* Interior */}
-              <div className="mb-6">
-                <h3 className="text-[11px] tracking-[4px] uppercase text-white/40 font-semibold mb-4">
-                  Interior
-                </h3>
-                <ul className="space-y-2.5">
-                  {pkg.interior.map((item) => (
-                    <li key={item} className="flex items-start gap-3 text-sm text-white/80">
-                      <span className="text-white/30 mt-0.5">&#10003;</span>
-                      {item}
-                    </li>
-                  ))}
-                  {pkg.interiorUpgrades.map((item) => (
-                    <li key={item} className="flex items-start gap-3 text-sm text-gold">
-                      <span className="mt-0.5">&#9733;</span>
-                      {item}
-                    </li>
-                  ))}
-                </ul>
-              </div>
+                <div className="pb-4 mb-0 border-b border-[#1a3020]">
+                  <div
+                    key={`${tierIdx}-${pkg.key}`}
+                    className="font-['Cormorant_Garamond',serif] text-[52px] font-bold text-[#C9A84C] leading-none animate-[priceIn_0.26s_cubic-bezier(0.22,1,0.36,1)_both]"
+                  >
+                    {price}
+                  </div>
+                  <div className="text-[11px] text-[#3d6b48] mt-1">{tier.tierLabel}</div>
+                </div>
 
-              {/* Exterior */}
-              <div className="mb-6">
-                <h3 className="text-[11px] tracking-[4px] uppercase text-white/40 font-semibold mb-4">
-                  Exterior
-                </h3>
-                <ul className="space-y-2.5">
-                  {pkg.exterior.map((item) => (
-                    <li key={item} className="flex items-start gap-3 text-sm text-white/80">
-                      <span className="text-white/30 mt-0.5">&#10003;</span>
-                      {item}
-                    </li>
-                  ))}
-                  {pkg.exteriorUpgrades.map((item) => (
-                    <li key={item} className="flex items-start gap-3 text-sm text-gold">
-                      <span className="mt-0.5">&#9733;</span>
-                      {item}
-                    </li>
-                  ))}
-                </ul>
-              </div>
+                <div className="border-t border-[#1a3020] my-[18px]" />
 
-              {/* Bonuses */}
-              <div className="mb-8">
-                <h3 className="text-[11px] tracking-[4px] uppercase text-white/40 font-semibold mb-4">
-                  Included
-                </h3>
-                <ul className="space-y-2.5">
-                  {pkg.bonuses.map((item) => (
-                    <li key={item} className="flex items-start gap-3 text-sm text-white/60">
-                      <span className="text-gold mt-0.5">&#10022;</span>
-                      {item}
-                    </li>
-                  ))}
-                </ul>
-              </div>
+                <div className="flex-1 mb-[22px] space-y-0">
+                  {/* Interior */}
+                  <div className="text-[9px] font-semibold tracking-[0.18em] uppercase text-[#2e5c3a] mb-2">Interior</div>
+                  <ul className="flex flex-col gap-[7px] mb-3.5">
+                    {pkg.interior.map((item) => (
+                      <li
+                        key={item.text}
+                        className="text-[12px] flex items-start gap-2 leading-[1.45]"
+                        style={{ color: item.upgrade ? "#C9A84C" : "#5a8a68" }}
+                      >
+                        <span style={{ color: item.upgrade ? "#C9A84C" : "#2e5c3a", marginTop: 1, flexShrink: 0, fontSize: 11 }}>
+                          {item.upgrade ? "★" : "✓"}
+                        </span>
+                        {item.text}
+                      </li>
+                    ))}
+                  </ul>
 
-              {/* CTA */}
-              <div className="mt-auto">
+                  {/* Exterior */}
+                  <div className="text-[9px] font-semibold tracking-[0.18em] uppercase text-[#2e5c3a] mb-2">Exterior</div>
+                  <ul className="flex flex-col gap-[7px] mb-3.5">
+                    {pkg.exterior.map((item) => (
+                      <li
+                        key={item.text}
+                        className="text-[12px] flex items-start gap-2 leading-[1.45]"
+                        style={{ color: item.upgrade ? "#C9A84C" : "#5a8a68" }}
+                      >
+                        <span style={{ color: item.upgrade ? "#C9A84C" : "#2e5c3a", marginTop: 1, flexShrink: 0, fontSize: 11 }}>
+                          {item.upgrade ? "★" : "✓"}
+                        </span>
+                        {item.text}
+                      </li>
+                    ))}
+                  </ul>
+
+                  {/* Included */}
+                  <div className="text-[9px] font-semibold tracking-[0.18em] uppercase text-[#2e5c3a] mb-2">Included</div>
+                  <ul className="flex flex-col gap-[7px]">
+                    {pkg.included.map((item) => (
+                      <li key={item} className="text-[12px] flex items-start gap-2 leading-[1.45] text-[#c8d8c0]">
+                        <span className="text-[#C9A84C] mt-px flex-shrink-0 text-[11px]">✦</span>
+                        {item}
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+
                 <Button
                   asChild
-                  className={`w-full h-auto! tracking-[2px] uppercase font-semibold transition-all ${
+                  className={[
+                    "w-full rounded-lg text-[11px] font-semibold tracking-[0.1em] uppercase transition-all py-3",
                     pkg.popular
-                      ? "bg-gold! text-white! hover:bg-gold-soft! py-4 text-sm"
-                      : "bg-transparent! border border-gold/40! text-gold! hover:bg-gold/10! py-3 text-xs"
-                  }`}
+                      ? "bg-[#C9A84C]! text-[#091810]! border border-[#C9A84C]! hover:bg-[#d4b560]!"
+                      : "bg-transparent! border border-[#1e3828]! text-[#7aa882]! hover:border-[#C9A84C]! hover:text-[#C9A84C]!",
+                  ].join(" ")}
                 >
-                  <Link href={`/book?package=${encodeURIComponent(pkg.name + " Detail")}`}>
-                    {pkg.cta}
-                  </Link>
+                  <Link href={`/book?package=${pkg.name}`}>Book {pkg.name}</Link>
                 </Button>
               </div>
-            </div>
-          ))}
+            );
+          })}
         </div>
-      </section>
 
-      {/* Guarantee */}
-      <section className="px-6 md:px-20 max-w-[1200px] mx-auto w-full pb-12">
-        <div className="border border-gold/20 rounded-xl p-8 text-center">
-          <p className="text-[11px] tracking-[4px] uppercase text-gold mb-3">Our Promise</p>
-          <p className="text-white/70 text-sm leading-relaxed max-w-[520px] mx-auto">
-            Not completely satisfied within 48 hours of your detail? We'll come back and make it right — free, no questions asked. We stand behind every job.
+        {/* GUARANTEE */}
+        <div className="text-center py-8 pb-10">
+          <p className="text-[13px] text-[#3d6b48] leading-[1.75]">
+            <span className="text-[#C9A84C] font-medium">48-hour satisfaction guarantee.</span>{" "}
+            Not completely happy? We come back and make it right — free, no questions.
           </p>
         </div>
-      </section>
 
-      {/* Crown Refresh */}
-      <section className="px-6 md:px-20 max-w-[1200px] mx-auto w-full pb-20">
-        <div className="border border-white/10 rounded-xl p-8 md:p-10 bg-black/20">
-          <div className="flex flex-col md:flex-row md:items-center justify-between gap-6">
-            <div className="max-w-[560px]">
-              <p className="text-[11px] tracking-[4px] uppercase text-white/40 mb-2">
-                Maintenance Service
-              </p>
-              <h2 className="text-2xl font-semibold tracking-[4px] uppercase mb-2">
+        {/* CROWN REFRESH */}
+        <div className="bg-[#0d1f16] border border-[#1a3020] rounded-[14px] p-8 md:p-9">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-10 md:items-start">
+            <div>
+              <div className="text-[10px] tracking-[0.22em] uppercase text-[#3d6b48] mb-2.5">Maintenance</div>
+              <div className="font-['Cormorant_Garamond',serif] text-[28px] font-bold mb-2 leading-[1.1]">
                 Crown Refresh
-              </h2>
-              <div className="flex items-baseline gap-1 mb-4">
-                <span className="text-3xl font-bold text-gold">$85</span>
-                <span className="text-white/40 text-sm">starting</span>
               </div>
-              <ul className="space-y-2 mb-4">
+              <div className="font-['Cormorant_Garamond',serif] text-[34px] font-semibold text-[#C9A84C] mb-2.5">
+                $85{" "}
+                <span className="text-sm font-['DM_Sans',sans-serif] font-normal text-[#3d6b48]">starting</span>
+              </div>
+              <p className="text-[12px] text-[#3d6b48] leading-[1.75] max-w-[260px]">
+                Best for vehicles serviced within the last 60 days. New clients start with Prince to build a clean baseline.
+              </p>
+            </div>
+            <div>
+              <ul className="grid grid-cols-2 gap-x-5 gap-y-2.5 mb-6">
                 {[
-                  "Exterior Hand Wash & Dry",
-                  "Tire Shine & Dress",
-                  "Exterior & Interior Windows",
-                  "Quick Interior Vacuum & Wipe-Down",
-                  "Door Panels & Screens Wiped",
-                  "Air Freshener",
+                  "Exterior Foam Bath & Hand Wash",
+                  "Tires Cleaned and Dressed",
+                  "Streak-Free Glass",
+                  "Light Interior Wipedown",
+                  "Light Vacuum",
+                  "Polymer Wax Booster",
                 ].map((item) => (
-                  <li key={item} className="flex items-start gap-3 text-sm text-white/70">
-                    <span className="text-white/30 mt-0.5">&#10003;</span>
+                  <li key={item} className="text-[12px] text-[#7aa882] flex items-start gap-2">
+                    <span className="w-1 h-1 rounded-full bg-[#C9A84C] mt-[6px] flex-shrink-0 opacity-45" />
                     {item}
                   </li>
                 ))}
               </ul>
-              <p className="text-white/30 text-xs leading-relaxed">
-                Best for vehicles maintained within the last 60 days. New clients start with the Prince Detail to establish a clean baseline.
-              </p>
-            </div>
-            <div className="md:text-right">
               <Button
                 asChild
-                className="bg-transparent! border border-gold/40! text-gold! hover:bg-gold/10! py-3 px-8 text-xs tracking-[2px] uppercase font-semibold"
+                className="bg-transparent! border border-[#1e3828]! text-[#7aa882]! hover:border-[#C9A84C]! hover:text-[#C9A84C]! text-[11px] tracking-[0.1em] uppercase font-semibold py-3 px-6"
               >
-                <Link href="/book?package=Crown%20Refresh">
-                  Book Refresh
-                </Link>
+                <Link href="/book?package=Crown+Refresh">Book Refresh</Link>
               </Button>
             </div>
           </div>
         </div>
-      </section>
+
+      </div>
+
+      <style>{`
+        @keyframes priceIn {
+          from { opacity: 0; transform: translateY(7px); }
+          to { opacity: 1; transform: translateY(0); }
+        }
+      `}</style>
     </>
   );
 }

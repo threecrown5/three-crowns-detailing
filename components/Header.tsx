@@ -20,20 +20,14 @@ export function Header() {
   const [open, setOpen] = useState(false);
 
   return (
-    <header
-      className={`w-full z-50 flex items-center justify-between px-6 md:px-20 h-[70px] md:h-[90px] ${
-        isHome
-          ? "absolute top-0 left-0 bg-transparent"
-          : "fixed top-0 left-0 bg-black/35 backdrop-blur-[8px]"
-      }`}
-    >
+    <header className="w-full z-50 flex items-center justify-between px-6 md:px-20 h-[70px] md:h-[90px] fixed top-0 left-0 bg-black/35 backdrop-blur-[8px]">
       <Link href="/">
         <Image
           src="/images/logo_transparent.png"
           alt="Three Crowns Logo"
           width={180}
           height={60}
-          className="h-[40px] md:h-[60px] w-auto"
+          className="h-[62px] md:h-[90px] w-auto"
           priority
         />
       </Link>
@@ -57,12 +51,13 @@ export function Header() {
           (818) 296-7347
         </PhoneLink>
 
-        <Button
-          asChild
-          className="ml-2 tracking-wide bg-gold! text-white! rounded-full px-6 py-2 font-semibold hover:bg-gold-soft! hover:-translate-y-0.5 transition-all"
+        <Link
+          href="/book"
+          className="ml-4 text-xs tracking-[0.18em] uppercase font-medium pb-[3px] border-b border-[#C9A84C] hover:opacity-70 transition-opacity"
+          style={{ color: "#C9A84C" }}
         >
-          <Link href="/book">Book</Link>
-        </Button>
+          Book Now
+        </Link>
       </nav>
 
       {/* Mobile Nav */}

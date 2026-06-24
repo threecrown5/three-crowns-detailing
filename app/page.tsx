@@ -63,7 +63,7 @@ export default function HomePage() {
     <>
       {/* ── HERO ── */}
       <section
-        className="relative min-h-svh flex items-center bg-cover bg-center bg-no-repeat"
+        className="relative min-h-svh flex items-center bg-cover bg-center bg-no-repeat pt-[70px] md:pt-[90px]"
         style={{ backgroundImage: 'url("/images/Classic Benz.jpg")' }}
       >
         {/* Horizontal overlay */}

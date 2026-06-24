@@ -22,11 +22,11 @@ const tiers = [
     tierLabel: "SUV · Truck",
   },
   {
-    label: "XL / Full-Size SUV",
-    sub: "Cadillac Escalade · Lincoln Navigator · Land Rover Defender 110\nTahoe · Expedition · 3-Row SUVs",
+    label: "XL SUV / HD Truck",
+    sub: "Cadillac Escalade · Lincoln Navigator · Tahoe · Expedition\nF-250 · Ram 2500 · Silverado HD · 3-Row SUVs",
     icon: "/images/icon_xl.png",
     prices: { prince: "$270", king: "$425", queen: "$580" },
-    tierLabel: "XL · Full-Size SUV",
+    tierLabel: "XL SUV · HD Truck",
   },
 ];
 
@@ -180,7 +180,7 @@ export default function ServicesPage() {
                     {t.label}
                   </div>
                   <div
-                    className="text-[10px] leading-[1.5] whitespace-pre-line transition-colors duration-200"
+                    className="hidden sm:block text-[10px] leading-[1.5] whitespace-pre-line transition-colors duration-200"
                     style={{ color: active ? "#4a7a55" : "#2a4a32" }}
                   >
                     {t.sub}

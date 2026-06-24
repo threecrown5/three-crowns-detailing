@@ -73,6 +73,14 @@ function BookPageContent() {
   const [selectedPackage, setSelectedPackage] = useState(
     searchParams.get("package") || ""
   );
+  const [vehicleSize, setVehicleSize] = useState("");
+
+  const packagePrices: Record<string, { prince: string; king: string; queen: string }> = {
+    "Sedan / Sport / Coupe": { prince: "$185", king: "$290", queen: "$400" },
+    "SUV / Truck":           { prince: "$225", king: "$350", queen: "$480" },
+    "XL SUV / HD Truck":     { prince: "$270", king: "$425", queen: "$580" },
+  };
+  const prices = packagePrices[vehicleSize] ?? { prince: "$185", king: "$290", queen: "$400" };
 
   async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
@@ -80,7 +88,7 @@ function BookPageContent() {
     setError(false);
     const form = e.currentTarget;
     const formData = new FormData(form);
-    formData.append("_subject", `New Detail Request - ${selectedPackage || "No package selected"}`);
+    formData.append("_subject", `New Detail Request - ${selectedPackage || "No package selected"}${vehicleSize ? ` (${vehicleSize})` : ""}`);
     formData.append("_captcha", "false");
     formData.append("_template", "table");
 
@@ -147,6 +155,21 @@ function BookPageContent() {
                 />
 
                 <Select
+                  name="vehicle_size"
+                  value={vehicleSize}
+                  onValueChange={setVehicleSize}
+                >
+                  <SelectTrigger className="bg-black/35 border-white/15 text-white h-14 focus:border-gold focus:ring-gold">
+                    <SelectValue placeholder="Vehicle size (optional)" />
+                  </SelectTrigger>
+                  <SelectContent className="bg-viridian-dark border-gold/20 text-white">
+                    <SelectItem value="Sedan / Sport / Coupe">Sedan / Sport / Coupe</SelectItem>
+                    <SelectItem value="SUV / Truck">SUV / Truck</SelectItem>
+                    <SelectItem value="XL SUV / HD Truck">XL SUV / HD Truck</SelectItem>
+                  </SelectContent>
+                </Select>
+
+                <Select
                   name="package"
                   value={selectedPackage}
                   onValueChange={setSelectedPackage}
@@ -155,10 +178,10 @@ function BookPageContent() {
                     <SelectValue placeholder="Which package interests you? (optional)" />
                   </SelectTrigger>
                   <SelectContent className="bg-viridian-dark border-gold/20 text-white">
-                    <SelectItem value="Prince Detail">Prince — From $170</SelectItem>
-                    <SelectItem value="King Detail">King — From $270</SelectItem>
-                    <SelectItem value="Queen Detail">Queen — From $350</SelectItem>
-                    <SelectItem value="Crown Refresh">Crown Refresh — Maintenance wash</SelectItem>
+                    <SelectItem value="Prince Detail">Prince — {prices.prince}</SelectItem>
+                    <SelectItem value="King Detail">King — {prices.king}</SelectItem>
+                    <SelectItem value="Queen Detail">Queen — {prices.queen}</SelectItem>
+                    <SelectItem value="Crown Refresh">Crown Refresh — $85</SelectItem>
                     <SelectItem value="Not sure">Not sure yet — just want a quote</SelectItem>
                   </SelectContent>
                 </Select>

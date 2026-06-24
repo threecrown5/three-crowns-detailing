@@ -29,7 +29,7 @@ export function Header() {
     >
       <Link href="/">
         <Image
-          src="/images/LogoXL.png"
+          src="/images/logo_transparent.png"
           alt="Three Crowns Logo"
           width={180}
           height={60}

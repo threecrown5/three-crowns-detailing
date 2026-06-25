@@ -80,9 +80,13 @@ export default function HomePage() {
               Glendale · Pasadena · Burbank
             </p>
 
-            <h1 className="text-4xl md:text-[clamp(52px,5vw,80px)] font-light tracking-wide leading-[1.1] mb-6">
-              Your car.<br className="hidden md:block" /> We'll handle it.
+            <h1 className="text-2xl md:text-3xl font-light tracking-wide leading-[1.2] mb-3 opacity-80">
+              Mobile Car Detailing in Glendale, CA — We Come to You
             </h1>
+
+            <h2 className="text-4xl md:text-[clamp(52px,5vw,80px)] font-light tracking-wide leading-[1.1] mb-6">
+              Your car.<br className="hidden md:block" /> We'll handle it.
+            </h2>
 
             <p className="text-white/65 text-base md:text-lg leading-relaxed max-w-[520px] mb-4 mx-auto md:mx-0">
               We come to your home or office and leave your vehicle spotless — no drop-off, no hassle, no second-guessing. Just results you can trust.
@@ -119,6 +123,24 @@ export default function HomePage() {
             </div>
 
           </div>
+        </div>
+      </section>
+
+      {/* ── BODY COPY (SEO) ── */}
+      <section className="py-16 px-6 md:px-20 max-w-[1200px] mx-auto">
+        <div className="max-w-[720px]">
+          <p className="text-sm md:text-base opacity-60 leading-relaxed mb-4">
+            Three Crowns Detailing is a professional mobile detailing service serving Glendale, Pasadena, and Burbank, CA. We come to your home or office — no drop-off, no waiting rooms, no wasted time.
+          </p>
+          <p className="text-sm md:text-base opacity-60 leading-relaxed mb-4">
+            Whether your car needs a full interior and exterior detail, paint decontamination, or a one-step paint correction to restore lost gloss, we handle it on-site with professional-grade products and a process built around your schedule.
+          </p>
+          <p className="text-sm md:text-base opacity-60 leading-relaxed mb-4">
+            Every service includes a vehicle health check — a written summary of what we found, what we treated, and what to watch. No guesswork, no surprises. Just an honest assessment and a car that looks and feels the way it should.
+          </p>
+          <p className="text-sm md:text-base opacity-60 leading-relaxed">
+            We've served 35+ clients across the Glendale corridor with a 5-star rating on Google. If you've been looking for a detailer you can actually rely on, this is it.
+          </p>
         </div>
       </section>
 

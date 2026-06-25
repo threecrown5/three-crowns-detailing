@@ -138,9 +138,15 @@ export default function ServicesPage() {
     <>
       <PageHeader
         label="Services & Pricing"
-        heading="Detailing Packages"
+        heading="Mobile Detailing Packages & Pricing — Glendale, Pasadena & Burbank"
         subtitle={"Mobile detailing at your driveway.\nNo drop-off. No waiting."}
       />
+
+      <section className="max-w-[1020px] mx-auto px-5 pb-6">
+        <p className="text-sm md:text-base opacity-60 leading-relaxed max-w-[680px]">
+          Three Crowns Detailing serves clients across Glendale, Pasadena, and Burbank, CA. Every package is performed on-site at your location — priced by vehicle type, scoped to your car&apos;s actual condition, and backed by our vehicle health check at every visit.
+        </p>
+      </section>
 
       <div className="max-w-[1020px] mx-auto px-5 pb-24">
 
@@ -302,6 +308,43 @@ export default function ServicesPage() {
           <p className="text-[13px] text-[#3d6b48] leading-[1.75]">
             <span className="text-[#C9A84C] font-medium">48-hour satisfaction guarantee.</span>{" "}
             Not completely happy? We come back and make it right — free, no questions.
+          </p>
+        </div>
+
+        {/* ADD-ONS */}
+        <div className="mb-8">
+          <div className="mb-7">
+            <div className="text-[10px] tracking-[0.22em] uppercase text-[#3d6b48] mb-2">Add-On Services</div>
+            <div className="font-['Cormorant_Garamond',serif] text-[28px] font-bold mb-1 leading-[1.1]">
+              Customize your detail.
+            </div>
+            <p className="text-[12px] text-[#3d6b48] leading-[1.75]">
+              Add one or more services to any package. Just mention it when you book.
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
+            {[
+              { name: "Headlight Restoration", price: "$60", body: "Oxidized, yellowed headlights reduce visibility and make a clean car look older than it is. We wet-sand, polish, and seal both lenses. Priced per pair." },
+              { name: "Engine Bay Cleaning", price: "$75", body: "A degreased, detailed engine bay makes maintenance easier and keeps buyers interested if you ever sell. We protect sensitive components and hand-clean the bay for a clean, presentable finish." },
+              { name: "Odor Elimination", price: "$60", body: "For smoke, pet, food, or any embedded smell that interior cleaning alone doesn't fully remove. We treat the source, not just the surface." },
+              { name: "Pet Hair Removal", price: "from $50", body: "Pet hair embeds into carpet and upholstery fibers in a way a standard vacuum can't touch. We use specialized tools to pull it out fully before the detail begins. Priced by severity." },
+              { name: "Tar & Adhesive Removal", price: "$40", body: "Road tar, sap, sticker residue, and bonded contamination that won't come off in a wash. Treated with a dedicated solvent before the exterior detail so it doesn't affect the finish." },
+              { name: "Rain-X / Glass Coating", price: "$50", body: "A hydrophobic glass treatment applied to all exterior windows. Water sheets off at speed, improving visibility in rain and reducing water spot buildup between details." },
+              { name: "Trim Restoration", price: "from $55", body: "Faded, gray plastic trim ages a car faster than almost anything else. We restore color and apply a protective coating that holds up through washes. Priced by severity and trim coverage." },
+            ].map((addon) => (
+              <div key={addon.name} className="bg-[#0d1f16] border border-[#1a3020] rounded-[14px] p-5">
+                <div className="flex items-start justify-between gap-3 mb-3">
+                  <div className="text-[13px] font-semibold text-[#f0ebe0] leading-tight">{addon.name}</div>
+                  <div className="font-['Cormorant_Garamond',serif] text-[18px] font-bold text-[#C9A84C] shrink-0">{addon.price}</div>
+                </div>
+                <p className="text-[11px] text-[#3d6b48] leading-[1.7]">{addon.body}</p>
+              </div>
+            ))}
+          </div>
+
+          <p className="text-[11px] text-[#2e5c3a] leading-[1.75] mt-4">
+            Add-on pricing is per service at time of booking. Some add-ons are condition-dependent — if scope changes on-site, we'll tell you before we start. No surprises.
           </p>
         </div>
 

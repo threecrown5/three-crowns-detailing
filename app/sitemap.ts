@@ -9,5 +9,8 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { url: `${siteUrl}/gallery`, lastModified: new Date(), priority: 0.7 },
     { url: `${siteUrl}/contact`, lastModified: new Date(), priority: 0.8 },
     { url: `${siteUrl}/book`, lastModified: new Date(), priority: 0.9 },
+    { url: `${siteUrl}/glendale`, lastModified: new Date(), priority: 0.85 },
+    { url: `${siteUrl}/pasadena`, lastModified: new Date(), priority: 0.85 },
+    { url: `${siteUrl}/burbank`, lastModified: new Date(), priority: 0.85 },
   ];
 }

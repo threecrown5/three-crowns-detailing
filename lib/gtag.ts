@@ -5,8 +5,8 @@ export const GOOGLE_ADS_ID = "AW-17812920864";
  * Created in Google Ads > Tools > Conversions.
  */
 export const CONVERSIONS = {
-  formSubmission: `${GOOGLE_ADS_ID}/MiuFCKisqr0cEKC07qlC`,
-  phoneClick: `${GOOGLE_ADS_ID}/A57jCKusqr0cEKC07qlC`,
+  formSubmission: `${GOOGLE_ADS_ID}/8I93CLCY0cccEKC07q1C`,
+  phoneClick: `${GOOGLE_ADS_ID}/860NCLOY0cccEKC07q1C`,
 } as const;
 
 declare global {

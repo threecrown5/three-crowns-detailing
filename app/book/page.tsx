@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, Suspense } from "react";
-import { useSearchParams } from "next/navigation";
+import { useSearchParams, useRouter } from "next/navigation";
 import { Input } from "@/components/ui/input";
 import {
   Select,
@@ -10,10 +10,9 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { CheckCircle, Phone, MessageCircle, Truck, Sparkles, Clock, ShieldCheck, Star } from "lucide-react";
+import { Phone, MessageCircle, Truck, Sparkles, Clock, ShieldCheck, Star } from "lucide-react";
 import { PageHeader } from "@/components/PageHeader";
 import { PhoneLink } from "@/components/PhoneLink";
-import { trackConversion, CONVERSIONS } from "@/lib/gtag";
 
 const trustItems = [
   {
@@ -67,9 +66,10 @@ export default function BookPage() {
 
 function BookPageContent() {
   const searchParams = useSearchParams();
-  const [submitted, setSubmitted] = useState(false);
+  const router = useRouter();
   const [submitting, setSubmitting] = useState(false);
   const [error, setError] = useState(false);
+
   const [selectedPackage, setSelectedPackage] = useState(
     searchParams.get("package") || ""
   );
@@ -99,8 +99,7 @@ function BookPageContent() {
         body: formData,
       });
       if (!res.ok) throw new Error();
-      setSubmitted(true);
-      trackConversion(CONVERSIONS.formSubmission);
+      router.push("/thank-you");
     } catch {
       setError(true);
     } finally {
@@ -122,8 +121,7 @@ function BookPageContent() {
           {/* ── LEFT: Form + Call/Text + Reviews ── */}
           <div className="lg:col-span-3">
 
-            {!submitted ? (
-              <form onSubmit={handleSubmit} className="space-y-4">
+            <form onSubmit={handleSubmit} className="space-y-4">
                 <p className="text-lg font-light text-white">
                   Get a free quote in seconds.
                 </p>
@@ -203,17 +201,7 @@ function BookPageContent() {
                 <p className="text-xs opacity-60">
                   No payment required. We'll reach out to confirm timing and answer any questions.
                 </p>
-              </form>
-            ) : (
-              <div className="text-center py-16 px-8 border border-gold/20 rounded-xl bg-black/30 animate-in fade-in slide-in-from-bottom-3 duration-400">
-                <CheckCircle className="mx-auto mb-4 text-gold" size={48} />
-                <h2 className="text-2xl text-gold font-semibold mb-3">You're all set.</h2>
-                <p className="opacity-70">
-                  We'll reach out shortly to confirm your appointment.<br />
-                  Questions? Call or text (818) 296-7347.
-                </p>
-              </div>
-            )}
+            </form>
 
             {/* OR divider */}
             <div className="flex items-center gap-4 mt-8 mb-6">

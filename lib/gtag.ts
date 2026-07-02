@@ -15,10 +15,6 @@ declare global {
   }
 }
 
-/**
- * Fires a Google Ads conversion event. Safe to call even if gtag
- * hasn't loaded yet (e.g. ad blockers) — it just no-ops.
- */
 export function trackConversion(sendTo: string) {
   if (typeof window !== "undefined" && typeof window.gtag === "function") {
     window.gtag("event", "conversion", { send_to: sendTo });

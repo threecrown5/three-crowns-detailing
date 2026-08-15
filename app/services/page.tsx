@@ -37,17 +37,21 @@ const packages = [
     tagline: "The clean slate.\nEvery new client starts here.",
     popular: false,
     interior: [
-      { text: "All Surface Cleaning", upgrade: false },
-      { text: "Crack & Crevice Air Purge", upgrade: false },
-      { text: "Deep Interior Vacuum", upgrade: false },
+      { text: "Exfoliation Scrub for all Plastic, Vinyl, Alcantara, and Leather surfaces", upgrade: false },
+      { text: "Focused attention to Creases and Crevices", upgrade: false },
+      { text: "Deep Interior Vacuum + Brush Agitation", upgrade: false },
       { text: "Streak-Free Glass and Screens", upgrade: false },
-      { text: "Floor Mat Cleaning", upgrade: false },
+      { text: "Floor Mat Cleaning + Dressing", upgrade: false },
+      { text: "Foot Pedal Cleaning", upgrade: false },
     ],
     exterior: [
       { text: "Pre-Soak Foam Bath", upgrade: false },
       { text: "Foam Bath and Contact Wash", upgrade: false },
-      { text: "Wheel & Tires Cleaned and Dressed", upgrade: false },
-      { text: "Polymer Wax Protection", upgrade: false },
+      { text: "Wheel Faces, Wells, and Barrels cleaned", upgrade: false },
+      { text: "Tires Scrubbed and Cleaned with Gentle Chemicals", upgrade: false },
+      { text: "Hydrophobic Layer for Wheels", upgrade: false },
+      { text: "Dressing for Moisturizing and Shine applied to Tires and Wheel Wells", upgrade: false },
+      { text: "Hydrophobic and Dust Repellent Polymer Wax Protection", upgrade: false },
     ],
     included: [
       "Vehicle Health Check Card",
@@ -61,11 +65,12 @@ const packages = [
     tagline: "For those who take\ntheir car seriously.",
     popular: true,
     interior: [
-      { text: "All Surface Cleaning", upgrade: false },
-      { text: "Crack & Crevice Air Purge", upgrade: false },
-      { text: "Deep Interior Vacuum", upgrade: false },
+      { text: "Exfoliation Scrub for all Plastic, Vinyl, Alcantara, and Leather surfaces", upgrade: false },
+      { text: "Focused attention to Creases and Crevices", upgrade: false },
+      { text: "Deep Interior Vacuum + Brush Agitation", upgrade: false },
       { text: "Streak-Free Glass and Screens", upgrade: false },
-      { text: "Floor Mat Cleaning", upgrade: false },
+      { text: "Floor Mat Cleaning + Dressing", upgrade: false },
+      { text: "Foot Pedal Cleaning", upgrade: false },
       { text: "Leather Conditioning", upgrade: true },
       { text: "Carpet and Upholstery Shampoo", upgrade: true },
       { text: "Anti-Static and UV Protectant", upgrade: true },
@@ -73,7 +78,10 @@ const packages = [
     exterior: [
       { text: "Pre-Soak Foam Bath", upgrade: false },
       { text: "Foam Bath and Contact Wash", upgrade: false },
-      { text: "Wheel & Tires Cleaned and Dressed", upgrade: false },
+      { text: "Wheel Faces, Wells, and Barrels cleaned", upgrade: false },
+      { text: "Tires Scrubbed and Cleaned with Gentle Chemicals", upgrade: false },
+      { text: "Hydrophobic Layer for Wheels", upgrade: false },
+      { text: "Dressing for Moisturizing and Shine applied to Tires and Wheel Wells", upgrade: false },
       { text: "Clay Bar Decontamination", upgrade: true },
       { text: "Iron Remover Treatment", upgrade: true },
       { text: "Ceramic Spray Sealant", upgrade: true },
@@ -90,11 +98,12 @@ const packages = [
     tagline: "The full experience.\nNothing held back.",
     popular: false,
     interior: [
-      { text: "All Surface Cleaning", upgrade: false },
-      { text: "Crack & Crevice Air Purge", upgrade: false },
-      { text: "Deep Interior Vacuum", upgrade: false },
+      { text: "Exfoliation Scrub for all Plastic, Vinyl, Alcantara, and Leather surfaces", upgrade: false },
+      { text: "Focused attention to Creases and Crevices", upgrade: false },
+      { text: "Deep Interior Vacuum + Brush Agitation", upgrade: false },
       { text: "Streak-Free Glass and Screens", upgrade: false },
-      { text: "Floor Mat Cleaning", upgrade: false },
+      { text: "Floor Mat Cleaning + Dressing", upgrade: false },
+      { text: "Foot Pedal Cleaning", upgrade: false },
       { text: "Leather Conditioning", upgrade: false },
       { text: "Carpet and Upholstery Shampoo", upgrade: false },
       { text: "Anti-Static and UV Protectant", upgrade: false },
@@ -103,14 +112,16 @@ const packages = [
     exterior: [
       { text: "Pre-Soak Foam Bath", upgrade: false },
       { text: "Foam Bath and Contact Wash", upgrade: false },
-      { text: "Wheel & Tires Cleaned and Dressed", upgrade: false },
+      { text: "Wheel Faces, Wells, and Barrels cleaned", upgrade: false },
+      { text: "Tires Scrubbed and Cleaned with Gentle Chemicals", upgrade: false },
+      { text: "Hydrophobic Layer for Wheels", upgrade: false },
+      { text: "Dressing for Moisturizing and Shine applied to Tires and Wheel Wells", upgrade: false },
       { text: "Clay Bar Decontamination", upgrade: false },
       { text: "Iron Remover Treatment", upgrade: false },
       { text: "Ceramic Spray Sealant", upgrade: false },
     ],
     included: [
       "1 Complimentary Crown Refresh within 30 days",
-      "Fragrance Selection",
       "Priority Rebooking Slot",
     ],
   },
@@ -327,11 +338,10 @@ export default function ServicesPage() {
             {[
               { name: "Headlight Restoration", price: "$60", body: "Oxidized, yellowed headlights reduce visibility and make a clean car look older than it is. We wet-sand, polish, and seal both lenses. Priced per pair." },
               { name: "Engine Bay Cleaning", price: "$75", body: "A degreased, detailed engine bay makes maintenance easier and keeps buyers interested if you ever sell. We protect sensitive components and hand-clean the bay for a clean, presentable finish." },
-              { name: "Odor Elimination", price: "$60", body: "For smoke, pet, food, or any embedded smell that interior cleaning alone doesn't fully remove. We treat the source, not just the surface." },
               { name: "Pet Hair Removal", price: "from $50", body: "Pet hair embeds into carpet and upholstery fibers in a way a standard vacuum can't touch. We use specialized tools to pull it out fully before the detail begins. Priced by severity." },
               { name: "Tar & Adhesive Removal", price: "$40", body: "Road tar, sap, sticker residue, and bonded contamination that won't come off in a wash. Treated with a dedicated solvent before the exterior detail so it doesn't affect the finish." },
-              { name: "Rain-X / Glass Coating", price: "$50", body: "A hydrophobic glass treatment applied to all exterior windows. Water sheets off at speed, improving visibility in rain and reducing water spot buildup between details." },
               { name: "Trim Restoration", price: "from $55", body: "Faded, gray plastic trim ages a car faster than almost anything else. We restore color and apply a protective coating that holds up through washes. Priced by severity and trim coverage." },
+              { name: "Scratch Removal", price: "from $50", body: "Light scratches and swirls can often be polished out, but every scratch is different — depth, paint type, and location all change what's possible, and no single process fixes them all. Reach out and we'll talk through your goals and what results to expect before we start." },
             ].map((addon) => (
               <div key={addon.name} className="bg-[#0d1f16] border border-[#1a3020] rounded-[14px] p-5">
                 <div className="flex items-start justify-between gap-3 mb-3">
@@ -356,12 +366,13 @@ export default function ServicesPage() {
               <div className="font-['Cormorant_Garamond',serif] text-[28px] font-bold mb-2 leading-[1.1]">
                 Crown Refresh
               </div>
-              <div className="font-['Cormorant_Garamond',serif] text-[34px] font-semibold text-[#C9A84C] mb-2.5">
+              <div className="font-['Cormorant_Garamond',serif] text-[34px] font-semibold text-[#C9A84C] mb-1">
                 $85{" "}
                 <span className="text-sm font-['DM_Sans',sans-serif] font-normal text-[#3d6b48]">starting</span>
               </div>
+              <div className="text-[11px] text-[#3d6b48] mb-2.5">$105 SUV / $120 XL</div>
               <p className="text-[12px] text-[#3d6b48] leading-[1.75] max-w-[260px]">
-                Best for vehicles serviced within the last 60 days. New clients start with Prince to build a clean baseline.
+                Maintenance for in-between details so your vehicle is clean, always. Best for vehicles serviced within the last 60 days. The more often you book, the less it costs — Refresh pricing scales with how frequent your vehicle is serviced. Heavier conditions requiring deeper cleaning will be charged accordingly.
               </p>
             </div>
             <div>
@@ -369,10 +380,12 @@ export default function ServicesPage() {
                 {[
                   "Exterior Foam Bath & Hand Wash",
                   "Tires Cleaned and Dressed",
+                  "Wheel Faces Cleaned and Hydrophobics Refreshed",
                   "Streak-Free Glass",
-                  "Light Interior Wipedown",
+                  "Gentle Wipe Down for All Surfaces",
                   "Light Vacuum",
-                  "Polymer Wax Booster",
+                  "Floor Mat Cleaned and Dressed",
+                  "Polymer Wax/Ceramic Sealant Booster",
                 ].map((item) => (
                   <li key={item} className="text-[12px] text-[#7aa882] flex items-start gap-2">
                     <span className="w-1 h-1 rounded-full bg-[#C9A84C] mt-[6px] flex-shrink-0 opacity-45" />

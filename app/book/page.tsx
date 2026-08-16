@@ -115,7 +115,7 @@ function BookPageContent() {
         subtitle="We come to your home or office in Glendale, Pasadena, and Burbank. No drop-off needed."
       />
 
-      <section className="pb-20 px-6 md:px-20 w-full min-w-0 max-w-[1200px] mx-auto">
+      <section className="pb-20 px-6 md:px-20 w-full min-w-0 max-w-[1200px] min-[2000px]:max-w-[1500px] mx-auto">
         <div className="grid grid-cols-1 lg:grid-cols-5 gap-16 lg:items-start">
 
           {/* ── LEFT: Form + Call/Text + Reviews ── */}
@@ -242,7 +242,7 @@ function BookPageContent() {
                     ))}
                   </div>
                   <span className="text-xs tracking-[3px] uppercase text-gold opacity-70">
-                    34 Google Reviews
+                    40 Google Reviews
                   </span>
                 </div>
                 
@@ -307,7 +307,7 @@ function BookPageContent() {
               {/* Trust bar */}
               <div className="grid grid-cols-3 border border-gold/10 rounded-sm overflow-hidden mt-12">
                 <div className="flex flex-col items-center justify-center py-4 px-3 bg-black/20 border-r border-gold/10 text-center">
-                  <span className="text-gold text-xl font-light">34</span>
+                  <span className="text-gold text-xl font-light">40</span>
                   <span className="text-xs opacity-40 mt-1">5-Star Reviews</span>
                 </div>
                 <div className="flex flex-col items-center justify-center py-4 px-3 bg-black/20 border-r border-gold/10 text-center">

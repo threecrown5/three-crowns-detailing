@@ -19,7 +19,7 @@ export default function ContactPage() {
       heading="Get In Touch"
       subtitle="Have a question before booking? Reach out and we'll be happy to help."
     />
-    <section className="pb-20 px-6 md:px-20 flex-1 w-full min-w-0 max-w-[1200px] mx-auto">
+    <section className="pb-20 px-6 md:px-20 flex-1 w-full min-w-0 max-w-[1200px] min-[2000px]:max-w-[1500px] mx-auto">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-16">
           {/* Left: Contact Details */}
           <div>

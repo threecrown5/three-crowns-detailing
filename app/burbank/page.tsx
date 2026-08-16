@@ -6,7 +6,7 @@ export default function BurbankPage() {
   return (
     <>
       {/* ── HERO ── */}
-      <section className="pt-[140px] pb-16 px-6 md:px-20 max-w-[1200px] mx-auto">
+      <section className="pt-[140px] pb-16 px-6 md:px-20 max-w-[1200px] min-[2000px]:max-w-[1500px] mx-auto">
         <p className="text-gold text-xs tracking-[6px] font-medium mb-4 uppercase opacity-80">
           Burbank, CA
         </p>
@@ -31,7 +31,7 @@ export default function BurbankPage() {
       </section>
 
       {/* ── BODY COPY ── */}
-      <section className="py-12 px-6 md:px-20 max-w-[1200px] mx-auto">
+      <section className="py-12 px-6 md:px-20 max-w-[1200px] min-[2000px]:max-w-[1500px] mx-auto">
         <div className="max-w-[720px] space-y-5 text-sm md:text-base opacity-60 leading-relaxed">
           <p>
             Burbank runs on a different schedule than most of LA. Early calls, long days, a car that goes from the studio lot to the freeway and back without much ceremony. The last thing on the list is finding time to get the car detailed. Three Crowns Detailing fits into your schedule instead of forcing you to rearrange it. We come to you — at home, at work, wherever the car is parked — and handle the job while you're handling everything else.
@@ -44,7 +44,7 @@ export default function BurbankPage() {
 
       {/* ── PACKAGES ── */}
       <section className="py-16 px-6 md:px-20 bg-black/20">
-        <div className="max-w-[1200px] mx-auto">
+        <div className="max-w-[1200px] min-[2000px]:max-w-[1500px] mx-auto">
           <p className="text-xs tracking-[4px] uppercase text-gold opacity-70 mb-3">What We Offer in Burbank</p>
           <h2 className="text-3xl md:text-4xl font-light mb-12">Detailing packages, on-site.</h2>
 
@@ -75,7 +75,7 @@ export default function BurbankPage() {
       </section>
 
       {/* ── WHY BURBANK ── */}
-      <section className="py-16 px-6 md:px-20 max-w-[1200px] mx-auto">
+      <section className="py-16 px-6 md:px-20 max-w-[1200px] min-[2000px]:max-w-[1500px] mx-auto">
         <p className="text-xs tracking-[4px] uppercase text-gold opacity-70 mb-3">Why Burbank Clients Choose Three Crowns</p>
         <div className="max-w-[720px] space-y-5 text-sm md:text-base opacity-60 leading-relaxed">
           <p>
@@ -87,6 +87,19 @@ export default function BurbankPage() {
           <p>
             We've served 35+ clients across the Glendale–Burbank corridor with a 5-star rating on Google. Most of them were working while we took care of the car.
           </p>
+        </div>
+      </section>
+
+      {/* ── ALSO SERVING ── */}
+      <section className="pb-16 px-6 md:px-20 max-w-[1200px] min-[2000px]:max-w-[1500px] mx-auto">
+        <p className="text-xs tracking-[4px] uppercase text-gold opacity-70 mb-3">Also Serving</p>
+        <div className="flex flex-wrap gap-x-8 gap-y-2">
+          <Link href="/glendale" className="text-sm opacity-50 hover:opacity-100 hover:text-gold transition-all">
+            Mobile Detailing in Glendale →
+          </Link>
+          <Link href="/pasadena" className="text-sm opacity-50 hover:opacity-100 hover:text-gold transition-all">
+            Mobile Detailing in Pasadena →
+          </Link>
         </div>
       </section>
 

@@ -73,7 +73,7 @@ export default function HomePage() {
         {/* Bottom fade — smooth transition into next section */}
         <div className="absolute bottom-0 left-0 right-0 h-40 bg-gradient-to-t from-[#070E08] to-transparent" />
 
-        <div className="relative z-10 w-full max-w-[1200px] mx-auto px-6 md:px-20 py-32 md:py-0">
+        <div className="relative z-10 w-full max-w-[1200px] min-[2000px]:max-w-[1500px] mx-auto px-6 md:px-20 py-32 md:py-0">
           <div className="max-w-[680px] text-center md:text-left">
 
             <p className="text-gold text-xs tracking-[6px] font-medium mb-6 uppercase opacity-80">
@@ -99,7 +99,7 @@ export default function HomePage() {
                   <Star key={i} size={13} className="text-gold fill-gold" />
                 ))}
               </div>
-              <span className="text-white/45 text-xs tracking-wide">34 five-star reviews on Google</span>
+              <span className="text-white/45 text-xs tracking-wide">40 five-star reviews on Google</span>
             </div>
 
             <div className="flex flex-row gap-4 justify-center md:justify-start mb-10">
@@ -127,25 +127,31 @@ export default function HomePage() {
       </section>
 
       {/* ── BODY COPY (SEO) ── */}
-      <section className="py-16 px-6 md:px-20 max-w-[1200px] mx-auto">
-        <div className="max-w-[720px]">
-          <p className="text-sm md:text-base opacity-60 leading-relaxed mb-4">
+      <section className="py-16 px-6 md:px-20 max-w-[1200px] min-[2000px]:max-w-[1500px] mx-auto">
+        <div className="relative max-w-[720px] mx-auto px-8 py-6 md:px-12 md:py-8">
+          {/* Corner brackets */}
+          <span className="absolute top-0 left-0 w-6 h-6 border-t border-l border-gold/70" />
+          <span className="absolute top-0 right-0 w-6 h-6 border-t border-r border-gold/70" />
+          <span className="absolute bottom-0 left-0 w-6 h-6 border-b border-l border-gold/70" />
+          <span className="absolute bottom-0 right-0 w-6 h-6 border-b border-r border-gold/70" />
+
+          <p className="text-sm md:text-base opacity-60 leading-relaxed mb-4 text-center">
             Three Crowns Detailing is a professional mobile detailing service serving Glendale, Pasadena, and Burbank, CA. We come to your home or office — no drop-off, no waiting rooms, no wasted time.
           </p>
-          <p className="text-sm md:text-base opacity-60 leading-relaxed mb-4">
+          <p className="text-sm md:text-base opacity-60 leading-relaxed mb-4 text-center">
             Whether your car needs a full interior and exterior detail, paint decontamination, or a one-step paint correction to restore lost gloss, we handle it on-site with professional-grade products and a process built around your schedule.
           </p>
-          <p className="text-sm md:text-base opacity-60 leading-relaxed mb-4">
+          <p className="text-sm md:text-base opacity-60 leading-relaxed mb-4 text-center">
             Every service includes a vehicle health check — a written summary of what we found, what we treated, and what to watch. No guesswork, no surprises. Just an honest assessment and a car that looks and feels the way it should.
           </p>
-          <p className="text-sm md:text-base opacity-60 leading-relaxed">
+          <p className="text-sm md:text-base opacity-60 leading-relaxed text-center">
             We've served 35+ clients across the Glendale corridor with a 5-star rating on Google. If you've been looking for a detailer you can actually rely on, this is it.
           </p>
         </div>
       </section>
 
       {/* ── HOW IT WORKS ── */}
-      <section className="py-20 px-6 md:px-20 max-w-[1200px] mx-auto">
+      <section className="py-20 px-6 md:px-20 max-w-[1200px] min-[2000px]:max-w-[1500px] mx-auto">
         <p className="text-xs tracking-[4px] uppercase text-gold opacity-70 mb-3">The process</p>
         <h2 className="text-3xl md:text-4xl font-light mb-14">Simple from start to finish.</h2>
 
@@ -162,7 +168,7 @@ export default function HomePage() {
 
       {/* ── WHY THREE CROWNS ── */}
       <section className="py-20 px-6 md:px-20 bg-black/20">
-        <div className="max-w-[1200px] mx-auto grid grid-cols-1 lg:grid-cols-2 gap-16 lg:items-center">
+        <div className="max-w-[1200px] min-[2000px]:max-w-[1500px] mx-auto grid grid-cols-1 lg:grid-cols-2 gap-16 lg:items-center">
 
           <div>
             <p className="text-xs tracking-[4px] uppercase text-gold opacity-70 mb-3">Why clients stay</p>
@@ -193,12 +199,41 @@ export default function HomePage() {
         </div>
       </section>
 
+      {/* ── SERVICE AREAS ── */}
+      <section className="py-20 px-6 md:px-20 max-w-[1200px] min-[2000px]:max-w-[1500px] mx-auto">
+        <p className="text-xs tracking-[4px] uppercase text-gold opacity-70 mb-3">Where we work</p>
+        <h2 className="text-3xl md:text-4xl font-light mb-14">Serving your city.</h2>
+
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+          {[
+            { href: "/glendale", city: "Glendale", body: "Our home base — Montrose, La Crescenta, Adams Hill, Verdugo Woodlands, and across Glendale." },
+            { href: "/pasadena", city: "Pasadena", body: "Old Town, San Marino, Arcadia, and across Pasadena." },
+            { href: "/burbank", city: "Burbank", body: "Media District, Magnolia Park, Toluca Lake, and across Burbank." },
+          ].map((area) => (
+            <Link
+              key={area.href}
+              href={area.href}
+              className="group border-t border-gold/20 pt-8 block hover:border-gold/50 transition-colors"
+            >
+              <div className="flex items-center gap-2 mb-3">
+                <MapPin size={14} className="text-gold/60" />
+                <h3 className="text-base font-medium tracking-wide">{area.city}</h3>
+              </div>
+              <p className="text-sm opacity-50 leading-relaxed mb-4">{area.body}</p>
+              <span className="text-xs tracking-[2px] uppercase text-gold opacity-70 group-hover:opacity-100 transition-opacity">
+                Mobile Detailing in {area.city} →
+              </span>
+            </Link>
+          ))}
+        </div>
+      </section>
+
       {/* ── REVIEWS ── */}
-      <section className="py-20 px-6 md:px-20 max-w-[1200px] mx-auto">
+      <section className="py-20 px-6 md:px-20 max-w-[1200px] min-[2000px]:max-w-[1500px] mx-auto">
         <div className="flex items-center justify-between mb-10 flex-wrap gap-4">
           <div>
             <p className="text-xs tracking-[4px] uppercase text-gold opacity-70 mb-2">What clients say</p>
-            <h2 className="text-3xl font-light">34 five-star reviews.</h2>
+            <h2 className="text-3xl font-light">40 five-star reviews.</h2>
           </div>
           <div className="flex gap-0.5">
             {[...Array(5)].map((_, i) => (
@@ -228,7 +263,7 @@ export default function HomePage() {
             rel="noopener noreferrer"
             className="text-xs tracking-[2px] uppercase text-gold opacity-70 hover:opacity-100 transition-opacity"
           >
-            See all 34 reviews on Google →
+            See all 40 reviews on Google →
           </a>
         </div>
       </section>

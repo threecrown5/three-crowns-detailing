@@ -78,7 +78,7 @@ export default function RefreshPage() {
                 <Star key={i} size={12} className="text-gold fill-gold" />
               ))}
             </div>
-            <span className="text-xs opacity-50">34 Google Reviews</span>
+            <span className="text-xs opacity-50">40 Google Reviews</span>
           </div>
           <div className="flex flex-col items-center justify-center gap-2 border border-gold/10 rounded-sm py-5 bg-black/20 text-center">
             <ShieldCheck size={18} className="text-gold" />

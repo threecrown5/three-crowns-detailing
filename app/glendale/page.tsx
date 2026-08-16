@@ -6,7 +6,7 @@ export default function GlendalePage() {
   return (
     <>
       {/* ── HERO ── */}
-      <section className="pt-[140px] pb-16 px-6 md:px-20 max-w-[1200px] mx-auto">
+      <section className="pt-[140px] pb-16 px-6 md:px-20 max-w-[1200px] min-[2000px]:max-w-[1500px] mx-auto">
         <p className="text-gold text-xs tracking-[6px] font-medium mb-4 uppercase opacity-80">
           Glendale, CA
         </p>
@@ -31,7 +31,7 @@ export default function GlendalePage() {
       </section>
 
       {/* ── BODY COPY ── */}
-      <section className="py-12 px-6 md:px-20 max-w-[1200px] mx-auto">
+      <section className="py-12 px-6 md:px-20 max-w-[1200px] min-[2000px]:max-w-[1500px] mx-auto">
         <div className="max-w-[720px] space-y-5 text-sm md:text-base opacity-60 leading-relaxed">
           <p>
             Glendale is home base for Three Crowns Detailing. We've been working in driveways, apartment lots, and office parking structures across this city since we launched — and it's where we do most of our work. If you've seen a dark green setup at a neighbor's place, that was probably us.
@@ -44,7 +44,7 @@ export default function GlendalePage() {
 
       {/* ── PACKAGES ── */}
       <section className="py-16 px-6 md:px-20 bg-black/20">
-        <div className="max-w-[1200px] mx-auto">
+        <div className="max-w-[1200px] min-[2000px]:max-w-[1500px] mx-auto">
           <p className="text-xs tracking-[4px] uppercase text-gold opacity-70 mb-3">What We Offer in Glendale</p>
           <h2 className="text-3xl md:text-4xl font-light mb-12">Detailing packages, on-site.</h2>
 
@@ -75,7 +75,7 @@ export default function GlendalePage() {
       </section>
 
       {/* ── WHY GLENDALE ── */}
-      <section className="py-16 px-6 md:px-20 max-w-[1200px] mx-auto">
+      <section className="py-16 px-6 md:px-20 max-w-[1200px] min-[2000px]:max-w-[1500px] mx-auto">
         <p className="text-xs tracking-[4px] uppercase text-gold opacity-70 mb-3">Why Glendale Clients Choose Three Crowns</p>
         <div className="max-w-[720px] space-y-5 text-sm md:text-base opacity-60 leading-relaxed">
           <p>
@@ -87,6 +87,19 @@ export default function GlendalePage() {
           <p>
             We've completed 50+ jobs across Glendale with a 5-star rating on Google. Our clients book again — not because we remind them constantly, but because the experience was worth repeating.
           </p>
+        </div>
+      </section>
+
+      {/* ── ALSO SERVING ── */}
+      <section className="pb-16 px-6 md:px-20 max-w-[1200px] min-[2000px]:max-w-[1500px] mx-auto">
+        <p className="text-xs tracking-[4px] uppercase text-gold opacity-70 mb-3">Also Serving</p>
+        <div className="flex flex-wrap gap-x-8 gap-y-2">
+          <Link href="/pasadena" className="text-sm opacity-50 hover:opacity-100 hover:text-gold transition-all">
+            Mobile Detailing in Pasadena →
+          </Link>
+          <Link href="/burbank" className="text-sm opacity-50 hover:opacity-100 hover:text-gold transition-all">
+            Mobile Detailing in Burbank →
+          </Link>
         </div>
       </section>
 

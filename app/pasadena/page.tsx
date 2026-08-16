@@ -6,7 +6,7 @@ export default function PasadenaPage() {
   return (
     <>
       {/* ── HERO ── */}
-      <section className="pt-[140px] pb-16 px-6 md:px-20 max-w-[1200px] mx-auto">
+      <section className="pt-[140px] pb-16 px-6 md:px-20 max-w-[1200px] min-[2000px]:max-w-[1500px] mx-auto">
         <p className="text-gold text-xs tracking-[6px] font-medium mb-4 uppercase opacity-80">
           Pasadena, CA
         </p>
@@ -31,7 +31,7 @@ export default function PasadenaPage() {
       </section>
 
       {/* ── BODY COPY ── */}
-      <section className="py-12 px-6 md:px-20 max-w-[1200px] mx-auto">
+      <section className="py-12 px-6 md:px-20 max-w-[1200px] min-[2000px]:max-w-[1500px] mx-auto">
         <div className="max-w-[720px] space-y-5 text-sm md:text-base opacity-60 leading-relaxed">
           <p>
             If you're in Pasadena and you've been putting off getting your car detailed, it's usually for one reason: you don't have time to deal with it. Drop it off somewhere, wait around, pick it up — that's half a day gone. Three Crowns Detailing removes that entirely. We come to your driveway, your parking structure, or your office lot and handle the job while you're doing something that actually matters to you.
@@ -44,7 +44,7 @@ export default function PasadenaPage() {
 
       {/* ── PACKAGES ── */}
       <section className="py-16 px-6 md:px-20 bg-black/20">
-        <div className="max-w-[1200px] mx-auto">
+        <div className="max-w-[1200px] min-[2000px]:max-w-[1500px] mx-auto">
           <p className="text-xs tracking-[4px] uppercase text-gold opacity-70 mb-3">What We Offer in Pasadena</p>
           <h2 className="text-3xl md:text-4xl font-light mb-12">Detailing packages, on-site.</h2>
 
@@ -75,7 +75,7 @@ export default function PasadenaPage() {
       </section>
 
       {/* ── WHY PASADENA ── */}
-      <section className="py-16 px-6 md:px-20 max-w-[1200px] mx-auto">
+      <section className="py-16 px-6 md:px-20 max-w-[1200px] min-[2000px]:max-w-[1500px] mx-auto">
         <p className="text-xs tracking-[4px] uppercase text-gold opacity-70 mb-3">Why Pasadena Clients Choose Three Crowns</p>
         <div className="max-w-[720px] space-y-5 text-sm md:text-base opacity-60 leading-relaxed">
           <p>
@@ -87,6 +87,19 @@ export default function PasadenaPage() {
           <p>
             We've served 35+ clients across the Glendale–Pasadena corridor with a 5-star rating on Google. Most of them didn't come outside once during the service.
           </p>
+        </div>
+      </section>
+
+      {/* ── ALSO SERVING ── */}
+      <section className="pb-16 px-6 md:px-20 max-w-[1200px] min-[2000px]:max-w-[1500px] mx-auto">
+        <p className="text-xs tracking-[4px] uppercase text-gold opacity-70 mb-3">Also Serving</p>
+        <div className="flex flex-wrap gap-x-8 gap-y-2">
+          <Link href="/glendale" className="text-sm opacity-50 hover:opacity-100 hover:text-gold transition-all">
+            Mobile Detailing in Glendale →
+          </Link>
+          <Link href="/burbank" className="text-sm opacity-50 hover:opacity-100 hover:text-gold transition-all">
+            Mobile Detailing in Burbank →
+          </Link>
         </div>
       </section>
 

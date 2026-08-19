@@ -15,7 +15,7 @@ export function ThankYouContent() {
         <CheckCircle className="mx-auto mb-6 text-gold" size={56} />
         <h1 className="text-3xl font-semibold text-gold mb-4">Got it.</h1>
         <p className="text-lg font-light opacity-70 leading-relaxed">
-          I'll reach out within a few hours to lock in your booking.
+          I&apos;ll reach out within a few hours to lock in your booking.
         </p>
         <p className="text-sm opacity-40 mt-4">
           Questions in the meantime? Text or call{" "}

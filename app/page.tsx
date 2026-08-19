@@ -85,7 +85,7 @@ export default function HomePage() {
             </h1>
 
             <h2 className="text-4xl md:text-[clamp(52px,5vw,80px)] font-light tracking-wide leading-[1.1] mb-6">
-              Your car.<br className="hidden md:block" /> We'll handle it.
+              Your car.<br className="hidden md:block" /> We&apos;ll handle it.
             </h2>
 
             <p className="text-white/65 text-base md:text-lg leading-relaxed max-w-[520px] mb-4 mx-auto md:mx-0">
@@ -128,24 +128,24 @@ export default function HomePage() {
 
       {/* ── BODY COPY (SEO) ── */}
       <section className="py-16 px-6 md:px-20 max-w-[1200px] min-[2000px]:max-w-[1500px] mx-auto">
-        <div className="relative max-w-[720px] mx-auto px-8 py-6 md:px-12 md:py-8">
+        <div className="relative max-w-[960px] mx-auto px-8 py-6 md:px-14 md:py-10">
           {/* Corner brackets */}
-          <span className="absolute top-0 left-0 w-6 h-6 border-t border-l border-gold/70" />
-          <span className="absolute top-0 right-0 w-6 h-6 border-t border-r border-gold/70" />
-          <span className="absolute bottom-0 left-0 w-6 h-6 border-b border-l border-gold/70" />
-          <span className="absolute bottom-0 right-0 w-6 h-6 border-b border-r border-gold/70" />
+          <span className="absolute top-0 left-0 w-6 h-6 border-t-2 border-l-2 rounded-tl-xl border-gold/70" />
+          <span className="absolute top-0 right-0 w-6 h-6 border-t-2 border-r-2 rounded-tr-xl border-gold/70" />
+          <span className="absolute bottom-0 left-0 w-6 h-6 border-b-2 border-l-2 rounded-bl-xl border-gold/70" />
+          <span className="absolute bottom-0 right-0 w-6 h-6 border-b-2 border-r-2 rounded-br-xl border-gold/70" />
 
-          <p className="text-sm md:text-base opacity-60 leading-relaxed mb-4 text-center">
+          <p className="text-base md:text-lg opacity-60 leading-relaxed mb-4 text-center">
             Three Crowns Detailing is a professional mobile detailing service serving Glendale, Pasadena, and Burbank, CA. We come to your home or office — no drop-off, no waiting rooms, no wasted time.
           </p>
-          <p className="text-sm md:text-base opacity-60 leading-relaxed mb-4 text-center">
+          <p className="text-base md:text-lg opacity-60 leading-relaxed mb-4 text-center">
             Whether your car needs a full interior and exterior detail, paint decontamination, or a one-step paint correction to restore lost gloss, we handle it on-site with professional-grade products and a process built around your schedule.
           </p>
-          <p className="text-sm md:text-base opacity-60 leading-relaxed mb-4 text-center">
+          <p className="text-base md:text-lg opacity-60 leading-relaxed mb-4 text-center">
             Every service includes a vehicle health check — a written summary of what we found, what we treated, and what to watch. No guesswork, no surprises. Just an honest assessment and a car that looks and feels the way it should.
           </p>
-          <p className="text-sm md:text-base opacity-60 leading-relaxed text-center">
-            We've served 35+ clients across the Glendale corridor with a 5-star rating on Google. If you've been looking for a detailer you can actually rely on, this is it.
+          <p className="text-base md:text-lg opacity-60 leading-relaxed text-center">
+            We&apos;ve served 35+ clients across the Glendale corridor with a 5-star rating on Google. If you&apos;ve been looking for a detailer you can actually rely on, this is it.
           </p>
         </div>
       </section>
@@ -177,7 +177,7 @@ export default function HomePage() {
               <span className="text-gold italic" style={{ fontFamily: 'var(--font-cormorant, serif)' }}>We take care of you.</span>
             </h2>
             <p className="text-sm opacity-50 leading-relaxed mb-10 max-w-[480px]">
-              You're trusting someone to show up at your home, handle your car, and do it right without you babysitting the process. That's the bar we hold ourselves to — every single time.
+              You&apos;re trusting someone to show up at your home, handle your car, and do it right without you babysitting the process. That&apos;s the bar we hold ourselves to — every single time.
             </p>
             <Button
               asChild
@@ -296,7 +296,7 @@ export default function HomePage() {
         <div className="max-w-[600px] mx-auto text-center">
           <p className="text-xs tracking-[4px] uppercase text-gold opacity-70 mb-4">Ready?</p>
           <h2 className="text-3xl md:text-4xl font-light mb-3">
-            We'll take care of it.
+            We&apos;ll take care of it.
           </h2>
           <p className="text-sm italic opacity-60 mb-4" style={{ fontFamily: 'var(--font-cormorant, serif)' }}>
             Handled. Every time.

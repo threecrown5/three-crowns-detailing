@@ -34,10 +34,10 @@ export default function BurbankPage() {
       <section className="py-12 px-6 md:px-20 max-w-[1200px] min-[2000px]:max-w-[1500px] mx-auto">
         <div className="max-w-[720px] space-y-5 text-sm md:text-base opacity-60 leading-relaxed">
           <p>
-            Burbank runs on a different schedule than most of LA. Early calls, long days, a car that goes from the studio lot to the freeway and back without much ceremony. The last thing on the list is finding time to get the car detailed. Three Crowns Detailing fits into your schedule instead of forcing you to rearrange it. We come to you — at home, at work, wherever the car is parked — and handle the job while you're handling everything else.
+            Burbank runs on a different schedule than most of LA. Early calls, long days, a car that goes from the studio lot to the freeway and back without much ceremony. The last thing on the list is finding time to get the car detailed. Three Crowns Detailing fits into your schedule instead of forcing you to rearrange it. We come to you — at home, at work, wherever the car is parked — and handle the job while you&apos;re handling everything else.
           </p>
           <p>
-            We serve clients across Burbank and the surrounding area, including Toluca Lake, North Hollywood adjacent, and the neighborhoods near Warner Bros., Disney, and NBC. If you're in the 91501, 91502, 91504, 91505, or 91506 zip codes, we're already working in your area.
+            We serve clients across Burbank and the surrounding area, including Toluca Lake, North Hollywood adjacent, and the neighborhoods near Warner Bros., Disney, and NBC. If you&apos;re in the 91501, 91502, 91504, 91505, or 91506 zip codes, we&apos;re already working in your area.
           </p>
         </div>
       </section>
@@ -60,7 +60,7 @@ export default function BurbankPage() {
               <p className="text-gold text-sm font-medium mb-1">King Detail</p>
               <p className="text-gold/60 text-xs mb-4">from $290</p>
               <p className="text-sm opacity-50 leading-relaxed">
-                Everything in Prince, plus leather conditioning, carpet and upholstery shampoo, UV protectant, clay bar decontamination, iron remover, and ceramic spray sealant. For the car that's due for a full reset — or the owner who wants real protection going forward. Includes a complimentary Crown Refresh within 30 days.
+                Everything in Prince, plus leather conditioning, carpet and upholstery shampoo, UV protectant, clay bar decontamination, iron remover, and ceramic spray sealant. For the car that&apos;s due for a full reset — or the owner who wants real protection going forward. Includes a complimentary Crown Refresh within 30 days.
               </p>
             </div>
             <div className="border-t border-gold/20 pt-8">
@@ -79,13 +79,13 @@ export default function BurbankPage() {
         <p className="text-xs tracking-[4px] uppercase text-gold opacity-70 mb-3">Why Burbank Clients Choose Three Crowns</p>
         <div className="max-w-[720px] space-y-5 text-sm md:text-base opacity-60 leading-relaxed">
           <p>
-            In Burbank, time is the real currency. Our clients aren't comparison shopping six detailers — they want someone reliable they can book and stop thinking about. That's the exact problem we're built to solve.
+            In Burbank, time is the real currency. Our clients aren&apos;t comparison shopping six detailers — they want someone reliable they can book and stop thinking about. That&apos;s the exact problem we&apos;re built to solve.
           </p>
           <p>
-            You'll get a confirmation text before we arrive. When we're done, you get a vehicle health check card — a written summary of what we treated and what to keep an eye on. Honest, clear, no upselling on-site. The price you were quoted is the price you pay.
+            You&apos;ll get a confirmation text before we arrive. When we&apos;re done, you get a vehicle health check card — a written summary of what we treated and what to keep an eye on. Honest, clear, no upselling on-site. The price you were quoted is the price you pay.
           </p>
           <p>
-            We've served 35+ clients across the Glendale–Burbank corridor with a 5-star rating on Google. Most of them were working while we took care of the car.
+            We&apos;ve served 35+ clients across the Glendale–Burbank corridor with a 5-star rating on Google. Most of them were working while we took care of the car.
           </p>
         </div>
       </section>
@@ -109,7 +109,7 @@ export default function BurbankPage() {
           <p className="text-xs tracking-[4px] uppercase text-gold opacity-70 mb-4">Book Mobile Detailing in Burbank</p>
           <h2 className="text-3xl md:text-4xl font-light mb-4">Ready to get your car handled?</h2>
           <p className="text-sm opacity-45 leading-relaxed mb-8">
-            Fill out the form or text us directly. We'll confirm your vehicle, recommend the right package, and get you on the schedule — usually within the week.
+            Fill out the form or text us directly. We&apos;ll confirm your vehicle, recommend the right package, and get you on the schedule — usually within the week.
           </p>
           <p className="text-sm italic opacity-40 mb-8" style={{ fontFamily: 'var(--font-cormorant, serif)' }}>
             Handled. Every time.

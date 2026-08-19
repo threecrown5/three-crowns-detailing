@@ -54,7 +54,7 @@ export default function RefreshPage() {
           </Button>
 
           <p className="text-white/30 text-xs leading-relaxed mt-4 text-center">
-            No payment required to book. We'll confirm timing with you directly.
+            No payment required to book. We&apos;ll confirm timing with you directly.
           </p>
         </div>
 

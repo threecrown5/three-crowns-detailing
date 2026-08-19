@@ -34,10 +34,10 @@ export default function PasadenaPage() {
       <section className="py-12 px-6 md:px-20 max-w-[1200px] min-[2000px]:max-w-[1500px] mx-auto">
         <div className="max-w-[720px] space-y-5 text-sm md:text-base opacity-60 leading-relaxed">
           <p>
-            If you're in Pasadena and you've been putting off getting your car detailed, it's usually for one reason: you don't have time to deal with it. Drop it off somewhere, wait around, pick it up — that's half a day gone. Three Crowns Detailing removes that entirely. We come to your driveway, your parking structure, or your office lot and handle the job while you're doing something that actually matters to you.
+            If you&apos;re in Pasadena and you&apos;ve been putting off getting your car detailed, it&apos;s usually for one reason: you don&apos;t have time to deal with it. Drop it off somewhere, wait around, pick it up — that&apos;s half a day gone. Three Crowns Detailing removes that entirely. We come to your driveway, your parking structure, or your office lot and handle the job while you&apos;re doing something that actually matters to you.
           </p>
           <p>
-            We serve clients across Pasadena and the surrounding area — including Old Town, San Marino, Arcadia, Altadena, La Cañada Flintridge, and the neighborhoods along the 210 corridor. If you're in the 91101, 91103, 91104, 91105, 91106, or 91107 zip codes, we're already working in your area.
+            We serve clients across Pasadena and the surrounding area — including Old Town, San Marino, Arcadia, Altadena, La Cañada Flintridge, and the neighborhoods along the 210 corridor. If you&apos;re in the 91101, 91103, 91104, 91105, 91106, or 91107 zip codes, we&apos;re already working in your area.
           </p>
         </div>
       </section>
@@ -79,13 +79,13 @@ export default function PasadenaPage() {
         <p className="text-xs tracking-[4px] uppercase text-gold opacity-70 mb-3">Why Pasadena Clients Choose Three Crowns</p>
         <div className="max-w-[720px] space-y-5 text-sm md:text-base opacity-60 leading-relaxed">
           <p>
-            Pasadena has a car culture worth protecting. Whether you're driving a daily BMW through Old Town or keeping a weekend vehicle in storage near the Rose Bowl, the standard here is different. Our clients aren't looking for a quick wash — they want someone who's going to show up, communicate clearly, and leave the car better than they found it.
+            Pasadena has a car culture worth protecting. Whether you&apos;re driving a daily BMW through Old Town or keeping a weekend vehicle in storage near the Rose Bowl, the standard here is different. Our clients aren&apos;t looking for a quick wash — they want someone who&apos;s going to show up, communicate clearly, and leave the car better than they found it.
           </p>
           <p>
-            That's the whole model. You get a confirmation text before we arrive, a health check card when we're done, and a detailer who actually picks up the phone. No chasing anyone down. No surprises on pricing. No wondering if the job got done right.
+            That&apos;s the whole model. You get a confirmation text before we arrive, a health check card when we&apos;re done, and a detailer who actually picks up the phone. No chasing anyone down. No surprises on pricing. No wondering if the job got done right.
           </p>
           <p>
-            We've served 35+ clients across the Glendale–Pasadena corridor with a 5-star rating on Google. Most of them didn't come outside once during the service.
+            We&apos;ve served 35+ clients across the Glendale–Pasadena corridor with a 5-star rating on Google. Most of them didn&apos;t come outside once during the service.
           </p>
         </div>
       </section>
@@ -109,7 +109,7 @@ export default function PasadenaPage() {
           <p className="text-xs tracking-[4px] uppercase text-gold opacity-70 mb-4">Book Mobile Detailing in Pasadena</p>
           <h2 className="text-3xl md:text-4xl font-light mb-4">Ready to get your car handled?</h2>
           <p className="text-sm opacity-45 leading-relaxed mb-8">
-            Fill out the form or text us directly. We'll confirm your vehicle type, recommend the right package, and get you scheduled — usually within the week.
+            Fill out the form or text us directly. We&apos;ll confirm your vehicle type, recommend the right package, and get you scheduled — usually within the week.
           </p>
           <p className="text-sm italic opacity-40 mb-8" style={{ fontFamily: 'var(--font-cormorant, serif)' }}>
             Handled. Every time.

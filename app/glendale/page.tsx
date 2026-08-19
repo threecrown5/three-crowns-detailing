@@ -34,10 +34,10 @@ export default function GlendalePage() {
       <section className="py-12 px-6 md:px-20 max-w-[1200px] min-[2000px]:max-w-[1500px] mx-auto">
         <div className="max-w-[720px] space-y-5 text-sm md:text-base opacity-60 leading-relaxed">
           <p>
-            Glendale is home base for Three Crowns Detailing. We've been working in driveways, apartment lots, and office parking structures across this city since we launched — and it's where we do most of our work. If you've seen a dark green setup at a neighbor's place, that was probably us.
+            Glendale is home base for Three Crowns Detailing. We&apos;ve been working in driveways, apartment lots, and office parking structures across this city since we launched — and it&apos;s where we do most of our work. If you&apos;ve seen a dark green setup at a neighbor&apos;s place, that was probably us.
           </p>
           <p>
-            We serve clients throughout Glendale and the surrounding neighborhoods — Montrose, La Crescenta, Adams Hill, Verdugo Woodlands, Glenoaks Canyon, and the areas near the Glendale Galleria and Brand Boulevard. If you're in the 91201, 91202, 91203, 91204, 91205, 91206, 91207, 91208, or 91214 zip codes, we're already in your area regularly.
+            We serve clients throughout Glendale and the surrounding neighborhoods — Montrose, La Crescenta, Adams Hill, Verdugo Woodlands, Glenoaks Canyon, and the areas near the Glendale Galleria and Brand Boulevard. If you&apos;re in the 91201, 91202, 91203, 91204, 91205, 91206, 91207, 91208, or 91214 zip codes, we&apos;re already in your area regularly.
           </p>
         </div>
       </section>
@@ -60,14 +60,14 @@ export default function GlendalePage() {
               <p className="text-gold text-sm font-medium mb-1">King Detail</p>
               <p className="text-gold/60 text-xs mb-4">from $290</p>
               <p className="text-sm opacity-50 leading-relaxed">
-                Everything in Prince, plus leather conditioning, carpet and upholstery shampoo, UV protectant, clay bar decontamination, iron remover, and ceramic spray sealant. The right package for a car that's overdue for a proper reset — or an owner who wants real protection built in. Includes a complimentary Crown Refresh within 30 days.
+                Everything in Prince, plus leather conditioning, carpet and upholstery shampoo, UV protectant, clay bar decontamination, iron remover, and ceramic spray sealant. The right package for a car that&apos;s overdue for a proper reset — or an owner who wants real protection built in. Includes a complimentary Crown Refresh within 30 days.
               </p>
             </div>
             <div className="border-t border-gold/20 pt-8">
               <p className="text-gold text-sm font-medium mb-1">Queen Detail</p>
               <p className="text-gold/60 text-xs mb-4">from $390</p>
               <p className="text-sm opacity-50 leading-relaxed">
-                Our most complete service. Everything in King, plus a one-step paint correction to remove swirl marks and restore gloss, followed by a professional sealant application. Glendale's sun is hard on paint — if your finish has lost its depth, this is how you get it back. Includes two Crown Refreshes, fragrance selection, and priority rebooking.
+                Our most complete service. Everything in King, plus a one-step paint correction to remove swirl marks and restore gloss, followed by a professional sealant application. Glendale&apos;s sun is hard on paint — if your finish has lost its depth, this is how you get it back. Includes two Crown Refreshes, fragrance selection, and priority rebooking.
               </p>
             </div>
           </div>
@@ -79,13 +79,13 @@ export default function GlendalePage() {
         <p className="text-xs tracking-[4px] uppercase text-gold opacity-70 mb-3">Why Glendale Clients Choose Three Crowns</p>
         <div className="max-w-[720px] space-y-5 text-sm md:text-base opacity-60 leading-relaxed">
           <p>
-            Most detailers in this area are hard to pin down. You text them, you wait, you're not sure if they're coming. That's the experience Three Crowns was built to replace.
+            Most detailers in this area are hard to pin down. You text them, you wait, you&apos;re not sure if they&apos;re coming. That&apos;s the experience Three Crowns was built to replace.
           </p>
           <p>
             You get a confirmation before we arrive. When the job is done, you get a vehicle health check card — a written summary of what was treated and what to keep an eye on going forward. The price you were quoted is what you pay. No surprises, no add-ons pushed on-site.
           </p>
           <p>
-            We've completed 50+ jobs across Glendale with a 5-star rating on Google. Our clients book again — not because we remind them constantly, but because the experience was worth repeating.
+            We&apos;ve completed 50+ jobs across Glendale with a 5-star rating on Google. Our clients book again — not because we remind them constantly, but because the experience was worth repeating.
           </p>
         </div>
       </section>
@@ -109,7 +109,7 @@ export default function GlendalePage() {
           <p className="text-xs tracking-[4px] uppercase text-gold opacity-70 mb-4">Book Mobile Detailing in Glendale</p>
           <h2 className="text-3xl md:text-4xl font-light mb-4">Ready to get your car handled?</h2>
           <p className="text-sm opacity-45 leading-relaxed mb-8">
-            Fill out the form or text us directly. We'll confirm your vehicle, recommend the right package, and get you on the schedule — usually within the week.
+            Fill out the form or text us directly. We&apos;ll confirm your vehicle, recommend the right package, and get you on the schedule — usually within the week.
           </p>
           <p className="text-sm italic opacity-40 mb-8" style={{ fontFamily: 'var(--font-cormorant, serif)' }}>
             Handled. Every time.

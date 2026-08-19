@@ -126,7 +126,7 @@ function BookPageContent() {
                   Get a free quote in seconds.
                 </p>
                 <p className="text-xs tracking-[3px] uppercase text-gold opacity-70">
-                  We'll reach out within the hour
+                  We&apos;ll reach out within the hour
                 </p>
 
                 <Input
@@ -199,7 +199,7 @@ function BookPageContent() {
                 )}
 
                 <p className="text-xs opacity-60">
-                  No payment required. We'll reach out to confirm timing and answer any questions.
+                  No payment required. We&apos;ll reach out to confirm timing and answer any questions.
                 </p>
             </form>
 

@@ -16,7 +16,6 @@ const navLinks = [
 
 export function Header() {
   const pathname = usePathname();
-  const isHome = pathname === "/";
   const [open, setOpen] = useState(false);
 
   return (

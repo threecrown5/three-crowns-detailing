@@ -253,15 +253,15 @@ export default function ServicesPage() {
 
                 <div className="flex-1 mb-[22px] space-y-0">
                   {/* Interior */}
-                  <div className="text-[9px] font-semibold tracking-[0.18em] uppercase text-[#2e5c3a] mb-2">Interior</div>
+                  <div className="text-[11px] font-semibold tracking-[0.18em] uppercase text-[#5a9468] mb-2">Interior</div>
                   <ul className="flex flex-col gap-[7px] mb-3.5">
                     {pkg.interior.map((item) => (
                       <li
                         key={item.text}
-                        className="text-[12px] flex items-start gap-2 leading-[1.45]"
-                        style={{ color: item.upgrade ? "#C9A84C" : "#5a8a68" }}
+                        className="text-[13px] flex items-start gap-2 leading-[1.45]"
+                        style={{ color: item.upgrade ? "#C9A84C" : "#8fbf9a" }}
                       >
-                        <span style={{ color: item.upgrade ? "#C9A84C" : "#2e5c3a", marginTop: 1, flexShrink: 0, fontSize: 11 }}>
+                        <span style={{ color: item.upgrade ? "#C9A84C" : "#4a7a55", marginTop: 1, flexShrink: 0, fontSize: 11 }}>
                           {item.upgrade ? "★" : "✓"}
                         </span>
                         {item.text}
@@ -270,15 +270,15 @@ export default function ServicesPage() {
                   </ul>
 
                   {/* Exterior */}
-                  <div className="text-[9px] font-semibold tracking-[0.18em] uppercase text-[#2e5c3a] mb-2">Exterior</div>
+                  <div className="text-[11px] font-semibold tracking-[0.18em] uppercase text-[#5a9468] mb-2">Exterior</div>
                   <ul className="flex flex-col gap-[7px] mb-3.5">
                     {pkg.exterior.map((item) => (
                       <li
                         key={item.text}
-                        className="text-[12px] flex items-start gap-2 leading-[1.45]"
-                        style={{ color: item.upgrade ? "#C9A84C" : "#5a8a68" }}
+                        className="text-[13px] flex items-start gap-2 leading-[1.45]"
+                        style={{ color: item.upgrade ? "#C9A84C" : "#8fbf9a" }}
                       >
-                        <span style={{ color: item.upgrade ? "#C9A84C" : "#2e5c3a", marginTop: 1, flexShrink: 0, fontSize: 11 }}>
+                        <span style={{ color: item.upgrade ? "#C9A84C" : "#4a7a55", marginTop: 1, flexShrink: 0, fontSize: 11 }}>
                           {item.upgrade ? "★" : "✓"}
                         </span>
                         {item.text}
@@ -348,13 +348,13 @@ export default function ServicesPage() {
                   <div className="text-[13px] font-semibold text-[#f0ebe0] leading-tight">{addon.name}</div>
                   <div className="font-['Cormorant_Garamond',serif] text-[18px] font-bold text-[#C9A84C] shrink-0">{addon.price}</div>
                 </div>
-                <p className="text-[11px] text-[#3d6b48] leading-[1.7]">{addon.body}</p>
+                <p className="text-[13px] text-[#5a9468] leading-[1.7]">{addon.body}</p>
               </div>
             ))}
           </div>
 
           <p className="text-[11px] text-[#2e5c3a] leading-[1.75] mt-4">
-            Add-on pricing is per service at time of booking. Some add-ons are condition-dependent — if scope changes on-site, we'll tell you before we start. No surprises.
+            Add-on pricing is per service at time of booking. Some add-ons are condition-dependent — if scope changes on-site, we&apos;ll tell you before we start. No surprises.
           </p>
         </div>
 

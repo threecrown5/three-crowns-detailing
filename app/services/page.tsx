@@ -5,27 +5,35 @@ import Link from "next/link";
 import Image from "next/image";
 import { Button } from "@/components/ui/button";
 import { PageHeader } from "@/components/PageHeader";
+import { OfferBanner } from "@/components/OfferBanner";
+import { formatPrice, type TierKey } from "@/lib/pricing";
 
-const tiers = [
+const tiers: {
+  key: TierKey;
+  label: string;
+  sub: string;
+  icon: string;
+  tierLabel: string;
+}[] = [
   {
+    key: "t1",
     label: "Sedan / Sport",
     sub: "Mustang GT · BMW 3 Series · Mercedes C-Class\nCoupes & Sport Sedans",
     icon: "/images/icon_sedan.png",
-    prices: { prince: "$185", king: "$290", queen: "$400" },
     tierLabel: "Sedan · Sport · Coupe",
   },
   {
+    key: "t2",
     label: "SUV / Truck",
     sub: "BMW X5 · Mercedes GLE · Range Rover Sport\nF-150 · Silverado · Tacoma",
     icon: "/images/icon_suv.png",
-    prices: { prince: "$225", king: "$350", queen: "$480" },
     tierLabel: "SUV · Truck",
   },
   {
+    key: "t3",
     label: "XL SUV / HD Truck",
     sub: "Cadillac Escalade · Lincoln Navigator · Tahoe · Expedition\nF-250 · Ram 2500 · Silverado HD · 3-Row SUVs",
     icon: "/images/icon_xl.png",
-    prices: { prince: "$270", king: "$425", queen: "$580" },
     tierLabel: "XL SUV · HD Truck",
   },
 ];
@@ -49,14 +57,8 @@ const packages = [
       { text: "Foam Bath and Contact Wash", upgrade: false },
       { text: "Wheel Faces, Wells, and Barrels cleaned", upgrade: false },
       { text: "Tires Scrubbed and Cleaned with Gentle Chemicals", upgrade: false },
-      { text: "Hydrophobic Layer for Wheels", upgrade: false },
       { text: "Dressing for Moisturizing and Shine applied to Tires and Wheel Wells", upgrade: false },
       { text: "Hydrophobic and Dust Repellent Polymer Wax Protection", upgrade: false },
-    ],
-    included: [
-      "Vehicle Health Check Card",
-      "Keep It Clean Maintenance Guide",
-      "Priority Rebooking Slot",
     ],
   },
   {
@@ -80,16 +82,10 @@ const packages = [
       { text: "Foam Bath and Contact Wash", upgrade: false },
       { text: "Wheel Faces, Wells, and Barrels cleaned", upgrade: false },
       { text: "Tires Scrubbed and Cleaned with Gentle Chemicals", upgrade: false },
-      { text: "Hydrophobic Layer for Wheels", upgrade: false },
       { text: "Dressing for Moisturizing and Shine applied to Tires and Wheel Wells", upgrade: false },
       { text: "Clay Bar Decontamination", upgrade: true },
       { text: "Iron Remover Treatment", upgrade: true },
       { text: "Ceramic Spray Sealant", upgrade: true },
-    ],
-    included: [
-      "Vehicle Health Check Card",
-      "Priority Rebooking Slot",
-      "50% Off First Crown Refresh",
     ],
   },
   {
@@ -107,22 +103,17 @@ const packages = [
       { text: "Leather Conditioning", upgrade: false },
       { text: "Carpet and Upholstery Shampoo", upgrade: false },
       { text: "Anti-Static and UV Protectant", upgrade: false },
-      { text: "One-Step Paint Correction & Gloss Enhancement", upgrade: true },
     ],
     exterior: [
       { text: "Pre-Soak Foam Bath", upgrade: false },
       { text: "Foam Bath and Contact Wash", upgrade: false },
       { text: "Wheel Faces, Wells, and Barrels cleaned", upgrade: false },
       { text: "Tires Scrubbed and Cleaned with Gentle Chemicals", upgrade: false },
-      { text: "Hydrophobic Layer for Wheels", upgrade: false },
       { text: "Dressing for Moisturizing and Shine applied to Tires and Wheel Wells", upgrade: false },
       { text: "Clay Bar Decontamination", upgrade: false },
       { text: "Iron Remover Treatment", upgrade: false },
       { text: "Ceramic Spray Sealant", upgrade: false },
-    ],
-    included: [
-      "1 Complimentary Crown Refresh within 30 days",
-      "Priority Rebooking Slot",
+      { text: "One Step Gloss Enhancement", upgrade: true },
     ],
   },
 ];
@@ -208,10 +199,15 @@ export default function ServicesPage() {
           </div>
         </div>
 
+        {/* OFFER — sits right above King/Queen, the tiers it applies to */}
+        <div className="mb-10">
+          <OfferBanner ctaLabel="Book now" ctaHref="/book" />
+        </div>
+
         {/* PACKAGES GRID */}
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-3.5 items-start mb-4">
           {packages.map((pkg) => {
-            const price = tier.prices[pkg.key];
+            const price = formatPrice(pkg.key, tier.key);
             return (
               <div
                 key={pkg.key}
@@ -287,15 +283,10 @@ export default function ServicesPage() {
                   </ul>
 
                   {/* Included */}
-                  <div className="text-[9px] font-semibold tracking-[0.18em] uppercase text-[#2e5c3a] mb-2">Included</div>
-                  <ul className="flex flex-col gap-[7px]">
-                    {pkg.included.map((item) => (
-                      <li key={item} className="text-[12px] flex items-start gap-2 leading-[1.45] text-[#c8d8c0]">
-                        <span className="text-[#C9A84C] mt-px flex-shrink-0 text-[11px]">✦</span>
-                        {item}
-                      </li>
-                    ))}
-                  </ul>
+                  <div className="text-[12px] flex items-start gap-2 leading-[1.45] text-[#c8d8c0] pt-1 mt-1 border-t border-[#1a3020]">
+                    <span className="text-[#C9A84C] mt-px flex-shrink-0 text-[11px]">✦</span>
+                    Vehicle Health Check Card included
+                  </div>
                 </div>
 
                 <Button
@@ -340,7 +331,7 @@ export default function ServicesPage() {
               { name: "Engine Bay Cleaning", price: "$75", body: "A degreased, detailed engine bay makes maintenance easier and keeps buyers interested if you ever sell. We protect sensitive components and hand-clean the bay for a clean, presentable finish." },
               { name: "Pet Hair Removal", price: "from $50", body: "Pet hair embeds into carpet and upholstery fibers in a way a standard vacuum can't touch. We use specialized tools to pull it out fully before the detail begins. Priced by severity." },
               { name: "Tar & Adhesive Removal", price: "$40", body: "Road tar, sap, sticker residue, and bonded contamination that won't come off in a wash. Treated with a dedicated solvent before the exterior detail so it doesn't affect the finish." },
-              { name: "Trim Restoration", price: "from $55", body: "Faded, gray plastic trim ages a car faster than almost anything else. We restore color and apply a protective coating that holds up through washes. Priced by severity and trim coverage." },
+              { name: "Trim Restoration", price: "from $60", body: "Faded, gray plastic trim ages a car faster than almost anything else. We restore color and apply a protective coating that holds up through washes. Priced by severity and trim coverage." },
               { name: "Scratch Removal", price: "from $50", body: "Light scratches and swirls can often be polished out, but every scratch is different — depth, paint type, and location all change what's possible, and no single process fixes them all. Reach out and we'll talk through your goals and what results to expect before we start." },
             ].map((addon) => (
               <div key={addon.name} className="bg-[#0d1f16] border border-[#1a3020] rounded-[14px] p-5">
@@ -367,10 +358,12 @@ export default function ServicesPage() {
                 Crown Refresh
               </div>
               <div className="font-['Cormorant_Garamond',serif] text-[34px] font-semibold text-[#C9A84C] mb-1">
-                $85{" "}
+                {formatPrice("refresh", "t1")}{" "}
                 <span className="text-sm font-['DM_Sans',sans-serif] font-normal text-[#3d6b48]">starting</span>
               </div>
-              <div className="text-[11px] text-[#3d6b48] mb-2.5">$105 SUV / $120 XL</div>
+              <div className="text-[11px] text-[#3d6b48] mb-2.5">
+                {formatPrice("refresh", "t2")} SUV / {formatPrice("refresh", "t3")} XL
+              </div>
               <p className="text-[12px] text-[#3d6b48] leading-[1.75] max-w-[260px]">
                 Maintenance for in-between details so your vehicle is clean, always. Best for vehicles serviced within the last 60 days. The more often you book, the less it costs — Refresh pricing scales with how frequent your vehicle is serviced. Heavier conditions requiring deeper cleaning will be charged accordingly.
               </p>
@@ -380,7 +373,7 @@ export default function ServicesPage() {
                 {[
                   "Exterior Foam Bath & Hand Wash",
                   "Tires Cleaned and Dressed",
-                  "Wheel Faces Cleaned and Hydrophobics Refreshed",
+                  "Wheel Faces Cleaned",
                   "Streak-Free Glass",
                   "Gentle Wipe Down for All Surfaces",
                   "Light Vacuum",

@@ -7,6 +7,7 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion";
+import { OfferBanner } from "@/components/OfferBanner";
 
 const reviews = [
   { name: "Cheryl L.", text: "The work is meticulous, and the wax has lasted over a month and still looks great. They listened and made it right without any hassle." },
@@ -124,6 +125,11 @@ export default function HomePage() {
 
           </div>
         </div>
+      </section>
+
+      {/* ── OFFER ── */}
+      <section className="px-6 md:px-20 max-w-[1200px] min-[2000px]:max-w-[1500px] mx-auto pt-10 md:pt-14">
+        <OfferBanner ctaLabel="See packages" ctaHref="/services" />
       </section>
 
       {/* ── BODY COPY (SEO) ── */}

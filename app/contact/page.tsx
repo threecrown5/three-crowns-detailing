@@ -5,7 +5,7 @@ import { PageHeader } from "@/components/PageHeader";
 import { PhoneLink } from "@/components/PhoneLink";
 
 const contactDetails = [
-  { label: "Call Or Text", value: "(818) 296-7347", icon: Phone, href: "tel:8182967347" },
+  { label: "Call Or Text", value: "(818) 296-7347", icon: Phone },
   { label: "Email", value: "threecrowns.detailing@gmail.com", icon: Mail, href: "mailto:threecrowns.detailing@gmail.com" },
   { label: "Instagram", value: "@threecrowns.detail", icon: Instagram, href: "https://instagram.com/threecrowns.detail" },
   { label: "Service Area", value: "Glendale, CA & Surrounding Areas", icon: MapPin },

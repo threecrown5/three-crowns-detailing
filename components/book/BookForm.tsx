@@ -10,7 +10,15 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { tiers, packages, tierByLabel, packageByName, formatPrice } from "@/lib/pricing";
+import {
+  tiers,
+  packages,
+  tierByLabel,
+  packageByName,
+  getPrice,
+  HEADLIGHT_ADDON,
+  HEADLIGHT_STANDALONE,
+} from "@/lib/pricing";
 
 const AUTORESPONSE = `Thanks for reaching out to Three Crowns — this is an automatic confirmation that we got your request.
 
@@ -30,19 +38,14 @@ export function BookForm() {
   const [error, setError] = useState(false);
 
   const initialPackage = searchParams.get("package");
-  const [selectedPackages, setSelectedPackages] = useState<string[]>(
-    initialPackage ? [initialPackage] : []
-  );
+  const [selectedPackage, setSelectedPackage] = useState(initialPackage ?? "");
+  const [headlightAddon, setHeadlightAddon] = useState(false);
   const [vehicleSize, setVehicleSize] = useState("");
   const [selectionError, setSelectionError] = useState(false);
 
   const tier = tierByLabel(vehicleSize);
-
-  function togglePackage(name: string) {
-    setSelectedPackages((prev) =>
-      prev.includes(name) ? prev.filter((p) => p !== name) : [...prev, name]
-    );
-  }
+  const pkg = packageByName(selectedPackage);
+  const showAddonOption = !!pkg && pkg.key !== "headlights";
 
   async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
@@ -52,7 +55,7 @@ export function BookForm() {
     // to its first option even when nothing has actually been chosen in
     // the UI, so `required` alone won't block an empty selection here —
     // enforce it explicitly against the real component state instead.
-    if (!vehicleSize || selectedPackages.length === 0) {
+    if (!vehicleSize || !selectedPackage) {
       setSelectionError(true);
       return;
     }
@@ -63,9 +66,12 @@ export function BookForm() {
     const formData = new FormData(form);
     formData.set("vehicle_size", vehicleSize);
 
+    const subjectParts = [selectedPackage];
+    if (showAddonOption && headlightAddon) subjectParts.push("+ Headlight Restoration add-on");
+
     formData.append(
       "_subject",
-      `New Detail Request - ${selectedPackages.join(", ")} (${vehicleSize})`
+      `New Detail Request - ${subjectParts.join(" ")} (${vehicleSize})`
     );
     formData.append("_captcha", "false");
     formData.append("_template", "table");
@@ -85,6 +91,9 @@ export function BookForm() {
       setSubmitting(false);
     }
   }
+
+  const total =
+    tier && pkg ? getPrice(pkg.key, tier.key) + (showAddonOption && headlightAddon ? HEADLIGHT_ADDON : 0) : null;
 
   return (
     <form onSubmit={handleSubmit} className="space-y-4">
@@ -143,7 +152,7 @@ export function BookForm() {
         </legend>
         <div className="grid grid-cols-2 gap-2.5">
           {packages.map((p) => {
-            const checked = selectedPackages.includes(p.name);
+            const checked = selectedPackage === p.name;
             return (
               <label
                 key={p.key}
@@ -155,40 +164,63 @@ export function BookForm() {
                 ].join(" ")}
               >
                 <input
-                  type="checkbox"
+                  type="radio"
                   name="package"
                   value={p.name}
                   checked={checked}
-                  onChange={() => togglePackage(p.name)}
+                  onChange={() => setSelectedPackage(p.name)}
                   className="accent-gold size-4 shrink-0"
                 />
-                <span className="text-sm">{p.name}</span>
+                <span className="text-sm">
+                  {p.key === "headlights"
+                    ? `Headlight Restoration — $${HEADLIGHT_STANDALONE}`
+                    : p.name}
+                </span>
               </label>
             );
           })}
         </div>
       </fieldset>
 
-      {tier && selectedPackages.length > 0 && (
+      {showAddonOption && (
+        <label className="flex items-center gap-2.5 border border-white/15 bg-black/35 rounded-sm px-3.5 h-14 cursor-pointer transition-colors hover:border-white/30">
+          <input
+            type="checkbox"
+            name="headlight_addon"
+            checked={headlightAddon}
+            onChange={(e) => setHeadlightAddon(e.target.checked)}
+            className="accent-gold size-4 shrink-0"
+          />
+          <span className="text-sm text-white/70">
+            Add headlight restoration — ${HEADLIGHT_ADDON}
+          </span>
+        </label>
+      )}
+
+      {tier && pkg && total !== null && (
         <div className="border border-gold/30 bg-gold/[0.06] rounded-sm px-5 py-4 space-y-2">
-          {selectedPackages.map((name) => {
-            const pkg = packageByName(name);
-            if (!pkg) return null;
-            return (
-              <p key={name} className="text-2xl font-light text-gold">
-                {name}: From {formatPrice(pkg.key, tier.key)}
-              </p>
-            );
-          })}
+          <p className="text-2xl font-light text-gold">
+            {pkg.key === "headlights" ? "Headlight Restoration" : selectedPackage}: From ${total}
+          </p>
           <p className="text-xs opacity-60 leading-relaxed">
             Starting price for your vehicle. Heavy pet hair, stains, or neglected paint may add — I&apos;ll confirm the exact number before we book.
           </p>
+          {pkg.key === "headlights" && (
+            <p className="text-xs opacity-60 leading-relaxed">
+              Per pair. If there&apos;s moisture inside the lens, I&apos;ll tell you before booking.
+            </p>
+          )}
+          {showAddonOption && headlightAddon && (
+            <p className="text-xs opacity-60 leading-relaxed">
+              Includes ${HEADLIGHT_ADDON} headlight restoration add-on — ${HEADLIGHT_STANDALONE - HEADLIGHT_ADDON} less than booking it separately.
+            </p>
+          )}
         </div>
       )}
 
       {selectionError && (
         <p className="text-red-400 text-xs">
-          Please select your vehicle size and at least one package to continue.
+          Please select your vehicle size and a package to continue.
         </p>
       )}
 

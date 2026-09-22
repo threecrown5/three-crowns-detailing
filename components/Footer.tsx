@@ -9,6 +9,20 @@ const serviceAreas = [
 export function Footer() {
   return (
     <footer className="mt-auto text-center py-10 bg-black/80 border-t border-gold/50">
+      <div className="flex items-center justify-center gap-5 mb-3">
+        <Link
+          href="/services"
+          className="text-xs text-white/40 tracking-wide hover:text-gold transition-colors"
+        >
+          Services
+        </Link>
+        <Link
+          href="/headlights"
+          className="text-xs text-white/40 tracking-wide hover:text-gold transition-colors"
+        >
+          Headlight Restoration
+        </Link>
+      </div>
       <div className="flex items-center justify-center gap-5 mb-4">
         {serviceAreas.map((area) => (
           <Link

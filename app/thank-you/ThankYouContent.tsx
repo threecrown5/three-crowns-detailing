@@ -3,6 +3,7 @@
 import { useEffect } from "react";
 import { CheckCircle } from "lucide-react";
 import { trackConversion, CONVERSIONS } from "@/lib/gtag";
+import { PhoneLink } from "@/components/PhoneLink";
 
 export function ThankYouContent() {
   useEffect(() => {
@@ -19,9 +20,9 @@ export function ThankYouContent() {
         </p>
         <p className="text-sm opacity-40 mt-4">
           Questions in the meantime? Text or call{" "}
-          <a href="tel:8182967347" className="text-gold hover:underline">
+          <PhoneLink className="text-gold hover:underline">
             (818) 296-7347
-          </a>
+          </PhoneLink>
           .
         </p>
       </div>

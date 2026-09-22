@@ -3,20 +3,36 @@ import Link from "next/link";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
 import { useState } from "react";
+import { ChevronDown } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Sheet, SheetContent, SheetTrigger, SheetTitle } from "@/components/ui/sheet";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
 import { PhoneLink } from "@/components/PhoneLink";
 
 const navLinks = [
   { href: "/", label: "Home" },
-  { href: "/services", label: "Services" },
   { href: "/gallery", label: "Gallery" },
   { href: "/contact", label: "Contact" },
+];
+
+const serviceLinks = [
+  { href: "/services#detailing", label: "Detailing" },
+  { href: "/services#add-ons", label: "Add-Ons" },
+  { href: "/services#refresh", label: "Refresh" },
+  { href: "/headlights", label: "Headlight Restoration" },
 ];
 
 export function Header() {
   const pathname = usePathname();
   const [open, setOpen] = useState(false);
+  const [mobileServicesOpen, setMobileServicesOpen] = useState(false);
+
+  const servicesActive = pathname === "/services" || pathname === "/headlights";
 
   return (
     <header className="w-full z-50 flex items-center justify-between px-6 md:px-20 h-[70px] md:h-[90px] fixed top-0 left-0 bg-black/35 backdrop-blur-[8px]">
@@ -33,7 +49,41 @@ export function Header() {
 
       {/* Desktop Nav */}
       <nav className="hidden md:flex items-center gap-10 ml-auto">
-        {navLinks.map((link) => (
+        <Link
+          href="/"
+          className={`font-medium tracking-wide transition-colors duration-300 hover:text-gold ${
+            pathname === "/" ? "text-gold!" : "text-white"
+          }`}
+        >
+          Home
+        </Link>
+
+        <DropdownMenu>
+          <DropdownMenuTrigger
+            className={`flex items-center gap-1.5 font-medium tracking-wide transition-colors duration-300 hover:text-gold outline-none cursor-pointer ${
+              servicesActive ? "text-gold!" : "text-white"
+            }`}
+          >
+            Services
+            <ChevronDown size={14} />
+          </DropdownMenuTrigger>
+          <DropdownMenuContent
+            align="start"
+            className="bg-viridian-dark border-gold/20 text-white min-w-[220px] py-2"
+          >
+            {serviceLinks.map((s) => (
+              <DropdownMenuItem
+                key={s.href}
+                asChild
+                className="tracking-wide focus:bg-gold/10 focus:text-gold cursor-pointer px-3 py-2.5"
+              >
+                <Link href={s.href}>{s.label}</Link>
+              </DropdownMenuItem>
+            ))}
+          </DropdownMenuContent>
+        </DropdownMenu>
+
+        {navLinks.slice(1).map((link) => (
           <Link
             key={link.href}
             href={link.href}
@@ -60,7 +110,13 @@ export function Header() {
       </nav>
 
       {/* Mobile Nav */}
-      <Sheet open={open} onOpenChange={setOpen}>
+      <Sheet
+        open={open}
+        onOpenChange={(v) => {
+          setOpen(v);
+          if (!v) setMobileServicesOpen(false);
+        }}
+      >
         <SheetTrigger asChild className="md:hidden">
           <button className="flex flex-col gap-1.5 cursor-pointer z-[2000]">
             <span className="block w-[26px] h-[2px] bg-white" />
@@ -70,8 +126,48 @@ export function Header() {
         </SheetTrigger>
         <SheetContent side="right" className="bg-black/95 backdrop-blur-lg border-none w-[70%]">
           <SheetTitle className="sr-only">Navigation</SheetTitle>
-          <nav className="flex flex-col items-center justify-center h-full gap-10">
-            {navLinks.map((link) => (
+          <nav className="flex flex-col items-center justify-center h-full gap-10 overflow-y-auto py-10">
+            <Link
+              href="/"
+              onClick={() => setOpen(false)}
+              className={`text-lg font-medium tracking-wide transition-colors hover:text-gold ${
+                pathname === "/" ? "text-gold" : "text-white"
+              }`}
+            >
+              Home
+            </Link>
+
+            <div className="flex flex-col items-center gap-6">
+              <button
+                onClick={() => setMobileServicesOpen((v) => !v)}
+                className={`flex items-center gap-2 text-lg font-medium tracking-wide transition-colors hover:text-gold cursor-pointer ${
+                  servicesActive ? "text-gold" : "text-white"
+                }`}
+              >
+                Services
+                <ChevronDown
+                  size={16}
+                  className={`transition-transform duration-200 ${mobileServicesOpen ? "rotate-180" : ""}`}
+                />
+              </button>
+              {mobileServicesOpen && (
+                <div className="flex flex-col items-center gap-5">
+                  {serviceLinks.map((s) => (
+                    <Link
+                      key={s.href}
+                      href={s.href}
+                      onClick={() => setOpen(false)}
+                      className="flex items-center gap-2 text-sm tracking-wide text-white/70 hover:text-gold transition-colors"
+                    >
+                      <span className="text-gold/50">→</span>
+                      {s.label}
+                    </Link>
+                  ))}
+                </div>
+              )}
+            </div>
+
+            {navLinks.slice(1).map((link) => (
               <Link
                 key={link.href}
                 href={link.href}

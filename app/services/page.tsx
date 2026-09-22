@@ -6,7 +6,7 @@ import Image from "next/image";
 import { Button } from "@/components/ui/button";
 import { PageHeader } from "@/components/PageHeader";
 import { OfferBanner } from "@/components/OfferBanner";
-import { formatPrice, type TierKey } from "@/lib/pricing";
+import { formatPrice, HEADLIGHT_STANDALONE, type TierKey } from "@/lib/pricing";
 
 const tiers: {
   key: TierKey;
@@ -153,7 +153,7 @@ export default function ServicesPage() {
       <div className="max-w-[1020px] mx-auto px-5 pb-24">
 
         {/* VEHICLE SELECTOR */}
-        <div className="mb-12">
+        <div id="detailing" className="mb-12 scroll-mt-28">
           <p className="text-center text-[11px] text-[#2e5c3a] tracking-[0.1em] uppercase mb-[18px]">
             Select your vehicle — pricing updates
           </p>
@@ -314,43 +314,55 @@ export default function ServicesPage() {
         </div>
 
         {/* ADD-ONS */}
-        <div className="mb-8">
+        <div id="add-ons" className="mb-8 scroll-mt-28">
           <div className="mb-7">
             <div className="text-[10px] tracking-[0.22em] uppercase text-[#3d6b48] mb-2">Add-On Services</div>
             <div className="font-['Cormorant_Garamond',serif] text-[28px] font-bold mb-1 leading-[1.1]">
               Customize your detail.
             </div>
-            <p className="text-[12px] text-[#3d6b48] leading-[1.75]">
+            <p className="text-[14px] text-[#7aa882] leading-[1.75]">
               Add one or more services to any package. Just mention it when you book.
             </p>
           </div>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
             {[
-              { name: "Headlight Restoration", price: "$60", body: "Oxidized, yellowed headlights reduce visibility and make a clean car look older than it is. We wet-sand, polish, and seal both lenses. Priced per pair." },
+              { name: "Headlight Restoration", price: `$${HEADLIGHT_STANDALONE}`, body: "Oxidized, yellowed headlights reduce visibility and make a clean car look older than it is. We wet-sand and seal both lenses with a 2K UV clear coat. Flat price per pair.", href: "/headlights" },
               { name: "Engine Bay Cleaning", price: "$75", body: "A degreased, detailed engine bay makes maintenance easier and keeps buyers interested if you ever sell. We protect sensitive components and hand-clean the bay for a clean, presentable finish." },
               { name: "Pet Hair Removal", price: "from $50", body: "Pet hair embeds into carpet and upholstery fibers in a way a standard vacuum can't touch. We use specialized tools to pull it out fully before the detail begins. Priced by severity." },
               { name: "Tar & Adhesive Removal", price: "$40", body: "Road tar, sap, sticker residue, and bonded contamination that won't come off in a wash. Treated with a dedicated solvent before the exterior detail so it doesn't affect the finish." },
               { name: "Trim Restoration", price: "from $60", body: "Faded, gray plastic trim ages a car faster than almost anything else. We restore color and apply a protective coating that holds up through washes. Priced by severity and trim coverage." },
               { name: "Scratch Removal", price: "from $50", body: "Light scratches and swirls can often be polished out, but every scratch is different — depth, paint type, and location all change what's possible, and no single process fixes them all. Reach out and we'll talk through your goals and what results to expect before we start." },
-            ].map((addon) => (
-              <div key={addon.name} className="bg-[#0d1f16] border border-[#1a3020] rounded-[14px] p-5">
-                <div className="flex items-start justify-between gap-3 mb-3">
-                  <div className="text-[13px] font-semibold text-[#f0ebe0] leading-tight">{addon.name}</div>
-                  <div className="font-['Cormorant_Garamond',serif] text-[18px] font-bold text-[#C9A84C] shrink-0">{addon.price}</div>
+            ].map((addon) => {
+              const Card = (
+                <div className="bg-[#0d1f16] border border-[#1a3020] rounded-[14px] p-5 h-full transition-all duration-200 hover:border-gold/50 hover:-translate-y-1 hover:shadow-[0_10px_28px_rgba(0,0,0,0.35)]">
+                  <div className="flex items-start justify-between gap-3 mb-3">
+                    <div className="text-[13px] font-semibold text-[#f0ebe0] leading-tight">{addon.name}</div>
+                    <div className="font-['Cormorant_Garamond',serif] text-[18px] font-bold text-[#C9A84C] shrink-0">{addon.price}</div>
+                  </div>
+                  <p className="text-[13px] text-[#5a9468] leading-[1.7]">{addon.body}</p>
+                  {addon.href && (
+                    <p className="text-[11px] text-[#C9A84C] tracking-[0.08em] uppercase mt-3">Learn more →</p>
+                  )}
                 </div>
-                <p className="text-[13px] text-[#5a9468] leading-[1.7]">{addon.body}</p>
-              </div>
-            ))}
+              );
+              return addon.href ? (
+                <Link key={addon.name} href={addon.href} className="block h-full">
+                  {Card}
+                </Link>
+              ) : (
+                <div key={addon.name} className="h-full">{Card}</div>
+              );
+            })}
           </div>
 
-          <p className="text-[11px] text-[#2e5c3a] leading-[1.75] mt-4">
+          <p className="text-[13px] text-[#7aa882] leading-[1.75] mt-4">
             Add-on pricing is per service at time of booking. Some add-ons are condition-dependent — if scope changes on-site, we&apos;ll tell you before we start. No surprises.
           </p>
         </div>
 
         {/* CROWN REFRESH */}
-        <div className="bg-[#0d1f16] border border-[#1a3020] rounded-[14px] p-8 md:p-9">
+        <div id="refresh" className="bg-[#0d1f16] border border-[#1a3020] rounded-[14px] p-8 md:p-9 scroll-mt-28">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-10 md:items-start">
             <div>
               <div className="text-[10px] tracking-[0.22em] uppercase text-[#3d6b48] mb-2.5">Maintenance</div>

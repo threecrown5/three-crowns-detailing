@@ -2,6 +2,7 @@ import { Suspense } from "react";
 import { Phone, MessageCircle, Truck, Sparkles, Clock, ShieldCheck, Star } from "lucide-react";
 import { PageHeader } from "@/components/PageHeader";
 import { PhoneLink } from "@/components/PhoneLink";
+import { SmsLink } from "@/components/SmsLink";
 import { OfferBanner } from "@/components/OfferBanner";
 import { BookForm } from "@/components/book/BookForm";
 import { BookFormFallback } from "@/components/book/BookFormFallback";
@@ -88,8 +89,8 @@ export default function BookPage() {
                 </div>
               </PhoneLink>
 
-                <a
-                href="sms:8182967347&body=Hi, I'd like to get a quote for a detail."
+              <SmsLink
+                body="Hi, I'd like to get a quote for a detail."
                 className="flex items-center justify-center gap-3 border border-gold/40 text-gold text-sm uppercase px-6 py-4 rounded-sm hover:border-gold hover:bg-gold/5 transition-all"
               >
                 <MessageCircle size={15} />
@@ -97,7 +98,7 @@ export default function BookPage() {
                   <span className="text-sm font-semibold">Text Us</span>
                   <span className="text-xs font-normal opacity-60">Quick quote</span>
                 </div>
-              </a>
+              </SmsLink>
             </div>
 
             {/* ── Review Strip ── */}

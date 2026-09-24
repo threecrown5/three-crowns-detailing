@@ -49,6 +49,7 @@ const galleryImages = [
   { src: "/galleryC/CivicDriverTire.jpg", width: 1440, height: 2560, alt: "Honda Civic wheel decontamination tire dressing mobile detailing Glendale CA", caption: "Crown Refresh — Wheel decontamination + tire dressing. Honda Civic. Glendale, CA." },
   { src: "/galleryC/HRVFrontD.jpg", width: 1080, height: 1920, alt: "Honda HR-V exterior mobile detailing hand wash wax Glendale CA", caption: "Prince Package — Full exterior detail, hand wash + wax. Honda HR-V. Glendale, CA." },
   { src: "/galleryC/SiennaWheel.jpeg", width: 1440, height: 2560, alt: "Toyota Sienna wheel tire cleaning mobile detailing Glendale CA", caption: "Crown Refresh — Monthly maintenance, wheel + tire cleaning. Toyota Sienna. Glendale, CA." },
+  { src: "/galleryC/HeadlightBeforeAndAfter.jpg", width: 3216, height: 1200, alt: "Foggy yellowed headlight restored to clear mobile headlight restoration Glendale CA", caption: "Headlight Restoration — Wet-sanded and resealed with 2K UV clear coat. Glendale, CA.", beforeAfter: true },
 ];
 
 export default function GalleryPage() {

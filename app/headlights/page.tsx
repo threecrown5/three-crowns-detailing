@@ -9,6 +9,7 @@ import {
 } from "@/components/ui/accordion";
 import { PhoneLink } from "@/components/PhoneLink";
 import { ImageSlot } from "@/components/ImageSlot";
+import { HeadlightBookButton } from "@/components/HeadlightBookButton";
 import { HEADLIGHT_STANDALONE, HEADLIGHT_ADDON } from "@/lib/pricing";
 
 const HEADLIGHT_PRICE = `$${HEADLIGHT_STANDALONE}`;
@@ -21,6 +22,19 @@ const reviews = [
   { name: "Cheryl L.", text: "The work is meticulous, and the wax has lasted over a month and still looks great. They listened and made it right without any hassle." },
   { name: "Luke K.", text: "They went above and beyond and paid attention to details most people would skip. The car looked absolutely amazing inside and out." },
   { name: "Jessica C.", text: "Professional, punctual, and extremely thorough. Both the interior and exterior were left spotless." },
+];
+
+const otherHeadlights = [
+  {
+    label: "Toyota Camry",
+    before: "/images/headlight-restoration/camry-before-close.jpg",
+    after: "/images/headlight-restoration/camry-after-close.jpg",
+  },
+  {
+    label: "Toyota Tacoma",
+    before: "/images/headlight-restoration/suv-before.jpg",
+    after: "/images/headlight-restoration/suv-after.jpg",
+  },
 ];
 
 const faqs = [
@@ -116,12 +130,7 @@ export default function HeadlightRestorationPage() {
               <span className="text-sm text-[#F2EFE6]/40 tracking-wide">per pair · all vehicles</span>
             </div>
             <div className="flex flex-col sm:flex-row gap-4">
-              <Button
-                asChild
-                className="bg-gold! text-black! px-7 py-3 h-auto! min-h-11 tracking-[2px] text-xs font-semibold hover:bg-gold/90! transition-all duration-300"
-              >
-                <Link href="/book?package=Headlights">Book Headlight Restoration</Link>
-              </Button>
+              <HeadlightBookButton className="bg-gold! text-black! px-7 py-3 h-auto! min-h-11 tracking-[2px] text-xs font-semibold hover:bg-gold/90! transition-all duration-300" />
               <PhoneLink className="flex items-center justify-center min-h-11 border border-[#F2EFE6]/25 text-[#F2EFE6]/80 px-7 py-3 tracking-[2px] text-xs font-medium hover:border-[#F2EFE6]/50 hover:text-[#F2EFE6] transition-all duration-300 rounded-md">
                 Call or text (818) 296-7347
               </PhoneLink>
@@ -278,12 +287,7 @@ export default function HeadlightRestorationPage() {
           </div>
 
           <div className="flex flex-col sm:flex-row gap-4 justify-center mt-9">
-            <Button
-              asChild
-              className="bg-gold! text-black! px-7 py-3 h-auto! min-h-11 tracking-[2px] text-xs font-semibold hover:bg-gold/90! transition-all duration-300"
-            >
-              <Link href="/book?package=Headlights">Book Headlight Restoration</Link>
-            </Button>
+            <HeadlightBookButton className="bg-gold! text-black! px-7 py-3 h-auto! min-h-11 tracking-[2px] text-xs font-semibold hover:bg-gold/90! transition-all duration-300" />
             <Button
               asChild
               className="bg-transparent! border border-[#F2EFE6]/25! text-[#F2EFE6]/80! px-7 py-3 h-auto! min-h-11 tracking-[2px] text-xs font-medium hover:border-[#F2EFE6]/50! hover:text-[#F2EFE6]! transition-all duration-300"
@@ -303,6 +307,54 @@ export default function HeadlightRestorationPage() {
           <p className="text-sm md:text-base leading-relaxed text-[#F2EFE6]/60 font-light">
             If there&apos;s moisture or fog on the inside of the lens, or the housing is cracked, restoration can&apos;t fix it — that needs a new headlight. Send a photo when you book and I&apos;ll tell you honestly before I drive out.
           </p>
+        </div>
+      </section>
+
+      {/* ── OTHER HEADLIGHTS WE'VE DONE ── */}
+      <section className="py-20 px-6 md:px-20 max-w-[1200px] min-[2000px]:max-w-[1500px] mx-auto">
+        <div className="text-center max-w-[720px] mx-auto mb-14">
+          <p className="text-xs tracking-[0.26em] uppercase text-gold font-medium mb-4">More Results</p>
+          <h2 className="font-[family-name:var(--font-playfair)] font-bold text-3xl md:text-[36px] leading-[1.25] text-[#F2EFE6]">
+            Other headlights we&apos;ve done
+          </h2>
+        </div>
+
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-7">
+          {otherHeadlights.map((item) => (
+            <div
+              key={item.label}
+              className="bg-gradient-to-b from-[#173026] to-[#12261D] border border-[#F2EFE6]/10 rounded-xl p-6"
+            >
+              <div className="grid grid-cols-2 gap-3 mb-4">
+                <div className="flex flex-col gap-2">
+                  <p className="text-[10px] tracking-[0.22em] uppercase text-gold text-center font-semibold">Before</p>
+                  <ImageSlot
+                    src={item.before}
+                    alt={`${item.label} headlight before restoration`}
+                    ratio="4:3"
+                  />
+                </div>
+                <div className="flex flex-col gap-2">
+                  <p className="text-[10px] tracking-[0.22em] uppercase text-gold text-center font-semibold">After</p>
+                  <ImageSlot
+                    src={item.after}
+                    alt={`${item.label} headlight after restoration`}
+                    ratio="4:3"
+                  />
+                </div>
+              </div>
+              <p className="text-sm text-[#F2EFE6]/60 text-center">{item.label}</p>
+            </div>
+          ))}
+        </div>
+
+        <div className="text-center mt-10">
+          <Link
+            href="/gallery"
+            className="text-xs tracking-[0.2em] uppercase text-gold/70 hover:text-gold transition-colors"
+          >
+            See more of our work →
+          </Link>
         </div>
       </section>
 
@@ -392,12 +444,7 @@ export default function HeadlightRestorationPage() {
             Clear headlights, handled.
           </h2>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Button
-              asChild
-              className="bg-gold! text-black! px-10 py-3 h-auto! min-h-11 tracking-[2px] text-xs font-semibold hover:bg-gold/90! transition-all"
-            >
-              <Link href="/book?package=Headlights">Book Headlight Restoration</Link>
-            </Button>
+            <HeadlightBookButton className="bg-gold! text-black! px-10 py-3 h-auto! min-h-11 tracking-[2px] text-xs font-semibold hover:bg-gold/90! transition-all" />
             <PhoneLink className="flex items-center justify-center min-h-11 border border-gold/40 text-gold px-10 py-3 tracking-[2px] text-xs font-semibold hover:border-gold hover:bg-gold/5 transition-all rounded-md">
               Call or text (818) 296-7347
             </PhoneLink>

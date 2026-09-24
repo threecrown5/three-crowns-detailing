@@ -129,7 +129,7 @@ export default function HomePage() {
 
       {/* ── OFFER ── */}
       <section className="px-6 md:px-20 max-w-[1200px] min-[2000px]:max-w-[1500px] mx-auto pt-10 md:pt-14">
-        <OfferBanner ctaLabel="See packages" ctaHref="/services" />
+        <OfferBanner />
       </section>
 
       {/* ── BODY COPY (SEO) ── */}

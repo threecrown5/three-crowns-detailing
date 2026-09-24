@@ -17,6 +17,7 @@ import { PhoneLink } from "@/components/PhoneLink";
 const navLinks = [
   { href: "/", label: "Home" },
   { href: "/gallery", label: "Gallery" },
+  { href: "/faq", label: "FAQ" },
   { href: "/contact", label: "Contact" },
 ];
 

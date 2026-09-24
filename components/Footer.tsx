@@ -22,6 +22,12 @@ export function Footer() {
         >
           Headlight Restoration
         </Link>
+        <Link
+          href="/faq"
+          className="text-xs text-white/40 tracking-wide hover:text-gold transition-colors"
+        >
+          FAQ
+        </Link>
       </div>
       <div className="flex items-center justify-center gap-5 mb-4">
         {serviceAreas.map((area) => (

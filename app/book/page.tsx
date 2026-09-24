@@ -65,7 +65,7 @@ export default function BookPage() {
           <div className="lg:col-span-3">
 
             <div className="mb-6">
-              <OfferBanner />
+              <OfferBanner variant="narrow" />
             </div>
 
             <Suspense fallback={<BookFormFallback />}>

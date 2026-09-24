@@ -201,7 +201,7 @@ export default function ServicesPage() {
 
         {/* OFFER — sits right above King/Queen, the tiers it applies to */}
         <div className="mb-10">
-          <OfferBanner ctaLabel="Book now" ctaHref="/book" />
+          <OfferBanner />
         </div>
 
         {/* PACKAGES GRID */}

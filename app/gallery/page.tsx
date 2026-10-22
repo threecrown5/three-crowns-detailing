@@ -2,9 +2,36 @@
 
 import { useState, useEffect, useCallback } from "react";
 import Image from "next/image";
-import { PageHeader } from "@/components/PageHeader";
 
-const galleryImages = [
+interface GalleryImage {
+  src: string;
+  width: number;
+  height: number;
+  alt: string;
+  caption: string;
+  /** Composite already shows a before/after split. */
+  beforeAfter?: boolean;
+  /** The composite already has "Before"/"After" pills baked into the image — don't draw our own. */
+  badgesBuiltIn?: boolean;
+  /** Vehicle/service heading rendered above the image instead of the caption below it. */
+  title?: string;
+}
+
+// Featured transformations first (before/afters + the new batch), then the
+// rest of the standard job photos. Shuffled client-side on load — see
+// GalleryPage below — so this order is really just the no-JS/SSR fallback.
+const galleryImages: GalleryImage[] = [
+  { src: "/galleryC/MercedesHeadlightBeforeAfter.webp", width: 1500, height: 2000, alt: "Foggy Mercedes E-Class headlight restored to clear, before and after", title: "Headlight Restoration — Mercedes E-Class", caption: "Wet-sanded and resealed with 2K UV clear coat.", beforeAfter: true, badgesBuiltIn: true },
+  { src: "/galleryC/TeslaScratchBeforeAfter.webp", width: 2000, height: 1983, alt: "Tesla paint scratch removed and polished to a mirror finish, before and after", title: "Scratch Removal — Tesla", caption: "Light scratches and swirls polished out, finish restored to a mirror gloss.", beforeAfter: true, badgesBuiltIn: true },
+  { src: "/galleryC/CamryHeadlightBeforeAfter.webp", width: 2000, height: 1000, alt: "Foggy Toyota Camry headlight restored to clear, before and after", title: "Headlight Restoration — Toyota Camry", caption: "Wet-sanded and resealed with 2K UV clear coat.", beforeAfter: true, badgesBuiltIn: true },
+  { src: "/galleryC/TacomaHeadlightBeforeAfter.webp", width: 1689, height: 2000, alt: "Foggy Toyota Tacoma headlight restored to clear, before and after", title: "Headlight Restoration — Toyota Tacoma", caption: "Wet-sanded and resealed with 2K UV clear coat.", beforeAfter: true, badgesBuiltIn: true },
+  { src: "/galleryC/GolfShifterBeforeAfter.webp", width: 2000, height: 1000, alt: "Volkswagen Golf shifter console interior detailed, before and after", title: "Interior Detail — Volkswagen Golf", caption: "Console and shifter boot degreased, dressed, and detailed.", beforeAfter: true, badgesBuiltIn: true },
+  { src: "/galleryC/GLAInteriorBeforeAfter.webp", width: 2000, height: 1000, alt: "Mercedes GLA dashboard and steering wheel interior detailed, before and after", title: "Interior Detail — Mercedes GLA", caption: "Dash and console degreased, leather conditioned throughout.", beforeAfter: true, badgesBuiltIn: true },
+  { src: "/galleryC/EngineBayBeforeAfter.webp", width: 2000, height: 1500, alt: "Mercedes-Benz engine bay degreased and detailed, before and after", title: "Engine Bay Detail — Mercedes-Benz", caption: "Degreased and hand-detailed, sensitive components protected throughout.", beforeAfter: true, badgesBuiltIn: true },
+  { src: "/galleryC/InteriorBeforeAndAfter.jpeg", width: 1080, height: 872, alt: "Car interior before and after full detail transformation mobile detailing Glendale CA", caption: "Prince Package — Full interior detail. Glendale, CA.", beforeAfter: true },
+  { src: "/galleryC/TeslaModelX.jpg", width: 4080, height: 2296, alt: "White Tesla Model X exterior mobile detailing Glendale CA", caption: "Crown Refresh — Full exterior hand wash + sealant top-up. Tesla Model X. Glendale, CA." },
+  { src: "/galleryC/BMWX6.jpg", width: 3264, height: 1836, alt: "Black BMW X6 exterior mobile detailing Glendale CA", caption: "King Package — Full exterior detail, clay bar + ceramic sealant. BMW X6. Glendale, CA." },
+  { src: "/galleryC/EClassCoupeInterior.jpg", width: 1125, height: 2000, alt: "Mercedes E-Class Coupe interior detail Glendale CA", caption: "Prince Package — Full interior detail. Mercedes E-Class Coupe. Glendale, CA." },
   { src: "/galleryC/WhiteM32.jpg", width: 1920, height: 2560, alt: "White BMW M3 mobile detailing paint decontamination sealant Glendale CA", caption: "Prince Package — Full exterior wash, paint decontamination + sealant. Glendale, CA." },
   { src: "/galleryC/chevybelair.jpeg", width: 1920, height: 1080, alt: "Classic Chevy Bel Air exterior mobile detailing hand wash wax Pasadena CA", caption: "Prince Package — Full exterior detail, hand wash + wax. Pasadena, CA." },
   { src: "/galleryC/benzwheel.jpeg", width: 1920, height: 2560, alt: "Mercedes wheel and tire mobile detailing monthly maintenance Glendale CA", caption: "Crown Refresh — Monthly maintenance, wheel + tire cleaning. Glendale, CA." },
@@ -19,7 +46,6 @@ const galleryImages = [
   { src: "/galleryC/WhiteM33.jpg", width: 1920, height: 2560, alt: "White BMW M3 paint decontamination sealant mobile detailing Glendale CA", caption: "Prince Package — Full exterior detail, paint decontamination + sealant. Glendale, CA." },
   { src: "/galleryC/HemiEngineBay.jpeg", width: 1920, height: 1080, alt: "Hemi engine bay detail exterior wash wax mobile detailing Burbank CA", caption: "Prince Package — Engine bay detail + full exterior wash and wax. Burbank, CA." },
   { src: "/galleryC/BlueMatteBenz.jpeg", width: 1920, height: 2560, alt: "Matte blue Mercedes Benz clay bar ceramic sealant mobile detailing Glendale CA", caption: "King Package — Matte-safe hand wash, clay bar + ceramic sealant. Glendale, CA." },
-  { src: "/galleryC/InteriorBeforeAndAfter.jpeg", width: 1080, height: 872, alt: "Car interior before and after full detail transformation mobile detailing Glendale CA", caption: "Prince Package — Full interior detail. Glendale, CA.", beforeAfter: true },
   { src: "/galleryC/GrayMustang.jpeg", width: 1440, height: 2560, alt: "Gray Ford Mustang exterior interior mobile detailing Glendale CA", caption: "Prince Package — Full exterior + interior detail. Glendale, CA." },
   { src: "/galleryC/WhiteLexus.jpeg", width: 1920, height: 2560, alt: "White Lexus exterior hand wash sealant mobile detailing Pasadena CA", caption: "Crown Refresh — Monthly maintenance, exterior hand wash + sealant top-up. Pasadena, CA." },
   { src: "/galleryC/WhiteGMC3.jpg", width: 1920, height: 2560, alt: "White GMC truck exterior wash wax wheel detail mobile detailing Burbank CA", caption: "Prince Package — Full exterior wash, wax, tire and wheel detail. Burbank, CA." },
@@ -49,11 +75,30 @@ const galleryImages = [
   { src: "/galleryC/CivicDriverTire.jpg", width: 1440, height: 2560, alt: "Honda Civic wheel decontamination tire dressing mobile detailing Glendale CA", caption: "Crown Refresh — Wheel decontamination + tire dressing. Honda Civic. Glendale, CA." },
   { src: "/galleryC/HRVFrontD.jpg", width: 1080, height: 1920, alt: "Honda HR-V exterior mobile detailing hand wash wax Glendale CA", caption: "Prince Package — Full exterior detail, hand wash + wax. Honda HR-V. Glendale, CA." },
   { src: "/galleryC/SiennaWheel.jpeg", width: 1440, height: 2560, alt: "Toyota Sienna wheel tire cleaning mobile detailing Glendale CA", caption: "Crown Refresh — Monthly maintenance, wheel + tire cleaning. Toyota Sienna. Glendale, CA." },
-  { src: "/galleryC/HeadlightBeforeAndAfter.jpg", width: 3216, height: 1200, alt: "Foggy yellowed headlight restored to clear mobile headlight restoration Glendale CA", caption: "Headlight Restoration — Wet-sanded and resealed with 2K UV clear coat. Glendale, CA.", beforeAfter: true },
 ];
+
+function shuffled<T>(items: T[]): T[] {
+  const arr = [...items];
+  for (let i = arr.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [arr[i], arr[j]] = [arr[j], arr[i]];
+  }
+  return arr;
+}
 
 export default function GalleryPage() {
   const [selectedImage, setSelectedImage] = useState<string | null>(null);
+  // Server-rendered order matches galleryImages exactly (no hydration
+  // mismatch); shuffled once on the client after mount so every visitor
+  // sees a different mix without affecting the initial page load.
+  const [images, setImages] = useState(galleryImages);
+
+  useEffect(() => {
+    // Deliberately re-randomizing after mount so SSR output (used for the
+    // no-JS/first-paint case) stays deterministic and hydration-safe.
+    // eslint-disable-next-line react-hooks/set-state-in-effect
+    setImages(shuffled(galleryImages));
+  }, []);
 
   const closeLightbox = useCallback(() => setSelectedImage(null), []);
 
@@ -72,39 +117,50 @@ export default function GalleryPage() {
 
   return (
     <>
-      <PageHeader
-        label="GALLERY"
-        heading="View Our Work"
-        subtitle="A look at the precision and care behind every detail."
-      />
-      <section className="pb-[120px] px-6 md:px-20 w-full min-w-0">
+      <section className="pt-[140px] pb-14 px-6 md:px-20 max-w-[1200px] min-[2000px]:max-w-[1500px] mx-auto text-center">
+        <p className="text-gold text-xs tracking-[0.28em] font-medium mb-5 uppercase">Gallery</p>
+        <h1 className="font-['Cormorant_Garamond',serif] font-bold text-4xl md:text-[54px] leading-[1.12] text-[#F2EFE6] mb-5">
+          View Our Work
+        </h1>
+        <p className="text-base md:text-[17px] leading-relaxed text-[#F2EFE6]/60 font-light max-w-[560px] mx-auto">
+          A look at the precision and care behind every detail — real jobs, real transformations.
+        </p>
+      </section>
 
+      <section className="pb-[120px] px-6 md:px-20 w-full min-w-0">
         <div className="columns-2 lg:columns-3 2xl:columns-4 gap-5">
-          {galleryImages.map((image) => (
+          {images.map((image) => (
             <div
               key={image.src}
-              className="break-inside-avoid mb-5 overflow-hidden rounded-lg cursor-pointer group relative"
+              className="break-inside-avoid mb-5 rounded-xl overflow-hidden border border-[#F2EFE6]/10 bg-gradient-to-b from-[#173026] to-[#0e2218] hover:border-gold/40 transition-all duration-300 cursor-pointer group"
               onClick={() => setSelectedImage(image.src)}
             >
-              <Image
-                src={image.src}
-                alt={image.alt}
-                width={image.width}
-                height={image.height}
-                sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 25vw"
-                className="w-full h-auto block transition-transform duration-400 group-hover:scale-105"
-              />
-              {image.beforeAfter && (
-                <>
-                  <span className="absolute top-2 left-2 text-white text-[10px] font-bold tracking-widest uppercase bg-black/60 px-1.5 py-0.5 rounded pointer-events-none">
-                    BEFORE
-                  </span>
-                  <span className="absolute top-2 right-2 text-white text-[10px] font-bold tracking-widest uppercase bg-black/60 px-1.5 py-0.5 rounded pointer-events-none">
-                    AFTER
-                  </span>
-                </>
+              {image.title && (
+                <p className="px-4 pt-4 pb-3 text-[13px] font-semibold text-[#F2EFE6] tracking-wide">
+                  {image.title}
+                </p>
               )}
-              <p className="text-[11px] text-white/50 px-2 pt-2 pb-2 leading-snug">
+              <div className="relative">
+                <Image
+                  src={image.src}
+                  alt={image.alt}
+                  width={image.width}
+                  height={image.height}
+                  sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 25vw"
+                  className="w-full h-auto block transition-transform duration-400 group-hover:scale-105"
+                />
+                {image.beforeAfter && !image.badgesBuiltIn && (
+                  <>
+                    <span className="absolute top-2 left-2 text-white text-[10px] font-bold tracking-widest uppercase bg-black/60 px-1.5 py-0.5 rounded pointer-events-none">
+                      BEFORE
+                    </span>
+                    <span className="absolute top-2 right-2 text-white text-[10px] font-bold tracking-widest uppercase bg-black/60 px-1.5 py-0.5 rounded pointer-events-none">
+                      AFTER
+                    </span>
+                  </>
+                )}
+              </div>
+              <p className="text-[11px] text-[#F2EFE6]/50 px-4 pt-2.5 pb-3.5 leading-snug">
                 {image.caption}
               </p>
             </div>

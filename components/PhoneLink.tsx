@@ -6,9 +6,8 @@ export function PhoneLink({
   className,
   children,
   onClick,
-}: {
-  className?: string;
-  children: React.ReactNode;
+  ...props
+}: React.ComponentProps<"a"> & {
   onClick?: () => void;
 }) {
   return (
@@ -19,6 +18,7 @@ export function PhoneLink({
         trackConversion(CONVERSIONS.phoneClick);
         onClick?.();
       }}
+      {...props}
     >
       {children}
     </a>

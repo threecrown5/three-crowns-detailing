@@ -2,17 +2,12 @@
 import Link from "next/link";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
-import { useState } from "react";
-import { ChevronDown } from "lucide-react";
+import { useState, useEffect } from "react";
+import { ChevronDown, Phone } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { Sheet, SheetContent, SheetTrigger, SheetTitle } from "@/components/ui/sheet";
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu";
+import { Sheet, SheetContent, SheetTitle } from "@/components/ui/sheet";
 import { PhoneLink } from "@/components/PhoneLink";
+import { BookNowPopup } from "@/components/BookNowPopup";
 
 const navLinks = [
   { href: "/", label: "Home" },
@@ -28,89 +23,105 @@ const serviceLinks = [
   { href: "/headlights", label: "Headlight Restoration" },
 ];
 
+// EXPERIMENTAL — trying a minimal nav (desktop: centered logo, hamburger
+// opens the same full menu used on mobile; mobile: icon-only call + a
+// sticky bottom Call/Book bar) from a design mockup. Easy to revert: see
+// git history for this file pre-mockup.
 export function Header() {
   const pathname = usePathname();
   const [open, setOpen] = useState(false);
   const [mobileServicesOpen, setMobileServicesOpen] = useState(false);
+  const [bookOpen, setBookOpen] = useState(false);
+  // The menu should slide in from whichever side its hamburger sits on —
+  // right on mobile, left on desktop's minimal nav — so this tracks the
+  // breakpoint client-side after mount (harmless if it lags by a frame;
+  // it only matters once the sheet is actually opened).
+  const [isDesktopNav, setIsDesktopNav] = useState(false);
+
+  useEffect(() => {
+    const mq = window.matchMedia("(min-width: 768px)");
+    const update = () => setIsDesktopNav(mq.matches);
+    update();
+    mq.addEventListener("change", update);
+    return () => mq.removeEventListener("change", update);
+  }, []);
 
   const servicesActive = pathname === "/services" || pathname === "/headlights";
 
   return (
-    <header className="w-full z-50 flex items-center justify-between px-6 md:px-20 h-[70px] md:h-[90px] fixed top-0 left-0 bg-black/35 backdrop-blur-[8px]">
-      <Link href="/">
-        <Image
-          src="/images/logo_transparent.png"
-          alt="Three Crowns Logo"
-          width={180}
-          height={60}
-          className="h-[62px] md:h-[90px] w-auto"
-          priority
-        />
-      </Link>
-
-      {/* Desktop Nav */}
-      <nav className="hidden md:flex items-center gap-10 ml-auto">
-        <Link
-          href="/"
-          className={`font-medium tracking-wide transition-colors duration-300 hover:text-gold ${
-            pathname === "/" ? "text-gold!" : "text-white"
-          }`}
-        >
-          Home
-        </Link>
-
-        <DropdownMenu>
-          <DropdownMenuTrigger
-            className={`flex items-center gap-1.5 font-medium tracking-wide transition-colors duration-300 hover:text-gold outline-none cursor-pointer ${
-              servicesActive ? "text-gold!" : "text-white"
-            }`}
-          >
-            Services
-            <ChevronDown size={14} />
-          </DropdownMenuTrigger>
-          <DropdownMenuContent
-            align="start"
-            className="bg-viridian-dark border-gold/20 text-white min-w-[220px] py-2"
-          >
-            {serviceLinks.map((s) => (
-              <DropdownMenuItem
-                key={s.href}
-                asChild
-                className="tracking-wide focus:bg-gold/10 focus:text-gold cursor-pointer px-3 py-2.5"
-              >
-                <Link href={s.href}>{s.label}</Link>
-              </DropdownMenuItem>
-            ))}
-          </DropdownMenuContent>
-        </DropdownMenu>
-
-        {navLinks.slice(1).map((link) => (
-          <Link
-            key={link.href}
-            href={link.href}
-            className={`font-medium tracking-wide transition-colors duration-300 hover:text-gold ${
-              pathname === link.href ? "text-gold!" : "text-white"
-            }`}
-          >
-            {link.label}
+    <>
+      <header className="w-full z-50 h-[70px] md:h-[88px] fixed top-0 left-0 bg-black/35 backdrop-blur-[8px]">
+        {/* Mobile bar */}
+        <div className="flex md:hidden items-center justify-between px-5 h-[70px]">
+          <Link href="/">
+            <Image
+              src="/images/logo_transparent.png"
+              alt="Three Crowns Logo"
+              width={180}
+              height={60}
+              className="h-[56px] w-auto"
+              priority
+            />
           </Link>
-        ))}
 
-        {/* Phone number — desktop */}
-        <PhoneLink className="font-medium tracking-wide text-gold hover:opacity-80 transition-opacity">
-          (818) 296-7347
-        </PhoneLink>
+          <div className="flex items-center gap-4">
+            <PhoneLink className="flex items-center text-white" aria-label="Call (818) 296-7347">
+              <Phone size={18} strokeWidth={1.8} />
+            </PhoneLink>
 
-        <Link
-          href="/book"
-          className="ml-4 text-xs tracking-[0.18em] uppercase font-medium pb-[3px] border-b border-[#C9A84C] hover:opacity-70 transition-opacity"
-          style={{ color: "#C9A84C" }}
-        >
-          Book Now
-        </Link>
-      </nav>
+            <button
+              type="button"
+              onClick={() => setOpen(true)}
+              className="flex flex-col gap-1 cursor-pointer z-[2000]"
+              aria-label="Open menu"
+            >
+              <span className="block w-5 h-[2px] bg-white" />
+              <span className="block w-5 h-[2px] bg-white" />
+            </button>
+          </div>
+        </div>
 
-      {/* Mobile Nav */}
+        {/* Desktop bar — minimal nav: hamburger / centered logo / call + book */}
+        <div className="hidden md:grid grid-cols-[1fr_auto_1fr] items-center px-8 h-[88px]">
+          <div>
+            <button
+              type="button"
+              onClick={() => setOpen(true)}
+              className="flex flex-col gap-1.5 cursor-pointer"
+              aria-label="Open menu"
+            >
+              <span className="block w-[26px] h-[2px] bg-white" />
+              <span className="block w-[26px] h-[2px] bg-white" />
+              <span className="block w-[26px] h-[2px] bg-white" />
+            </button>
+          </div>
+
+          <Link href="/" className="flex justify-center">
+            <Image
+              src="/images/logo_transparent.png"
+              alt="Three Crowns Logo"
+              width={180}
+              height={60}
+              className="h-[64px] w-auto"
+              priority
+            />
+          </Link>
+
+          <div className="flex items-center justify-end gap-6">
+            <PhoneLink className="flex items-center text-white hover:text-gold transition-colors" aria-label="Call (818) 296-7347">
+              <Phone size={20} strokeWidth={1.6} />
+            </PhoneLink>
+            <button
+              type="button"
+              onClick={() => setBookOpen(true)}
+              className="h-10 px-5 rounded-[3px] bg-gold text-[#0a100d] text-xs font-semibold tracking-wide hover:bg-gold/90 transition-colors cursor-pointer"
+            >
+              Book Now
+            </button>
+          </div>
+        </div>
+      </header>
+
       <Sheet
         open={open}
         onOpenChange={(v) => {
@@ -118,16 +129,9 @@ export function Header() {
           if (!v) setMobileServicesOpen(false);
         }}
       >
-        <SheetTrigger asChild className="md:hidden">
-          <button className="flex flex-col gap-1.5 cursor-pointer z-[2000]">
-            <span className="block w-[26px] h-[2px] bg-white" />
-            <span className="block w-[26px] h-[2px] bg-white" />
-            <span className="block w-[26px] h-[2px] bg-white" />
-          </button>
-        </SheetTrigger>
-        <SheetContent side="right" className="bg-black/95 backdrop-blur-lg border-none w-[70%]">
+        <SheetContent side={isDesktopNav ? "left" : "right"} className="bg-black/95 backdrop-blur-lg border-none w-[70%]">
           <SheetTitle className="sr-only">Navigation</SheetTitle>
-          <nav className="flex flex-col items-center justify-center h-full gap-10 overflow-y-auto py-10">
+          <nav className="flex flex-col items-center justify-start h-full gap-10 overflow-y-auto pt-28 pb-10">
             <Link
               href="/"
               onClick={() => setOpen(false)}
@@ -181,7 +185,7 @@ export function Header() {
               </Link>
             ))}
 
-            {/* Phone number — mobile */}
+            {/* Phone number */}
             <PhoneLink
               className="text-lg font-medium tracking-wide text-gold hover:opacity-80 transition-opacity"
               onClick={() => setOpen(false)}
@@ -191,7 +195,7 @@ export function Header() {
 
             <Button
               asChild
-              className="bg-gold text-white rounded-full px-6 py-2 font-semibold hover:bg-gold-soft"
+              className="bg-gold text-white rounded-md px-6 py-2 font-semibold hover:bg-gold-soft"
             >
               <Link href="/book" onClick={() => setOpen(false)}>
                 Book
@@ -200,6 +204,8 @@ export function Header() {
           </nav>
         </SheetContent>
       </Sheet>
-    </header>
+
+      <BookNowPopup open={bookOpen} onOpenChange={setBookOpen} />
+    </>
   );
 }

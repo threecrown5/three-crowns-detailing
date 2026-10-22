@@ -120,19 +120,19 @@ export function Header() {
 
           <div className="flex items-center justify-end gap-6">
             <PhoneLink className="flex items-center text-white hover:text-gold transition-colors" aria-label="Call (818) 296-7347">
-              <Phone size={20} strokeWidth={1.6} />
+              <Phone size={24} strokeWidth={1.6} />
             </PhoneLink>
             <SmsLink
               body={SMS_BODY}
               className="flex items-center text-white hover:text-gold transition-colors"
               aria-label="Text us"
             >
-              <MessageCircle size={20} strokeWidth={1.6} />
+              <MessageCircle size={24} strokeWidth={1.6} />
             </SmsLink>
             <button
               type="button"
               onClick={() => setBookOpen(true)}
-              className="h-10 px-5 rounded-[3px] bg-gold text-[#0a100d] text-xs font-semibold tracking-wide hover:bg-gold/90 transition-colors cursor-pointer"
+              className="h-11 px-6 rounded-[3px] bg-gold text-[#0a100d] text-sm font-semibold tracking-wide hover:bg-gold/90 transition-colors cursor-pointer"
             >
               Book Now
             </button>

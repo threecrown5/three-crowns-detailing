@@ -17,7 +17,7 @@ import { formatPrice } from "@/lib/pricing";
 const playfair = Playfair_Display({ subsets: ["latin"], weight: ["600", "700"] });
 
 const heroSecondaryBtn =
-  "flex items-center justify-center gap-2 border border-white/35 text-white text-xs tracking-[2px] uppercase font-semibold px-7 py-3 min-h-11 rounded-md hover:border-gold hover:text-gold transition-colors sm:min-w-[130px]";
+  "flex items-center justify-center gap-2 border border-white/35 text-white text-xs tracking-[2px] uppercase font-semibold px-7 py-3 min-h-11 md:min-h-14 md:px-9 md:text-sm rounded-md hover:border-gold hover:text-gold transition-colors sm:min-w-[130px] md:min-w-[170px]";
 
 const reviews = [
   { name: "Cheryl L.", text: "The work is meticulous, and the wax has lasted over a month and still looks great. They listened and made it right without any hassle." },
@@ -85,9 +85,9 @@ export default function HomePage() {
         <div className="absolute bottom-0 left-0 right-0 h-40 bg-gradient-to-t from-[#070E08] to-transparent" />
 
         <div className="relative z-10 w-full max-w-[1200px] min-[2000px]:max-w-[1500px] mx-auto px-6 md:px-20 self-end pb-14 md:pb-20">
-          <div className="max-w-[680px] text-left">
+          <div className="max-w-[680px] md:max-w-[900px] text-left">
 
-            <h1 className="text-[34px] md:text-[clamp(44px,4.4vw,68px)] font-light tracking-normal md:tracking-wide leading-[1.12] mb-4 md:mb-5">
+            <h1 className="text-[34px] md:text-[clamp(44px,4.2vw,64px)] md:max-w-[13em] md:text-balance font-light tracking-normal md:tracking-wide leading-[1.12] mb-4 md:mb-5">
               Mobile Car Detailing in Glendale, Pasadena &amp; Burbank
             </h1>
 
@@ -109,16 +109,16 @@ export default function HomePage() {
                   <Star key={i} size={13} className="text-gold fill-gold" />
                 ))}
               </div>
-              <span className="text-white/90 text-[13px] tracking-wide">{REVIEW_COUNT} five-star reviews on Google</span>
+              <span className="text-white/90 text-[13px] md:text-sm tracking-wide">{REVIEW_COUNT} five-star reviews on Google</span>
             </div>
 
             <div className="flex flex-col sm:flex-row sm:items-center gap-4 sm:gap-6 justify-start mb-3">
-              <BookNowButton className="w-full sm:w-auto bg-gold! text-black! px-7 py-3.5 md:py-2.5 h-auto! tracking-[2px] text-xs font-semibold hover:bg-gold/90! transition-all duration-300">
+              <BookNowButton className="w-full sm:w-auto bg-gold! text-black! px-7 py-3.5 md:py-4 md:px-10 md:min-h-14 h-auto! tracking-[2px] text-xs md:text-sm font-semibold hover:bg-gold/90! transition-all duration-300">
                 Get a Free Quote
               </BookNowButton>
               <Link
                 href="/services"
-                className="hidden sm:inline text-white text-sm underline! underline-offset-4 hover:text-gold transition-colors"
+                className="hidden sm:inline text-white text-base md:text-lg underline! underline-offset-4 hover:text-gold transition-colors"
               >
                 View packages, from {formatPrice("prince", "t1")}
               </Link>
@@ -137,7 +137,7 @@ export default function HomePage() {
 
             <Link
               href="/services"
-              className="sm:hidden block text-center text-white text-[13px] underline! underline-offset-4 hover:text-gold transition-colors mb-6"
+              className="sm:hidden block text-center text-white text-sm underline! underline-offset-4 hover:text-gold transition-colors mb-6"
             >
               View packages, from {formatPrice("prince", "t1")}
             </Link>

@@ -7,10 +7,11 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion";
-import { PhoneLink } from "@/components/PhoneLink";
 import { ImageSlot } from "@/components/ImageSlot";
+import { BookNowButton } from "@/components/BookNowButton";
 import { formatPrice } from "@/lib/pricing";
 import { locations, type Location } from "@/lib/locations";
+import { REVIEW_COUNT } from "@/lib/reviews";
 
 const siteUrl = "https://threecrownsdetailing.com";
 
@@ -28,7 +29,7 @@ const packages = [
 ];
 
 export function LocationPage({ location }: { location: Location }) {
-  const bookHref = `/book?city=${location.slug}`;
+  const leadSource = `Book Now Popup — ${location.city} Page`;
   const otherLocations = locations.filter((l) => l.slug !== location.slug);
   const reviewOffset = locations.findIndex((l) => l.slug === location.slug);
   const reviews = [0, 1, 2].map((i) => allReviews[(reviewOffset + i) % allReviews.length]);
@@ -80,16 +81,19 @@ export function LocationPage({ location }: { location: Location }) {
             <p className="text-base md:text-[17px] leading-relaxed text-[#F2EFE6]/60 font-light mb-7 max-w-[480px]">
               {location.subhead}
             </p>
-            <div className="flex flex-col sm:flex-row gap-4 mb-8">
-              <Button
-                asChild
+            <div className="flex flex-col sm:flex-row flex-wrap gap-4 mb-8">
+              <BookNowButton
+                leadSource={leadSource}
                 className="bg-gold! text-black! px-7 py-3 h-auto! min-h-11 tracking-[2px] text-xs font-semibold hover:bg-gold/90! transition-all duration-300"
               >
-                <Link href={bookHref}>Book Your {location.city} Detail →</Link>
+                Book Your {location.city} Detail →
+              </BookNowButton>
+              <Button
+                asChild
+                className="bg-gold/10! border border-gold/60! text-gold! px-7 py-3 h-auto! min-h-11 tracking-[2px] text-xs font-semibold hover:bg-gold/20! hover:border-gold! transition-all duration-300"
+              >
+                <Link href="/services">Browse Packages</Link>
               </Button>
-              <PhoneLink className="flex items-center justify-center min-h-11 border border-[#F2EFE6]/25 text-[#F2EFE6]/80 px-7 py-3 tracking-[2px] text-xs font-medium hover:border-[#F2EFE6]/50 hover:text-[#F2EFE6] transition-all duration-300 rounded-md">
-                Call or text (818) 296-7347
-              </PhoneLink>
             </div>
             <div className="flex items-center gap-2 text-white/35 text-xs tracking-wide">
               <MapPin size={13} className="text-gold/60" />
@@ -195,7 +199,7 @@ export function LocationPage({ location }: { location: Location }) {
             <div>
               <p className="text-xs tracking-[0.26em] uppercase text-gold font-medium mb-3">What clients say</p>
               <h2 className="font-['Cormorant_Garamond',serif] font-bold text-2xl md:text-3xl text-[#F2EFE6]">
-                40 five-star reviews.
+                {REVIEW_COUNT} five-star reviews.
               </h2>
             </div>
             <div className="flex gap-0.5">
@@ -226,7 +230,7 @@ export function LocationPage({ location }: { location: Location }) {
               rel="noopener noreferrer"
               className="text-xs tracking-[0.2em] uppercase text-gold/70 hover:text-gold transition-colors"
             >
-              See all 40 reviews on Google →
+              See all {REVIEW_COUNT} reviews on Google →
             </a>
           </div>
         </div>
@@ -295,15 +299,18 @@ export function LocationPage({ location }: { location: Location }) {
             Ready to get your car handled?
           </h2>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Button
-              asChild
+            <BookNowButton
+              leadSource={leadSource}
               className="bg-gold! text-black! px-10 py-3 h-auto! min-h-11 tracking-[2px] text-xs font-semibold hover:bg-gold/90! transition-all"
             >
-              <Link href={bookHref}>Book Your {location.city} Detail →</Link>
+              Book Your {location.city} Detail →
+            </BookNowButton>
+            <Button
+              asChild
+              className="bg-gold/10! border border-gold/60! text-gold! px-10 py-3 h-auto! min-h-11 tracking-[2px] text-xs font-semibold hover:bg-gold/20! hover:border-gold! transition-all"
+            >
+              <Link href="/services">Browse Packages</Link>
             </Button>
-            <PhoneLink className="flex items-center justify-center min-h-11 border border-gold/40 text-gold px-10 py-3 tracking-[2px] text-xs font-semibold hover:border-gold hover:bg-gold/5 transition-all rounded-md">
-              Call or text (818) 296-7347
-            </PhoneLink>
           </div>
         </div>
       </section>

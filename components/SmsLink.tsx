@@ -17,7 +17,7 @@ export function SmsLink({
 
   return (
     <a
-      href={`sms:8182967347${bodyParam}`}
+      href={`sms:+18182967347?${bodyParam}`}
       className={className}
       onClick={() => {
         trackConversion(CONVERSIONS.textClick);

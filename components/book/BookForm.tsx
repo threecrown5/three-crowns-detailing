@@ -116,8 +116,7 @@ export function BookForm() {
       <Input
         type="email"
         name="email"
-        placeholder="Email"
-        required
+        placeholder="Email (optional)"
         className="bg-black/35 border-white/15 text-white placeholder:text-white/40 focus:border-gold focus:ring-gold h-14"
       />
 

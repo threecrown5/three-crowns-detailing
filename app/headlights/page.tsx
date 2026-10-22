@@ -7,10 +7,16 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion";
-import { PhoneLink } from "@/components/PhoneLink";
 import { ImageSlot } from "@/components/ImageSlot";
 import { HeadlightBookButton } from "@/components/HeadlightBookButton";
+import { PhoneLink } from "@/components/PhoneLink";
+import { SmsLink } from "@/components/SmsLink";
 import { HEADLIGHT_STANDALONE, HEADLIGHT_ADDON } from "@/lib/pricing";
+import { REVIEW_COUNT } from "@/lib/reviews";
+
+const HEADLIGHT_SMS_BODY = "Hi, I'd like a quote for headlight restoration.";
+const callTextButtonClass =
+  "flex-1 sm:flex-none flex items-center justify-center bg-gold/10! border border-gold/60! text-gold! px-7 py-3 h-auto! min-h-11 tracking-[2px] text-xs font-semibold hover:bg-gold/20! hover:border-gold! transition-all duration-300 rounded-md";
 
 const HEADLIGHT_PRICE = `$${HEADLIGHT_STANDALONE}`;
 const HEADLIGHT_ADDON_PRICE = `$${HEADLIGHT_ADDON}`;
@@ -112,15 +118,15 @@ export default function HeadlightRestorationPage() {
 
       {/* ── HERO ── */}
       <section className="pt-[140px] pb-16 px-6 md:px-20 max-w-[1200px] min-[2000px]:max-w-[1500px] mx-auto">
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-12 md:gap-16 items-center">
-          <div>
+        <div className="flex flex-col gap-12 md:items-center md:text-center">
+          <div className="md:flex md:flex-col md:items-center">
             <p className="text-gold text-xs tracking-[0.28em] font-medium mb-5 uppercase">
               Headlight Restoration
             </p>
-            <h1 className="font-[family-name:var(--font-playfair)] font-bold text-4xl md:text-[54px] leading-[1.12] text-[#F2EFE6] mb-5 max-w-[560px]">
+            <h1 className="font-[family-name:var(--font-playfair)] font-bold text-4xl md:text-[58px] leading-[1.12] text-[#F2EFE6] mb-5 max-w-[560px] md:max-w-[920px]">
               Mobile Headlight Restoration in Glendale, Pasadena &amp; Burbank
             </h1>
-            <p className="text-base md:text-[17px] leading-relaxed text-[#F2EFE6]/60 font-light mb-7 max-w-[480px]">
+            <p className="text-base md:text-[17px] leading-relaxed text-[#F2EFE6]/60 font-light mb-7 max-w-[480px] md:max-w-[640px]">
               Foggy, yellow headlights restored in your driveway — and sealed so they stay clear.
             </p>
             <div className="flex items-baseline gap-3 mb-8">
@@ -131,13 +137,16 @@ export default function HeadlightRestorationPage() {
             </div>
             <div className="flex flex-col sm:flex-row gap-4">
               <HeadlightBookButton className="bg-gold! text-black! px-7 py-3 h-auto! min-h-11 tracking-[2px] text-xs font-semibold hover:bg-gold/90! transition-all duration-300" />
-              <PhoneLink className="flex items-center justify-center min-h-11 border border-[#F2EFE6]/25 text-[#F2EFE6]/80 px-7 py-3 tracking-[2px] text-xs font-medium hover:border-[#F2EFE6]/50 hover:text-[#F2EFE6] transition-all duration-300 rounded-md">
-                Call or text (818) 296-7347
-              </PhoneLink>
+              <div className="flex gap-3">
+                <PhoneLink className={callTextButtonClass}>Call</PhoneLink>
+                <SmsLink className={callTextButtonClass} body={HEADLIGHT_SMS_BODY}>
+                  Text
+                </SmsLink>
+              </div>
             </div>
           </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-5 max-w-[720px] md:max-w-[900px] w-full">
             <div className="flex flex-col gap-3">
               <p className="text-[11px] tracking-[0.22em] uppercase text-gold text-center font-semibold">Before</p>
               <ImageSlot
@@ -364,7 +373,7 @@ export default function HeadlightRestorationPage() {
           <div>
             <p className="text-xs tracking-[0.26em] uppercase text-gold font-medium mb-3">What clients say</p>
             <h2 className="font-[family-name:var(--font-playfair)] font-bold text-2xl md:text-3xl text-[#F2EFE6]">
-              40 five-star reviews.
+              {REVIEW_COUNT} five-star reviews.
             </h2>
           </div>
           <div className="flex gap-0.5">
@@ -395,7 +404,7 @@ export default function HeadlightRestorationPage() {
             rel="noopener noreferrer"
             className="text-xs tracking-[0.2em] uppercase text-gold/70 hover:text-gold transition-colors"
           >
-            See all 40 reviews on Google →
+            See all {REVIEW_COUNT} reviews on Google →
           </a>
         </div>
       </section>
@@ -445,9 +454,12 @@ export default function HeadlightRestorationPage() {
           </h2>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <HeadlightBookButton className="bg-gold! text-black! px-10 py-3 h-auto! min-h-11 tracking-[2px] text-xs font-semibold hover:bg-gold/90! transition-all" />
-            <PhoneLink className="flex items-center justify-center min-h-11 border border-gold/40 text-gold px-10 py-3 tracking-[2px] text-xs font-semibold hover:border-gold hover:bg-gold/5 transition-all rounded-md">
-              Call or text (818) 296-7347
-            </PhoneLink>
+            <div className="flex gap-3 justify-center">
+              <PhoneLink className={callTextButtonClass}>Call</PhoneLink>
+              <SmsLink className={callTextButtonClass} body={HEADLIGHT_SMS_BODY}>
+                Text
+              </SmsLink>
+            </div>
           </div>
         </div>
       </section>

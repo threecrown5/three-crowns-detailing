@@ -1,3 +1,5 @@
+import { REVIEW_COUNT } from "@/lib/reviews";
+
 const siteUrl = "https://threecrownsdetailing.com";
 
 const localBusinessSchema = {
@@ -64,7 +66,7 @@ const localBusinessSchema = {
   aggregateRating: {
     "@type": "AggregateRating",
     ratingValue: "5",
-    reviewCount: "40",
+    reviewCount: String(REVIEW_COUNT),
     bestRating: "5",
     worstRating: "1",
   },

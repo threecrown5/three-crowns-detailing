@@ -1,5 +1,4 @@
 import Link from "next/link";
-import { Button } from "@/components/ui/button";
 import { MapPin, Star, CheckCircle } from "lucide-react";
 import {
   Accordion,
@@ -8,6 +7,8 @@ import {
   AccordionTrigger,
 } from "@/components/ui/accordion";
 import { OfferBanner } from "@/components/OfferBanner";
+import { BookNowButton } from "@/components/BookNowButton";
+import { REVIEW_COUNT } from "@/lib/reviews";
 
 const reviews = [
   { name: "Cheryl L.", text: "The work is meticulous, and the wax has lasted over a month and still looks great. They listened and made it right without any hassle." },
@@ -74,54 +75,52 @@ export default function HomePage() {
         {/* Bottom fade — smooth transition into next section */}
         <div className="absolute bottom-0 left-0 right-0 h-40 bg-gradient-to-t from-[#070E08] to-transparent" />
 
-        <div className="relative z-10 w-full max-w-[1200px] min-[2000px]:max-w-[1500px] mx-auto px-6 md:px-20 py-32 md:py-0">
-          <div className="max-w-[680px] text-center md:text-left">
+        <div className="relative z-10 w-full max-w-[1200px] min-[2000px]:max-w-[1500px] mx-auto px-6 md:px-20 self-end pb-14 md:pb-20">
+          <div className="max-w-[680px] text-left">
 
-            <p className="text-gold text-xs tracking-[6px] font-medium mb-6 uppercase opacity-80">
-              Glendale · Pasadena · Burbank
-            </p>
-
-            <h1 className="text-2xl md:text-3xl font-light tracking-wide leading-[1.2] mb-3 opacity-80">
-              Mobile Car Detailing in Glendale, CA — We Come to You
+            <h1 className="text-xs md:text-sm md:whitespace-nowrap font-light tracking-wide leading-[1.2] mb-3 text-gold/90">
+              Mobile Detailing in Glendale, Pasadena &amp; Burbank
             </h1>
 
-            <h2 className="text-4xl md:text-[clamp(52px,5vw,80px)] font-light tracking-wide leading-[1.1] mb-6">
-              Your car.<br className="hidden md:block" /> We&apos;ll handle it.
+            <h2 className="text-5xl md:text-[clamp(52px,5vw,80px)] font-light tracking-wide leading-[1.1] mb-5 md:mb-6">
+              Back to new. <br className="hidden md:block" />Kept that way.
             </h2>
 
-            <p className="text-white/65 text-base md:text-lg leading-relaxed max-w-[520px] mb-4 mx-auto md:mx-0">
+            <p className="text-white/65 text-lg leading-relaxed max-w-[520px] mb-5 md:hidden">
+              We come to your home or office. No drop-off, no hassle.
+            </p>
+            <p className="hidden md:block text-white/65 text-base md:text-lg leading-relaxed max-w-[520px] mb-4">
               We come to your home or office and leave your vehicle spotless — no drop-off, no hassle, no second-guessing. Just results you can trust.
             </p>
 
             {/* Star row */}
-            <div className="flex items-center gap-2 justify-center md:justify-start mb-10">
+            <div className="flex items-center gap-2 justify-start mb-7 md:mb-10">
               <div className="flex gap-0.5">
                 {[...Array(5)].map((_, i) => (
                   <Star key={i} size={13} className="text-gold fill-gold" />
                 ))}
               </div>
-              <span className="text-white/45 text-xs tracking-wide">40 five-star reviews on Google</span>
+              <span className="text-white/45 text-xs tracking-wide">{REVIEW_COUNT} five-star reviews on Google</span>
             </div>
 
-            <div className="flex flex-row gap-4 justify-center md:justify-start mb-10">
-              <Button
-                asChild
-                className="bg-gold! text-black! px-7 py-2.5 h-auto! tracking-[2px] text-xs font-semibold hover:bg-gold/90! transition-all duration-300"
+            <div className="flex flex-col sm:flex-row sm:items-center gap-4 sm:gap-6 justify-start mb-2 sm:mb-6 md:mb-10">
+              <BookNowButton className="w-full sm:w-auto bg-gold! text-black! px-7 py-3.5 md:py-2.5 h-auto! tracking-[2px] text-xs font-semibold hover:bg-gold/90! transition-all duration-300">
+                Get a Free Quote
+              </BookNowButton>
+              <Link
+                href="/services"
+                className="hidden sm:inline text-white text-sm underline! underline-offset-4 hover:text-gold transition-colors"
               >
-                <Link href="/book">Get a Free Quote</Link>
-              </Button>
-              <Button
-                asChild
-                className="bg-transparent! border border-white/25! text-white/80! px-7 py-2.5 h-auto! tracking-[2px] text-xs font-medium hover:border-white/50! hover:text-white! transition-all duration-300"
-              >
-                <Link href="/services">View Packages</Link>
-              </Button>
+                View Packages
+              </Link>
             </div>
 
-            <div className="flex items-center gap-2 justify-center md:justify-start text-white/35 text-xs tracking-wide">
-              <MapPin size={13} className="text-gold/60" />
-              Serving Glendale, Pasadena, Burbank &amp; surrounding areas
-            </div>
+            <Link
+              href="/services"
+              className="sm:hidden block text-center text-white text-[13px] underline! underline-offset-4 hover:text-gold transition-colors mb-6"
+            >
+              View Packages
+            </Link>
 
           </div>
         </div>
@@ -185,12 +184,9 @@ export default function HomePage() {
             <p className="text-sm opacity-50 leading-relaxed mb-10 max-w-[480px]">
               You&apos;re trusting someone to show up at your home, handle your car, and do it right without you babysitting the process. That&apos;s the bar we hold ourselves to — every single time.
             </p>
-            <Button
-              asChild
-              className="bg-gold! text-black! px-7 py-2.5 h-auto! tracking-[2px] text-xs font-semibold hover:bg-gold/90! transition-all"
-            >
-              <Link href="/book">Book Your Detail</Link>
-            </Button>
+            <BookNowButton className="bg-gold! text-black! px-7 py-2.5 h-auto! tracking-[2px] text-xs font-semibold hover:bg-gold/90! transition-all">
+              Book Your Detail
+            </BookNowButton>
           </div>
 
           <div className="space-y-4">
@@ -239,7 +235,7 @@ export default function HomePage() {
         <div className="flex items-center justify-between mb-10 flex-wrap gap-4">
           <div>
             <p className="text-xs tracking-[4px] uppercase text-gold opacity-70 mb-2">What clients say</p>
-            <h2 className="text-3xl font-light">40 five-star reviews.</h2>
+            <h2 className="text-3xl font-light">{REVIEW_COUNT} five-star reviews.</h2>
           </div>
           <div className="flex gap-0.5">
             {[...Array(5)].map((_, i) => (
@@ -269,7 +265,7 @@ export default function HomePage() {
             rel="noopener noreferrer"
             className="text-xs tracking-[2px] uppercase text-gold opacity-70 hover:opacity-100 transition-opacity"
           >
-            See all 40 reviews on Google →
+            See all {REVIEW_COUNT} reviews on Google →
           </a>
         </div>
       </section>
@@ -310,12 +306,9 @@ export default function HomePage() {
           <p className="text-sm opacity-45 leading-relaxed mb-10">
             We come to your home or office in Glendale, Pasadena, and Burbank.<br />No drop-off needed.
           </p>
-          <Button
-            asChild
-            className="bg-gold! text-black! px-10 py-3 h-auto! tracking-[2px] text-xs font-semibold hover:bg-gold/90! transition-all"
-          >
-            <Link href="/book">Get a Free Quote →</Link>
-          </Button>
+          <BookNowButton className="bg-gold! text-black! px-10 py-3 h-auto! tracking-[2px] text-xs font-semibold hover:bg-gold/90! transition-all">
+            Get a Free Quote →
+          </BookNowButton>
         </div>
       </section>
     </>

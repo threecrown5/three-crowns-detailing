@@ -3,10 +3,18 @@
 import { useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
+import { Phone, MessageCircle } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { PageHeader } from "@/components/PageHeader";
 import { OfferBanner } from "@/components/OfferBanner";
+import { ReviewStrip } from "@/components/ReviewStrip";
+import { PhoneLink } from "@/components/PhoneLink";
+import { SmsLink } from "@/components/SmsLink";
 import { formatPrice, HEADLIGHT_STANDALONE, type TierKey } from "@/lib/pricing";
+
+const callTextRowClass = "grid grid-cols-2 gap-3";
+const callTextButtonClass =
+  "flex items-center justify-center gap-2.5 border border-[#C9A84C]/40 text-[#C9A84C] text-xs uppercase px-5 py-3.5 min-h-11 rounded-md hover:border-[#C9A84C] hover:bg-[#C9A84C]/5 transition-all";
 
 const tiers: {
   key: TierKey;
@@ -199,10 +207,27 @@ export default function ServicesPage() {
           </div>
         </div>
 
+        {/* CALL / TEXT — above the package prices on mobile */}
+        <div className={`${callTextRowClass} mb-10`}>
+          <PhoneLink className={callTextButtonClass}>
+            <Phone size={14} />
+            Call Us
+          </PhoneLink>
+          <SmsLink
+            body="Hi, I'd like a quote for a detail."
+            className={callTextButtonClass}
+          >
+            <MessageCircle size={14} />
+            Text Us
+          </SmsLink>
+        </div>
+
         {/* OFFER — sits right above King/Queen, the tiers it applies to */}
         <div className="mb-10">
           <OfferBanner />
         </div>
+
+        <ReviewStrip className="mb-10" />
 
         {/* PACKAGES GRID */}
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-3.5 items-start mb-4">
@@ -406,6 +431,21 @@ export default function ServicesPage() {
               </Button>
             </div>
           </div>
+        </div>
+
+        {/* CALL / TEXT — second prompt after add-ons/maintenance */}
+        <div className={`${callTextRowClass} mt-10 mb-0`}>
+          <PhoneLink className={callTextButtonClass}>
+            <Phone size={14} />
+            Call Us
+          </PhoneLink>
+          <SmsLink
+            body="Hi, I'd like a quote for a detail."
+            className={callTextButtonClass}
+          >
+            <MessageCircle size={14} />
+            Text Us
+          </SmsLink>
         </div>
 
       </div>

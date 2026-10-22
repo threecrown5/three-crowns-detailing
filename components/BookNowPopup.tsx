@@ -19,20 +19,23 @@ export function BookNowPopup({
   open,
   onOpenChange,
   leadSource = "Book Now Popup",
-  defaultInterest = "",
+  fixedInterest,
+  interestLabel,
   packageName,
 }: {
   open: boolean;
   onOpenChange: (open: boolean) => void;
   /** Distinguishes which page/button triggered this popup in the email. */
   leadSource?: string;
-  /** Pre-selects one of the interest pills (e.g. "Headlight Restoration"). */
-  defaultInterest?: string;
+  /** Skips the "what are you interested in?" question (e.g. "Detailing"). */
+  fixedInterest?: string;
+  /** What to show in place of the question (e.g. "King Detail"). */
+  interestLabel?: string;
   /** Package the visitor clicked (e.g. "King"); sent as a hidden field. */
   packageName?: string;
 }) {
   const router = useRouter();
-  const [interest, setInterest] = useState<string>(defaultInterest);
+  const [interest, setInterest] = useState<string>(fixedInterest ?? "");
   const [submitting, setSubmitting] = useState(false);
   const [error, setError] = useState(false);
   const [selectionError, setSelectionError] = useState(false);
@@ -49,9 +52,11 @@ export function BookNowPopup({
     setSubmitting(true);
 
     const formData = new FormData(e.currentTarget);
+    const page = window.location.pathname;
+    formData.append("page", page);
     formData.append(
       "_subject",
-      `New Quote Request - ${interest}${packageName ? ` (${packageName})` : ""}`
+      `New Quote Request - ${interestLabel ?? interest} — ${page}`
     );
 
     try {
@@ -79,7 +84,7 @@ export function BookNowPopup({
       setTimeout(() => {
         setError(false);
         setSelectionError(false);
-        setInterest(defaultInterest);
+        setInterest(fixedInterest ?? "");
       }, 200);
     }
   }
@@ -149,38 +154,48 @@ export function BookNowPopup({
             />
           </div>
 
-          <fieldset className="flex flex-col gap-2">
-            <legend className={labelClass}>What are you interested in?</legend>
-            <div className="grid grid-cols-3 gap-2.5 mt-1">
-              {interests.map((option) => {
-                const checked = interest === option;
-                return (
-                  <label
-                    key={option}
-                    className={[
-                      "flex items-center justify-center text-center border rounded-md px-2 py-3 text-[13px] cursor-pointer transition-colors leading-snug",
-                      checked
-                        ? "border-gold bg-gold/10 text-[#f1ece0]"
-                        : "border-gold/25 bg-[#0b221b] text-[#b9c7c0] hover:border-gold/50",
-                    ].join(" ")}
-                  >
-                    <input
-                      type="radio"
-                      name="interested_in"
-                      value={option}
-                      checked={checked}
-                      onChange={() => setInterest(option)}
-                      className="sr-only"
-                    />
-                    {option}
-                  </label>
-                );
-              })}
+          {fixedInterest ? (
+            <div className="flex flex-col gap-2">
+              <span className={labelClass}>You&apos;re requesting</span>
+              <p className="text-lg font-semibold text-gold">
+                {interestLabel ?? fixedInterest}
+              </p>
+              <input type="hidden" name="interested_in" value={fixedInterest} />
             </div>
-            {selectionError && (
-              <p className="text-red-400 text-xs">Please select one so we know how to help.</p>
-            )}
-          </fieldset>
+          ) : (
+            <fieldset className="flex flex-col gap-2">
+              <legend className={labelClass}>What are you interested in?</legend>
+              <div className="grid grid-cols-3 gap-2.5 mt-1">
+                {interests.map((option) => {
+                  const checked = interest === option;
+                  return (
+                    <label
+                      key={option}
+                      className={[
+                        "flex items-center justify-center text-center border rounded-md px-2 py-3 text-[13px] cursor-pointer transition-colors leading-snug",
+                        checked
+                          ? "border-gold bg-gold/10 text-[#f1ece0]"
+                          : "border-gold/25 bg-[#0b221b] text-[#b9c7c0] hover:border-gold/50",
+                      ].join(" ")}
+                    >
+                      <input
+                        type="radio"
+                        name="interested_in"
+                        value={option}
+                        checked={checked}
+                        onChange={() => setInterest(option)}
+                        className="sr-only"
+                      />
+                      {option}
+                    </label>
+                  );
+                })}
+              </div>
+              {selectionError && (
+                <p className="text-red-400 text-xs">Please select one so we know how to help.</p>
+              )}
+            </fieldset>
+          )}
 
           <input type="hidden" name="lead_source" value={leadSource} />
           {packageName && <input type="hidden" name="package" value={packageName} />}

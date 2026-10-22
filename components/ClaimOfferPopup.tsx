@@ -31,6 +31,9 @@ export function ClaimOfferPopup({
     setSubmitting(true);
 
     const formData = new FormData(e.currentTarget);
+    const page = window.location.pathname;
+    formData.append("page", page);
+    formData.set("_subject", `${formData.get("_subject")} — ${page}`);
 
     try {
       const res = await fetch(

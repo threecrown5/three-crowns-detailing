@@ -1,14 +1,13 @@
-import Link from "next/link";
-import { Button } from "@/components/ui/button";
 import { Phone, Mail, Instagram, MapPin } from "lucide-react";
 import { PageHeader } from "@/components/PageHeader";
 import { PhoneLink } from "@/components/PhoneLink";
+import { BookNowButton } from "@/components/BookNowButton";
 
 const contactDetails = [
   { label: "Call Or Text", value: "(818) 296-7347", icon: Phone },
   { label: "Email", value: "threecrowns.detailing@gmail.com", icon: Mail, href: "mailto:threecrowns.detailing@gmail.com" },
-  { label: "Instagram", value: "@threecrowns.detail", icon: Instagram, href: "https://instagram.com/threecrowns.detail" },
-  { label: "Service Area", value: "Glendale, CA & Surrounding Areas", icon: MapPin },
+  { label: "Instagram", value: "@threecrowns.detailing", icon: Instagram, href: "https://instagram.com/threecrowns.detailing" },
+  { label: "Service Area", value: "Glendale, Pasadena, Burbank, and surrounding areas", icon: MapPin },
 ];
 
 export default function ContactPage() {
@@ -62,12 +61,9 @@ export default function ContactPage() {
               })}
             </div>
 
-            <Button
-              asChild
-              className="mt-12 bg-gold! text-white! px-10 py-3.5 h-auto! tracking-[3px] uppercase text-xs font-semibold hover:bg-gold-soft! transition-all rounded"
-            >
-              <Link href="/book">Schedule Detail</Link>
-            </Button>
+            <BookNowButton className="mt-12 bg-gold! text-white! px-10 py-3.5 h-auto! tracking-[3px] uppercase text-xs font-semibold hover:bg-gold-soft! transition-all rounded">
+              Schedule Detail
+            </BookNowButton>
           </div>
 
           {/* Right: Map */}

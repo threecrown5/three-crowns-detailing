@@ -63,9 +63,11 @@ export function BookForm() {
     const formData = new FormData(form);
     formData.set("vehicle_size", vehicleSize);
 
+    formData.append("lead_source", "Book Page Form");
+    formData.append("page", window.location.pathname);
     formData.append(
       "_subject",
-      `New Detail Request - ${selectedPackage} (${vehicleSize})`
+      `New Detail Request - ${selectedPackage} (${vehicleSize}) — /book`
     );
     formData.append("_captcha", "false");
     formData.append("_template", "table");

@@ -11,14 +11,16 @@ export function BookNowLink({
   className,
   children,
   leadSource,
-  defaultInterest,
+  fixedInterest,
+  interestLabel,
   packageName,
 }: {
   href: string;
   className?: string;
   children: React.ReactNode;
   leadSource?: string;
-  defaultInterest?: string;
+  fixedInterest?: string;
+  interestLabel?: string;
   packageName?: string;
 }) {
   const [open, setOpen] = useState(false);
@@ -40,7 +42,8 @@ export function BookNowLink({
         open={open}
         onOpenChange={setOpen}
         leadSource={leadSource}
-        defaultInterest={defaultInterest}
+        fixedInterest={fixedInterest}
+        interestLabel={interestLabel}
         packageName={packageName}
       />
     </>

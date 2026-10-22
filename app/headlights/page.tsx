@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
-import { Star } from "lucide-react";
+import { MessageCircle, Phone, Star } from "lucide-react";
 import {
   Accordion,
   AccordionContent,
@@ -16,7 +16,7 @@ import { REVIEW_COUNT } from "@/lib/reviews";
 
 const HEADLIGHT_SMS_BODY = "Hi, I'd like a quote for headlight restoration.";
 const callTextButtonClass =
-  "flex-1 sm:flex-none flex items-center justify-center bg-gold/10! border border-gold/60! text-gold! px-7 py-3 h-auto! min-h-11 tracking-[2px] text-xs font-semibold hover:bg-gold/20! hover:border-gold! transition-all duration-300 rounded-md";
+  "flex items-center justify-center gap-2.5 border border-[#C9A84C]/40 text-[#C9A84C] text-xs uppercase px-5 py-3.5 min-h-11 rounded-md hover:border-[#C9A84C] hover:bg-[#C9A84C]/5 transition-all";
 
 const HEADLIGHT_PRICE = `$${HEADLIGHT_STANDALONE}`;
 const HEADLIGHT_ADDON_PRICE = `$${HEADLIGHT_ADDON}`;
@@ -135,18 +135,22 @@ export default function HeadlightRestorationPage() {
               </span>
               <span className="text-sm text-[#F2EFE6]/40 tracking-wide">per pair · all vehicles</span>
             </div>
-            <div className="flex flex-col sm:flex-row gap-4">
+            <div className="flex flex-col gap-3 md:items-center">
               <BookNowLink
                 href="/book?package=Headlights"
                 leadSource="Book Now Popup — Headlights Page"
-                defaultInterest="Headlight Restoration"
+                fixedInterest="Headlight Restoration"
                 className="bg-gold! text-black! px-7 py-3 h-auto! min-h-11 tracking-[2px] text-xs font-semibold hover:bg-gold/90! transition-all duration-300"
               >
                 Book Headlight Restoration
               </BookNowLink>
-              <div className="flex gap-3">
-                <PhoneLink className={callTextButtonClass}>Call</PhoneLink>
+              <div className="grid grid-cols-2 gap-3 w-full sm:min-w-[340px] sm:w-auto">
+                <PhoneLink className={callTextButtonClass}>
+                  <Phone size={14} />
+                  Call
+                </PhoneLink>
                 <SmsLink className={callTextButtonClass} body={HEADLIGHT_SMS_BODY}>
+                  <MessageCircle size={14} />
                   Text
                 </SmsLink>
               </div>
@@ -306,7 +310,7 @@ export default function HeadlightRestorationPage() {
             <BookNowLink
                 href="/book?package=Headlights"
                 leadSource="Book Now Popup — Headlights Page"
-                defaultInterest="Headlight Restoration"
+                fixedInterest="Headlight Restoration"
                 className="bg-gold! text-black! px-7 py-3 h-auto! min-h-11 tracking-[2px] text-xs font-semibold hover:bg-gold/90! transition-all duration-300"
               >
                 Book Headlight Restoration
@@ -466,21 +470,25 @@ export default function HeadlightRestorationPage() {
           <h2 className="font-[family-name:var(--font-playfair)] font-bold text-3xl md:text-[38px] text-[#F2EFE6] mb-9">
             Clear headlights, handled.
           </h2>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
+          <div className="flex flex-col gap-3 items-center">
             <BookNowLink
                 href="/book?package=Headlights"
                 leadSource="Book Now Popup — Headlights Page"
-                defaultInterest="Headlight Restoration"
+                fixedInterest="Headlight Restoration"
                 className="bg-gold! text-black! px-10 py-3 h-auto! min-h-11 tracking-[2px] text-xs font-semibold hover:bg-gold/90! transition-all"
               >
                 Book Headlight Restoration
               </BookNowLink>
-            <div className="flex gap-3 justify-center">
-              <PhoneLink className={callTextButtonClass}>Call</PhoneLink>
-              <SmsLink className={callTextButtonClass} body={HEADLIGHT_SMS_BODY}>
-                Text
-              </SmsLink>
-            </div>
+            <div className="grid grid-cols-2 gap-3 w-full sm:min-w-[340px] sm:w-auto">
+                <PhoneLink className={callTextButtonClass}>
+                  <Phone size={14} />
+                  Call
+                </PhoneLink>
+                <SmsLink className={callTextButtonClass} body={HEADLIGHT_SMS_BODY}>
+                  <MessageCircle size={14} />
+                  Text
+                </SmsLink>
+              </div>
           </div>
         </div>
       </section>

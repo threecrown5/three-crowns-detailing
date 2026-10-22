@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { Playfair_Display } from "next/font/google";
 import { MapPin, MessageCircle, Phone, Star, CheckCircle } from "lucide-react";
 import {
   Accordion,
@@ -11,6 +12,9 @@ import { BookNowButton } from "@/components/BookNowButton";
 import { PhoneLink } from "@/components/PhoneLink";
 import { SmsLink } from "@/components/SmsLink";
 import { REVIEW_COUNT } from "@/lib/reviews";
+import { formatPrice } from "@/lib/pricing";
+
+const playfair = Playfair_Display({ subsets: ["latin"], weight: ["600", "700"] });
 
 const heroSecondaryBtn =
   "flex items-center justify-center gap-2 border border-white/35 text-white text-xs tracking-[2px] uppercase font-semibold px-7 py-3 min-h-11 rounded-md hover:border-gold hover:text-gold transition-colors sm:min-w-[130px]";
@@ -83,13 +87,13 @@ export default function HomePage() {
         <div className="relative z-10 w-full max-w-[1200px] min-[2000px]:max-w-[1500px] mx-auto px-6 md:px-20 self-end pb-14 md:pb-20">
           <div className="max-w-[680px] text-left">
 
-            <h1 className="text-xs md:text-sm md:whitespace-nowrap font-light tracking-wide leading-[1.2] mb-3 text-gold/90">
-              Mobile Detailing in Glendale, Pasadena &amp; Burbank
+            <h1 className="text-[34px] md:text-[clamp(44px,4.4vw,68px)] font-light tracking-normal md:tracking-wide leading-[1.12] mb-4 md:mb-5">
+              Mobile Car Detailing in Glendale, Pasadena &amp; Burbank
             </h1>
 
-            <h2 className="text-5xl md:text-[clamp(52px,5vw,80px)] font-light tracking-wide leading-[1.1] mb-5 md:mb-6">
-              Back to new. <br className="hidden md:block" />Kept that way.
-            </h2>
+            <p className={`${playfair.className} text-[22px] md:text-[26px] font-semibold leading-snug tracking-[0.06em] text-gold [text-shadow:0_0_10px_rgba(0,0,0,0.85),0_1px_3px_rgba(0,0,0,0.7)] mb-5 md:mb-6`}>
+              Back to new. Kept that way.
+            </p>
 
             <p className="text-white/65 text-lg leading-relaxed max-w-[520px] mb-5 md:hidden">
               We come to your home or office. No drop-off, no hassle.
@@ -105,7 +109,7 @@ export default function HomePage() {
                   <Star key={i} size={13} className="text-gold fill-gold" />
                 ))}
               </div>
-              <span className="text-white/45 text-xs tracking-wide">{REVIEW_COUNT} five-star reviews on Google</span>
+              <span className="text-white/90 text-[13px] tracking-wide">{REVIEW_COUNT} five-star reviews on Google</span>
             </div>
 
             <div className="flex flex-col sm:flex-row sm:items-center gap-4 sm:gap-6 justify-start mb-3">
@@ -116,7 +120,7 @@ export default function HomePage() {
                 href="/services"
                 className="hidden sm:inline text-white text-sm underline! underline-offset-4 hover:text-gold transition-colors"
               >
-                View Packages
+                View packages, from {formatPrice("prince", "t1")}
               </Link>
             </div>
 
@@ -135,7 +139,7 @@ export default function HomePage() {
               href="/services"
               className="sm:hidden block text-center text-white text-[13px] underline! underline-offset-4 hover:text-gold transition-colors mb-6"
             >
-              View Packages
+              View packages, from {formatPrice("prince", "t1")}
             </Link>
 
           </div>

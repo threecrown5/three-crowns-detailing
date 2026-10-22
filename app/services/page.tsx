@@ -1,11 +1,10 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { Phone, MessageCircle } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { PageHeader } from "@/components/PageHeader";
 import { OfferBanner } from "@/components/OfferBanner";
 import { ReviewStrip } from "@/components/ReviewStrip";
 import { PhoneLink } from "@/components/PhoneLink";
@@ -161,38 +160,91 @@ function CrownIcon({ color }: { color: string }) {
 export default function ServicesPage() {
   const [tierIdx, setTierIdx] = useState(0);
   const tier = tiers[tierIdx];
+  const [activeTab, setActiveTab] = useState<string | null>(null);
+  const stripRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    let raf = 0;
+    const onScroll = () => {
+      cancelAnimationFrame(raf);
+      raf = requestAnimationFrame(() => {
+        let current: string | null = null;
+        for (const l of jumpLinks) {
+          const el = document.getElementById(l.id);
+          if (el && el.getBoundingClientRect().top <= 200) current = l.id;
+        }
+        setActiveTab(current);
+      });
+    };
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => {
+      window.removeEventListener("scroll", onScroll);
+      cancelAnimationFrame(raf);
+    };
+  }, []);
+
+  useEffect(() => {
+    if (!activeTab) return;
+    const strip = stripRef.current;
+    const tab = strip?.querySelector<HTMLElement>(`[data-tab="${activeTab}"]`);
+    if (strip && tab) strip.scrollTo({ left: tab.offsetLeft - 24, behavior: "smooth" });
+  }, [activeTab]);
 
   return (
     <>
-      <PageHeader
-        label="Services & Pricing"
-        heading="Mobile Detailing Packages & Pricing — Glendale, Pasadena & Burbank"
-        subtitle={"Mobile detailing at your driveway.\nNo drop-off. No waiting."}
-      />
-
-      <div className="-mt-6 pb-10 px-6 md:px-20 max-w-[1200px] min-[2000px]:max-w-[1500px] mx-auto w-full">
+      <header className="pt-[140px] md:pt-[180px] pb-8 px-6 md:px-20 max-w-[1200px] min-[2000px]:max-w-[1500px] mx-auto w-full">
+        <p className="text-xs md:text-sm uppercase tracking-[0.3em] text-[#C9A84C] mb-5">
+          Services &amp; Pricing
+        </p>
+        <h1 className="text-[40px] md:text-6xl font-normal leading-[1.1] mb-6 max-w-[900px]">
+          Mobile Detailing Packages &amp; Pricing
+          <span className="hidden md:inline"> — Glendale, Pasadena &amp; Burbank</span>
+        </h1>
+        <p className="text-lg text-[#a9bdb0] leading-relaxed max-w-[520px] mb-6">
+          Mobile detailing at your driveway. No drop-off. No waiting.
+        </p>
         <a
           href="#reviews"
           onClick={(e) => scrollToId(e, "reviews")}
-          className="inline-flex items-center gap-2 min-h-11 text-sm text-[#C9A84C] hover:text-[#d4b560] transition-colors"
+          className="inline-flex items-center gap-3 min-h-11 text-base"
         >
-          <span aria-hidden="true" className="tracking-[2px]">★★★★★</span>
-          <span className="text-white/80 underline underline-offset-4">{REVIEW_COUNT} Google reviews</span>
+          <span aria-hidden="true" className="tracking-[2px] text-[#C9A84C]">★★★★★</span>
+          <span className="font-medium text-[#f0ebe0]">5.0</span>
+          <span aria-hidden="true" className="text-[#a9bdb0]/60">•</span>
+          <span className="text-[#a9bdb0]">{REVIEW_COUNT} Google reviews ›</span>
         </a>
+      </header>
 
-        <nav aria-label="On this page" className="mt-3 flex flex-wrap gap-2.5">
-          {jumpLinks.map((l) => (
-            <a
-              key={l.id}
-              href={`#${l.id}`}
-              onClick={(e) => scrollToId(e, l.id)}
-              className="whitespace-nowrap rounded-full border border-[#C9A84C]/40 px-4 min-h-10 inline-flex items-center text-xs tracking-[0.08em] uppercase text-[#C9A84C] hover:border-[#C9A84C] hover:bg-[#C9A84C]/5 transition-colors"
-            >
-              {l.label}
-            </a>
-          ))}
-        </nav>
-      </div>
+      <nav aria-label="On this page" className="border-y border-[#C9A84C]/15 mb-10">
+        <div
+          ref={stripRef}
+          className="flex justify-between md:justify-start gap-4 md:gap-8 overflow-x-auto px-6 md:px-20 max-w-[1200px] min-[2000px]:max-w-[1500px] mx-auto [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
+        >
+          {jumpLinks.map((l) => {
+            const active = activeTab === l.id;
+            return (
+              <a
+                key={l.id}
+                data-tab={l.id}
+                href={`#${l.id}`}
+                aria-current={active ? "true" : undefined}
+                onClick={(e) => {
+                  setActiveTab(l.id);
+                  scrollToId(e, l.id);
+                }}
+                className={[
+                  "shrink-0 whitespace-nowrap py-4 min-h-12 text-[11px] md:text-sm uppercase tracking-[0.03em] md:tracking-[0.08em] border-b-2 -mb-px transition-colors",
+                  active
+                    ? "text-[#f0ebe0]! border-[#C9A84C]"
+                    : "text-[#a9bdb0]! border-transparent hover:text-[#f0ebe0]!",
+                ].join(" ")}
+              >
+                {l.label}
+              </a>
+            );
+          })}
+        </div>
+      </nav>
 
       <div className="max-w-[1020px] mx-auto px-5 pb-24">
 
@@ -347,14 +399,10 @@ export default function ServicesPage() {
                 <BookNowLink
                   href={`/book?package=${pkg.name}`}
                   leadSource="Book Now Popup — Services Page"
-                  defaultInterest="Detailing"
+                  fixedInterest="Detailing"
+                  interestLabel={`${pkg.name} Detail`}
                   packageName={pkg.name}
-                  className={[
-                    "w-full min-h-12 rounded-lg text-[11px] font-semibold tracking-[0.1em] uppercase transition-all py-3",
-                    pkg.popular
-                      ? "bg-[#C9A84C]! text-[#091810]! border border-[#C9A84C]! hover:bg-[#d4b560]!"
-                      : "bg-transparent! border border-[#1e3828]! text-[#7aa882]! hover:border-[#C9A84C]! hover:text-[#C9A84C]!",
-                  ].join(" ")}
+                  className="w-full min-h-12 rounded-lg text-[11px] font-semibold tracking-[0.1em] uppercase transition-all py-3 bg-[#C9A84C]! text-[#091810]! border border-[#C9A84C]! hover:bg-[#d4b560]!"
                 >
                   Book {pkg.name}
                 </BookNowLink>

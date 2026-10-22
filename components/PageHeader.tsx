@@ -4,7 +4,7 @@ export function PageHeader({
   subtitle,
 }: {
   label: string;
-  heading: string;
+  heading: React.ReactNode;
   subtitle: string;
 }) {
   return (

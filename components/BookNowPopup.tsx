@@ -19,14 +19,20 @@ export function BookNowPopup({
   open,
   onOpenChange,
   leadSource = "Book Now Popup",
+  defaultInterest = "",
+  packageName,
 }: {
   open: boolean;
   onOpenChange: (open: boolean) => void;
   /** Distinguishes which page/button triggered this popup in the email. */
   leadSource?: string;
+  /** Pre-selects one of the interest pills (e.g. "Headlight Restoration"). */
+  defaultInterest?: string;
+  /** Package the visitor clicked (e.g. "King"); sent as a hidden field. */
+  packageName?: string;
 }) {
   const router = useRouter();
-  const [interest, setInterest] = useState<string>("");
+  const [interest, setInterest] = useState<string>(defaultInterest);
   const [submitting, setSubmitting] = useState(false);
   const [error, setError] = useState(false);
   const [selectionError, setSelectionError] = useState(false);
@@ -43,7 +49,10 @@ export function BookNowPopup({
     setSubmitting(true);
 
     const formData = new FormData(e.currentTarget);
-    formData.append("_subject", `New Quote Request - ${interest}`);
+    formData.append(
+      "_subject",
+      `New Quote Request - ${interest}${packageName ? ` (${packageName})` : ""}`
+    );
 
     try {
       const res = await fetch(
@@ -70,7 +79,7 @@ export function BookNowPopup({
       setTimeout(() => {
         setError(false);
         setSelectionError(false);
-        setInterest("");
+        setInterest(defaultInterest);
       }, 200);
     }
   }
@@ -174,6 +183,7 @@ export function BookNowPopup({
           </fieldset>
 
           <input type="hidden" name="lead_source" value={leadSource} />
+          {packageName && <input type="hidden" name="package" value={packageName} />}
           <input type="hidden" name="_captcha" value="false" />
           <input type="hidden" name="_template" value="table" />
           {/* Honeypot — hidden from humans, formsubmit.co discards filled submissions. */}

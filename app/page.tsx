@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { MapPin, Star, CheckCircle } from "lucide-react";
+import { MapPin, MessageCircle, Phone, Star, CheckCircle } from "lucide-react";
 import {
   Accordion,
   AccordionContent,
@@ -8,7 +8,12 @@ import {
 } from "@/components/ui/accordion";
 import { OfferBanner } from "@/components/OfferBanner";
 import { BookNowButton } from "@/components/BookNowButton";
+import { PhoneLink } from "@/components/PhoneLink";
+import { SmsLink } from "@/components/SmsLink";
 import { REVIEW_COUNT } from "@/lib/reviews";
+
+const heroSecondaryBtn =
+  "flex items-center justify-center gap-2 border border-white/35 text-white text-xs tracking-[2px] uppercase font-semibold px-7 py-3 min-h-11 rounded-md hover:border-gold hover:text-gold transition-colors sm:min-w-[130px]";
 
 const reviews = [
   { name: "Cheryl L.", text: "The work is meticulous, and the wax has lasted over a month and still looks great. They listened and made it right without any hassle." },
@@ -103,7 +108,7 @@ export default function HomePage() {
               <span className="text-white/45 text-xs tracking-wide">{REVIEW_COUNT} five-star reviews on Google</span>
             </div>
 
-            <div className="flex flex-col sm:flex-row sm:items-center gap-4 sm:gap-6 justify-start mb-2 sm:mb-6 md:mb-10">
+            <div className="flex flex-col sm:flex-row sm:items-center gap-4 sm:gap-6 justify-start mb-3">
               <BookNowButton className="w-full sm:w-auto bg-gold! text-black! px-7 py-3.5 md:py-2.5 h-auto! tracking-[2px] text-xs font-semibold hover:bg-gold/90! transition-all duration-300">
                 Get a Free Quote
               </BookNowButton>
@@ -113,6 +118,17 @@ export default function HomePage() {
               >
                 View Packages
               </Link>
+            </div>
+
+            <div className="grid grid-cols-2 sm:flex gap-3 mb-5 sm:mb-6 md:mb-10">
+              <PhoneLink className={heroSecondaryBtn}>
+                <Phone size={14} />
+                Call
+              </PhoneLink>
+              <SmsLink body="Hi, I'd like to get a quote for a detail." className={heroSecondaryBtn}>
+                <MessageCircle size={14} />
+                Text
+              </SmsLink>
             </div>
 
             <Link

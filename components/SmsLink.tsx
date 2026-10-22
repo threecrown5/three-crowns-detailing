@@ -7,9 +7,8 @@ export function SmsLink({
   children,
   body,
   onClick,
-}: {
-  className?: string;
-  children: React.ReactNode;
+  ...props
+}: Omit<React.ComponentProps<"a">, "href" | "onClick"> & {
   body?: string;
   onClick?: () => void;
 }) {
@@ -23,6 +22,7 @@ export function SmsLink({
         trackConversion(CONVERSIONS.textClick);
         onClick?.();
       }}
+      {...props}
     >
       {children}
     </a>

@@ -10,7 +10,25 @@ import { OfferBanner } from "@/components/OfferBanner";
 import { ReviewStrip } from "@/components/ReviewStrip";
 import { PhoneLink } from "@/components/PhoneLink";
 import { SmsLink } from "@/components/SmsLink";
+import { BookNowLink } from "@/components/BookNowLink";
+import { REVIEW_COUNT } from "@/lib/reviews";
 import { formatPrice, HEADLIGHT_STANDALONE, type TierKey } from "@/lib/pricing";
+
+const jumpLinks = [
+  { id: "packages", label: "Packages" },
+  { id: "add-ons", label: "Add-ons" },
+  { id: "maintenance", label: "Maintenance" },
+  { id: "reviews", label: "Reviews" },
+];
+
+function scrollToId(e: React.MouseEvent<HTMLAnchorElement>, id: string) {
+  const el = document.getElementById(id);
+  if (!el) return;
+  e.preventDefault();
+  const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  el.scrollIntoView({ behavior: reduce ? "auto" : "smooth", block: "start" });
+  history.replaceState(null, "", `#${id}`);
+}
 
 const callTextRowClass = "grid grid-cols-2 gap-3";
 const callTextButtonClass =
@@ -152,17 +170,35 @@ export default function ServicesPage() {
         subtitle={"Mobile detailing at your driveway.\nNo drop-off. No waiting."}
       />
 
-      <section className="max-w-[1020px] mx-auto px-5 pb-6">
-        <p className="text-sm md:text-base opacity-60 leading-relaxed max-w-[680px]">
-          Three Crowns Detailing serves clients across Glendale, Pasadena, and Burbank, CA. Every package is performed on-site at your location — priced by vehicle type, scoped to your car&apos;s actual condition, and backed by our vehicle health check at every visit.
-        </p>
-      </section>
+      <div className="-mt-6 pb-10 px-6 md:px-20 max-w-[1200px] min-[2000px]:max-w-[1500px] mx-auto w-full">
+        <a
+          href="#reviews"
+          onClick={(e) => scrollToId(e, "reviews")}
+          className="inline-flex items-center gap-2 min-h-11 text-sm text-[#C9A84C] hover:text-[#d4b560] transition-colors"
+        >
+          <span aria-hidden="true" className="tracking-[2px]">★★★★★</span>
+          <span className="text-white/80 underline underline-offset-4">{REVIEW_COUNT} Google reviews</span>
+        </a>
+
+        <nav aria-label="On this page" className="mt-3 flex flex-wrap gap-2.5">
+          {jumpLinks.map((l) => (
+            <a
+              key={l.id}
+              href={`#${l.id}`}
+              onClick={(e) => scrollToId(e, l.id)}
+              className="whitespace-nowrap rounded-full border border-[#C9A84C]/40 px-4 min-h-10 inline-flex items-center text-xs tracking-[0.08em] uppercase text-[#C9A84C] hover:border-[#C9A84C] hover:bg-[#C9A84C]/5 transition-colors"
+            >
+              {l.label}
+            </a>
+          ))}
+        </nav>
+      </div>
 
       <div className="max-w-[1020px] mx-auto px-5 pb-24">
 
         {/* VEHICLE SELECTOR */}
         <div id="detailing" className="mb-12 scroll-mt-28">
-          <p className="text-center text-[11px] text-[#2e5c3a] tracking-[0.1em] uppercase mb-[18px]">
+          <p className="text-center text-[11px] text-[#9bb8a3] tracking-[0.1em] uppercase mb-[18px]">
             Select your vehicle — pricing updates
           </p>
           <div className="grid grid-cols-3 gap-2.5 sm:gap-[10px]">
@@ -191,13 +227,13 @@ export default function ServicesPage() {
                   </div>
                   <div
                     className="text-[12px] font-semibold mb-[3px] transition-colors duration-200"
-                    style={{ color: active ? "#f0ebe0" : "#3d6b48" }}
+                    style={{ color: active ? "#f0ebe0" : "#9bb8a3" }}
                   >
                     {t.label}
                   </div>
                   <div
                     className="hidden sm:block text-[10px] leading-[1.5] whitespace-pre-line transition-colors duration-200"
-                    style={{ color: active ? "#4a7a55" : "#2a4a32" }}
+                    style={{ color: active ? "#b4cdbb" : "#8aa892" }}
                   >
                     {t.sub}
                   </div>
@@ -222,14 +258,8 @@ export default function ServicesPage() {
           </SmsLink>
         </div>
 
-        {/* OFFER — sits right above King/Queen, the tiers it applies to */}
-        <div className="mb-10">
-          <OfferBanner />
-        </div>
-
-        <ReviewStrip className="mb-10" />
-
         {/* PACKAGES GRID */}
+        <div id="packages" className="scroll-mt-28">
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-3.5 items-start mb-4">
           {packages.map((pkg) => {
             const price = formatPrice(pkg.key, tier.key);
@@ -256,7 +286,7 @@ export default function ServicesPage() {
                 >
                   {pkg.name}
                 </div>
-                <div className="text-[11px] text-[#3d6b48] leading-[1.55] mb-5 whitespace-pre-line">
+                <div className="text-[11px] text-[#9bb8a3] leading-[1.55] mb-5 whitespace-pre-line">
                   {pkg.tagline}
                 </div>
 
@@ -267,14 +297,14 @@ export default function ServicesPage() {
                   >
                     {price}
                   </div>
-                  <div className="text-[11px] text-[#3d6b48] mt-1">{tier.tierLabel}</div>
+                  <div className="text-[11px] text-[#9bb8a3] mt-1">{tier.tierLabel}</div>
                 </div>
 
                 <div className="border-t border-[#1a3020] my-[18px]" />
 
                 <div className="flex-1 mb-[22px] space-y-0">
                   {/* Interior */}
-                  <div className="text-[11px] font-semibold tracking-[0.18em] uppercase text-[#5a9468] mb-2">Interior</div>
+                  <div className="text-[11px] font-semibold tracking-[0.18em] uppercase text-[#9bb8a3] mb-2">Interior</div>
                   <ul className="flex flex-col gap-[7px] mb-3.5">
                     {pkg.interior.map((item) => (
                       <li
@@ -291,7 +321,7 @@ export default function ServicesPage() {
                   </ul>
 
                   {/* Exterior */}
-                  <div className="text-[11px] font-semibold tracking-[0.18em] uppercase text-[#5a9468] mb-2">Exterior</div>
+                  <div className="text-[11px] font-semibold tracking-[0.18em] uppercase text-[#9bb8a3] mb-2">Exterior</div>
                   <ul className="flex flex-col gap-[7px] mb-3.5">
                     {pkg.exterior.map((item) => (
                       <li
@@ -314,34 +344,43 @@ export default function ServicesPage() {
                   </div>
                 </div>
 
-                <Button
-                  asChild
+                <BookNowLink
+                  href={`/book?package=${pkg.name}`}
+                  leadSource="Book Now Popup — Services Page"
+                  defaultInterest="Detailing"
+                  packageName={pkg.name}
                   className={[
-                    "w-full rounded-lg text-[11px] font-semibold tracking-[0.1em] uppercase transition-all py-3",
+                    "w-full min-h-12 rounded-lg text-[11px] font-semibold tracking-[0.1em] uppercase transition-all py-3",
                     pkg.popular
                       ? "bg-[#C9A84C]! text-[#091810]! border border-[#C9A84C]! hover:bg-[#d4b560]!"
                       : "bg-transparent! border border-[#1e3828]! text-[#7aa882]! hover:border-[#C9A84C]! hover:text-[#C9A84C]!",
                   ].join(" ")}
                 >
-                  <Link href={`/book?package=${pkg.name}`}>Book {pkg.name}</Link>
-                </Button>
+                  Book {pkg.name}
+                </BookNowLink>
               </div>
             );
           })}
         </div>
+        </div>
 
         {/* GUARANTEE */}
         <div className="text-center py-8 pb-10">
-          <p className="text-[13px] text-[#3d6b48] leading-[1.75]">
+          <p className="text-[13px] text-[#9bb8a3] leading-[1.75]">
             <span className="text-[#C9A84C] font-medium">48-hour satisfaction guarantee.</span>{" "}
             Not completely happy? We come back and make it right — free, no questions.
           </p>
         </div>
 
+        {/* OFFER */}
+        <div className="mb-10">
+          <OfferBanner />
+        </div>
+
         {/* ADD-ONS */}
         <div id="add-ons" className="mb-8 scroll-mt-28">
           <div className="mb-7">
-            <div className="text-[10px] tracking-[0.22em] uppercase text-[#3d6b48] mb-2">Add-On Services</div>
+            <div className="text-[10px] tracking-[0.22em] uppercase text-[#9bb8a3] mb-2">Add-On Services</div>
             <div className="font-['Cormorant_Garamond',serif] text-[28px] font-bold mb-1 leading-[1.1]">
               Customize your detail.
             </div>
@@ -365,7 +404,7 @@ export default function ServicesPage() {
                     <div className="text-[13px] font-semibold text-[#f0ebe0] leading-tight">{addon.name}</div>
                     <div className="font-['Cormorant_Garamond',serif] text-[18px] font-bold text-[#C9A84C] shrink-0">{addon.price}</div>
                   </div>
-                  <p className="text-[13px] text-[#5a9468] leading-[1.7]">{addon.body}</p>
+                  <p className="text-[13px] text-[#9bb8a3] leading-[1.7]">{addon.body}</p>
                   {addon.href && (
                     <p className="text-[11px] text-[#C9A84C] tracking-[0.08em] uppercase mt-3">Learn more →</p>
                   )}
@@ -387,21 +426,21 @@ export default function ServicesPage() {
         </div>
 
         {/* CROWN REFRESH */}
-        <div id="refresh" className="bg-[#0d1f16] border border-[#1a3020] rounded-[14px] p-8 md:p-9 scroll-mt-28">
+        <div id="maintenance" className="bg-[#0d1f16] border border-[#1a3020] rounded-[14px] p-8 md:p-9 scroll-mt-28">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-10 md:items-start">
             <div>
-              <div className="text-[10px] tracking-[0.22em] uppercase text-[#3d6b48] mb-2.5">Maintenance</div>
+              <div className="text-[10px] tracking-[0.22em] uppercase text-[#9bb8a3] mb-2.5">Maintenance</div>
               <div className="font-['Cormorant_Garamond',serif] text-[28px] font-bold mb-2 leading-[1.1]">
                 Crown Refresh
               </div>
               <div className="font-['Cormorant_Garamond',serif] text-[34px] font-semibold text-[#C9A84C] mb-1">
                 {formatPrice("refresh", "t1")}{" "}
-                <span className="text-sm font-['DM_Sans',sans-serif] font-normal text-[#3d6b48]">starting</span>
+                <span className="text-sm font-['DM_Sans',sans-serif] font-normal text-[#9bb8a3]">starting</span>
               </div>
-              <div className="text-[11px] text-[#3d6b48] mb-2.5">
+              <div className="text-[11px] text-[#9bb8a3] mb-2.5">
                 {formatPrice("refresh", "t2")} SUV / {formatPrice("refresh", "t3")} XL
               </div>
-              <p className="text-[12px] text-[#3d6b48] leading-[1.75] max-w-[260px]">
+              <p className="text-[12px] text-[#9bb8a3] leading-[1.75] max-w-[260px]">
                 Maintenance for in-between details so your vehicle is clean, always. Best for vehicles serviced within the last 60 days. The more often you book, the less it costs — Refresh pricing scales with how frequent your vehicle is serviced. Heavier conditions requiring deeper cleaning will be charged accordingly.
               </p>
             </div>
@@ -425,13 +464,19 @@ export default function ServicesPage() {
               </ul>
               <Button
                 asChild
-                className="bg-transparent! border border-[#1e3828]! text-[#7aa882]! hover:border-[#C9A84C]! hover:text-[#C9A84C]! text-[11px] tracking-[0.1em] uppercase font-semibold py-3 px-6"
+                className="bg-transparent! border border-[#1e3828]! text-[#7aa882]! hover:border-[#C9A84C]! hover:text-[#C9A84C]! min-h-12 text-[11px] tracking-[0.1em] uppercase font-semibold py-3 px-6"
               >
                 <Link href="/book?package=Crown+Refresh">Book Refresh</Link>
               </Button>
             </div>
           </div>
         </div>
+
+
+        {/* REVIEWS */}
+        <section id="reviews" className="scroll-mt-28 mt-12 mb-10">
+          <ReviewStrip />
+        </section>
 
         {/* CALL / TEXT — second prompt after add-ons/maintenance */}
         <div className={`${callTextRowClass} mt-10 mb-0`}>
@@ -447,6 +492,11 @@ export default function ServicesPage() {
             Text Us
           </SmsLink>
         </div>
+
+        {/* SEO intro copy */}
+        <p className="text-sm md:text-base opacity-60 leading-relaxed max-w-[680px] mt-12">
+          Three Crowns Detailing serves clients across Glendale, Pasadena, and Burbank, CA. Every package is performed on-site at your location — priced by vehicle type, scoped to your car&apos;s actual condition, and backed by our vehicle health check at every visit.
+        </p>
 
       </div>
 

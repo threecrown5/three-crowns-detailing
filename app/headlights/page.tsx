@@ -8,7 +8,7 @@ import {
   AccordionTrigger,
 } from "@/components/ui/accordion";
 import { ImageSlot } from "@/components/ImageSlot";
-import { HeadlightBookButton } from "@/components/HeadlightBookButton";
+import { BookNowLink } from "@/components/BookNowLink";
 import { PhoneLink } from "@/components/PhoneLink";
 import { SmsLink } from "@/components/SmsLink";
 import { HEADLIGHT_STANDALONE, HEADLIGHT_ADDON } from "@/lib/pricing";
@@ -136,7 +136,14 @@ export default function HeadlightRestorationPage() {
               <span className="text-sm text-[#F2EFE6]/40 tracking-wide">per pair · all vehicles</span>
             </div>
             <div className="flex flex-col sm:flex-row gap-4">
-              <HeadlightBookButton className="bg-gold! text-black! px-7 py-3 h-auto! min-h-11 tracking-[2px] text-xs font-semibold hover:bg-gold/90! transition-all duration-300" />
+              <BookNowLink
+                href="/book?package=Headlights"
+                leadSource="Book Now Popup — Headlights Page"
+                defaultInterest="Headlight Restoration"
+                className="bg-gold! text-black! px-7 py-3 h-auto! min-h-11 tracking-[2px] text-xs font-semibold hover:bg-gold/90! transition-all duration-300"
+              >
+                Book Headlight Restoration
+              </BookNowLink>
               <div className="flex gap-3">
                 <PhoneLink className={callTextButtonClass}>Call</PhoneLink>
                 <SmsLink className={callTextButtonClass} body={HEADLIGHT_SMS_BODY}>
@@ -296,7 +303,14 @@ export default function HeadlightRestorationPage() {
           </div>
 
           <div className="flex flex-col sm:flex-row gap-4 justify-center mt-9">
-            <HeadlightBookButton className="bg-gold! text-black! px-7 py-3 h-auto! min-h-11 tracking-[2px] text-xs font-semibold hover:bg-gold/90! transition-all duration-300" />
+            <BookNowLink
+                href="/book?package=Headlights"
+                leadSource="Book Now Popup — Headlights Page"
+                defaultInterest="Headlight Restoration"
+                className="bg-gold! text-black! px-7 py-3 h-auto! min-h-11 tracking-[2px] text-xs font-semibold hover:bg-gold/90! transition-all duration-300"
+              >
+                Book Headlight Restoration
+              </BookNowLink>
             <Button
               asChild
               className="bg-transparent! border border-[#F2EFE6]/25! text-[#F2EFE6]/80! px-7 py-3 h-auto! min-h-11 tracking-[2px] text-xs font-medium hover:border-[#F2EFE6]/50! hover:text-[#F2EFE6]! transition-all duration-300"
@@ -453,7 +467,14 @@ export default function HeadlightRestorationPage() {
             Clear headlights, handled.
           </h2>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <HeadlightBookButton className="bg-gold! text-black! px-10 py-3 h-auto! min-h-11 tracking-[2px] text-xs font-semibold hover:bg-gold/90! transition-all" />
+            <BookNowLink
+                href="/book?package=Headlights"
+                leadSource="Book Now Popup — Headlights Page"
+                defaultInterest="Headlight Restoration"
+                className="bg-gold! text-black! px-10 py-3 h-auto! min-h-11 tracking-[2px] text-xs font-semibold hover:bg-gold/90! transition-all"
+              >
+                Book Headlight Restoration
+              </BookNowLink>
             <div className="flex gap-3 justify-center">
               <PhoneLink className={callTextButtonClass}>Call</PhoneLink>
               <SmsLink className={callTextButtonClass} body={HEADLIGHT_SMS_BODY}>

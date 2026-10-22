@@ -3,10 +3,11 @@ import Link from "next/link";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
 import { useState, useEffect } from "react";
-import { ChevronDown, Phone } from "lucide-react";
+import { ChevronDown, MessageCircle, Phone } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Sheet, SheetContent, SheetTitle } from "@/components/ui/sheet";
 import { PhoneLink } from "@/components/PhoneLink";
+import { SmsLink } from "@/components/SmsLink";
 import { BookNowPopup } from "@/components/BookNowPopup";
 
 const navLinks = [
@@ -16,10 +17,12 @@ const navLinks = [
   { href: "/contact", label: "Contact" },
 ];
 
+const SMS_BODY = "Hi, I'd like to get a quote for a detail.";
+
 const serviceLinks = [
   { href: "/services#detailing", label: "Detailing" },
   { href: "/services#add-ons", label: "Add-Ons" },
-  { href: "/services#refresh", label: "Refresh" },
+  { href: "/services#maintenance", label: "Refresh" },
   { href: "/headlights", label: "Headlight Restoration" },
 ];
 
@@ -69,6 +72,14 @@ export function Header() {
               <Phone size={18} strokeWidth={1.8} />
             </PhoneLink>
 
+            <SmsLink
+              body={SMS_BODY}
+              className="flex items-center text-white"
+              aria-label="Text us"
+            >
+              <MessageCircle size={18} strokeWidth={1.8} />
+            </SmsLink>
+
             <button
               type="button"
               onClick={() => setOpen(true)}
@@ -111,6 +122,13 @@ export function Header() {
             <PhoneLink className="flex items-center text-white hover:text-gold transition-colors" aria-label="Call (818) 296-7347">
               <Phone size={20} strokeWidth={1.6} />
             </PhoneLink>
+            <SmsLink
+              body={SMS_BODY}
+              className="flex items-center text-white hover:text-gold transition-colors"
+              aria-label="Text us"
+            >
+              <MessageCircle size={20} strokeWidth={1.6} />
+            </SmsLink>
             <button
               type="button"
               onClick={() => setBookOpen(true)}

@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
+import { Playfair_Display } from "next/font/google";
 import Image from "next/image";
 import { Phone, MessageCircle } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -11,7 +12,9 @@ import { PhoneLink } from "@/components/PhoneLink";
 import { SmsLink } from "@/components/SmsLink";
 import { BookNowLink } from "@/components/BookNowLink";
 import { REVIEW_COUNT } from "@/lib/reviews";
-import { formatPrice, HEADLIGHT_STANDALONE, type TierKey } from "@/lib/pricing";
+import { formatPrice, getPrice, HEADLIGHT_STANDALONE, type TierKey } from "@/lib/pricing";
+
+const playfair = Playfair_Display({ subsets: ["latin"] });
 
 const jumpLinks = [
   { id: "packages", label: "Packages" },
@@ -63,99 +66,56 @@ const tiers: {
   },
 ];
 
-const packages = [
+const packages: {
+  key: "queen" | "king" | "prince";
+  name: string;
+  popular: boolean;
+  tagline: string;
+  blurb: string;
+  extraLabel: string;
+  extra: string;
+  included: { text: string; href?: string }[];
+}[] = [
   {
-    key: "prince" as const,
-    name: "Prince",
-    tagline: "The clean slate.\nEvery new client starts here.",
-    popular: false,
-    interior: [
-      { text: "Exfoliation Scrub for all Plastic, Vinyl, Alcantara, and Leather surfaces", upgrade: false },
-      { text: "Focused attention to Creases and Crevices", upgrade: false },
-      { text: "Deep Interior Vacuum + Brush Agitation", upgrade: false },
-      { text: "Streak-Free Glass and Screens", upgrade: false },
-      { text: "Floor Mat Cleaning + Dressing", upgrade: false },
-      { text: "Foot Pedal Cleaning", upgrade: false },
-    ],
-    exterior: [
-      { text: "Pre-Soak Foam Bath", upgrade: false },
-      { text: "Foam Bath and Contact Wash", upgrade: false },
-      { text: "Wheel Faces, Wells, and Barrels cleaned", upgrade: false },
-      { text: "Tires Scrubbed and Cleaned with Gentle Chemicals", upgrade: false },
-      { text: "Dressing for Moisturizing and Shine applied to Tires and Wheel Wells", upgrade: false },
-      { text: "Hydrophobic and Dust Repellent Polymer Wax Protection", upgrade: false },
-    ],
-  },
-  {
-    key: "king" as const,
-    name: "King",
-    tagline: "For those who take\ntheir car seriously.",
-    popular: true,
-    interior: [
-      { text: "Exfoliation Scrub for all Plastic, Vinyl, Alcantara, and Leather surfaces", upgrade: false },
-      { text: "Focused attention to Creases and Crevices", upgrade: false },
-      { text: "Deep Interior Vacuum + Brush Agitation", upgrade: false },
-      { text: "Streak-Free Glass and Screens", upgrade: false },
-      { text: "Floor Mat Cleaning + Dressing", upgrade: false },
-      { text: "Foot Pedal Cleaning", upgrade: false },
-      { text: "Leather Conditioning", upgrade: true },
-      { text: "Carpet and Upholstery Shampoo", upgrade: true },
-      { text: "Anti-Static and UV Protectant", upgrade: true },
-    ],
-    exterior: [
-      { text: "Pre-Soak Foam Bath", upgrade: false },
-      { text: "Foam Bath and Contact Wash", upgrade: false },
-      { text: "Wheel Faces, Wells, and Barrels cleaned", upgrade: false },
-      { text: "Tires Scrubbed and Cleaned with Gentle Chemicals", upgrade: false },
-      { text: "Dressing for Moisturizing and Shine applied to Tires and Wheel Wells", upgrade: false },
-      { text: "Clay Bar Decontamination", upgrade: true },
-      { text: "Iron Remover Treatment", upgrade: true },
-      { text: "Ceramic Spray Sealant", upgrade: true },
-    ],
-  },
-  {
-    key: "queen" as const,
+    key: "queen",
     name: "Queen",
-    tagline: "The full experience.\nNothing held back.",
     popular: false,
-    interior: [
-      { text: "Exfoliation Scrub for all Plastic, Vinyl, Alcantara, and Leather surfaces", upgrade: false },
-      { text: "Focused attention to Creases and Crevices", upgrade: false },
-      { text: "Deep Interior Vacuum + Brush Agitation", upgrade: false },
-      { text: "Streak-Free Glass and Screens", upgrade: false },
-      { text: "Floor Mat Cleaning + Dressing", upgrade: false },
-      { text: "Foot Pedal Cleaning", upgrade: false },
-      { text: "Leather Conditioning", upgrade: false },
-      { text: "Carpet and Upholstery Shampoo", upgrade: false },
-      { text: "Anti-Static and UV Protectant", upgrade: false },
+    tagline: "The full experience.\nNothing held back.",
+    blurb:
+      "Walk up to your car in the sun and see depth in the paint you haven't seen since the dealership. The shine you remember, back and built to hold.",
+    extraLabel: "Everything in King, plus",
+    extra: "A one-step gloss enhancement pass that restores depth and clarity to the paint.",
+    included: [
+      { text: "Vehicle Health Check Card" },
+      { text: "Priority rebooking slot" },
+      { text: "50% off Crown Refresh", href: "#maintenance" },
     ],
-    exterior: [
-      { text: "Pre-Soak Foam Bath", upgrade: false },
-      { text: "Foam Bath and Contact Wash", upgrade: false },
-      { text: "Wheel Faces, Wells, and Barrels cleaned", upgrade: false },
-      { text: "Tires Scrubbed and Cleaned with Gentle Chemicals", upgrade: false },
-      { text: "Dressing for Moisturizing and Shine applied to Tires and Wheel Wells", upgrade: false },
-      { text: "Clay Bar Decontamination", upgrade: false },
-      { text: "Iron Remover Treatment", upgrade: false },
-      { text: "Ceramic Spray Sealant", upgrade: false },
-      { text: "One Step Gloss Enhancement", upgrade: true },
-    ],
+  },
+  {
+    key: "king",
+    name: "King",
+    popular: true,
+    tagline: "For those who take\ntheir car seriously.",
+    blurb:
+      "Run your palm across the paint and feel it smooth as glass. Leather soft again, seats and carpet deep clean, every surface shielded from the California sun.",
+    extraLabel: "Everything in Prince, plus",
+    extra:
+      "Leather conditioning, carpet and upholstery shampoo, UV protection, clay bar and iron decontamination, ceramic spray sealant.",
+    included: [{ text: "Vehicle Health Check Card" }, { text: "Priority rebooking slot" }],
+  },
+  {
+    key: "prince",
+    name: "Prince",
+    popular: false,
+    tagline: "The clean slate.",
+    blurb:
+      "Open your car tomorrow morning to a cabin that feels reset. Glass so clear you forget it's there, carpet that feels clean under your hand, wheels bright again, and water beading off the paint for weeks.",
+    extraLabel: "Inside and out",
+    extra:
+      "Full interior deep clean, foam wash, wheels and tires, and a polymer wax finish. Every new client starts here.",
+    included: [{ text: "Vehicle Health Check Card" }, { text: "Priority rebooking slot" }],
   },
 ];
-
-function CrownIcon({ color }: { color: string }) {
-  return (
-    <svg width="18" height="16" viewBox="0 0 22 18" fill="none" style={{ marginBottom: 10 }}>
-      <path
-        d="M1 14 L4.5 6 L8.5 10.5 L11 2 L13.5 10.5 L17.5 6 L21 14 Z"
-        stroke={color}
-        strokeWidth="1.5"
-        strokeLinejoin="round"
-      />
-      <line x1="1" y1="16.5" x2="21" y2="16.5" stroke={color} strokeWidth="1.5" strokeLinecap="round" />
-    </svg>
-  );
-}
 
 export default function ServicesPage() {
   const [tierIdx, setTierIdx] = useState(0);
@@ -312,112 +272,108 @@ export default function ServicesPage() {
 
         {/* PACKAGES GRID */}
         <div id="packages" className="scroll-mt-28">
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-3.5 items-start mb-4">
-          {packages.map((pkg) => {
-            const price = formatPrice(pkg.key, tier.key);
-            return (
-              <div
-                key={pkg.key}
-                className={[
-                  "relative rounded-[14px] border p-7 flex flex-col",
-                  pkg.popular
-                    ? "bg-gradient-to-br from-[#162e20] to-[#0d1f16] border-[#6a5120]"
-                    : "bg-[#0d1f16] border-[#1a3020]",
-                ].join(" ")}
-              >
-                {pkg.popular && (
-                  <div className="absolute -top-px right-[22px] bg-[#C9A84C] text-[#091810] text-[9px] font-bold tracking-[0.14em] uppercase px-[11px] py-1 rounded-b-lg">
-                    Most Popular
-                  </div>
-                )}
-
-                <CrownIcon color={pkg.popular ? "#C9A84C" : "#3d6b48"} />
-
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-5 lg:gap-6 items-stretch">
+            {packages.map((pkg) => {
+              const price = getPrice(pkg.key, tier.key);
+              return (
                 <div
-                  className="font-['Cormorant_Garamond',serif] text-[30px] font-bold text-[#f0ebe0] leading-none mb-1"
+                  key={pkg.key}
+                  className={[
+                    "flex flex-col p-7 md:p-8 border",
+                    pkg.popular
+                      ? "bg-[#1d3828] border-[#8a7335]"
+                      : "bg-[#1b3427] border-[#3a4a2c]",
+                  ].join(" ")}
                 >
-                  {pkg.name}
-                </div>
-                <div className="text-[11px] text-[#9bb8a3] leading-[1.55] mb-5 whitespace-pre-line">
-                  {pkg.tagline}
-                </div>
+                  <div className="flex items-baseline justify-between gap-3">
+                    <h3 className={`${playfair.className} text-[32px] font-medium text-white leading-none`}>
+                      {pkg.name}
+                    </h3>
+                    {pkg.popular && (
+                      <span className="text-[11px] tracking-[0.18em] uppercase text-[#C9A84C]">
+                        Most popular
+                      </span>
+                    )}
+                  </div>
 
-                <div className="pb-4 mb-0 border-b border-[#1a3020]">
                   <div
                     key={`${tierIdx}-${pkg.key}`}
-                    className="font-['Cormorant_Garamond',serif] text-[52px] font-bold text-[#C9A84C] leading-none animate-[priceIn_0.26s_cubic-bezier(0.22,1,0.36,1)_both]"
+                    className={`${playfair.className} mt-5 mb-5 text-[56px] font-medium text-white leading-none animate-[priceIn_0.26s_cubic-bezier(0.22,1,0.36,1)_both]`}
                   >
                     {price}
                   </div>
-                  <div className="text-[11px] text-[#9bb8a3] mt-1">{tier.tierLabel}</div>
-                </div>
 
-                <div className="border-t border-[#1a3020] my-[18px]" />
+                  <p className={`${playfair.className} text-[22px] leading-snug text-[#E2C47A] whitespace-pre-line mb-4`}>
+                    {pkg.tagline}
+                  </p>
+                  <p className="text-[15px] leading-[1.7] text-[#f0ebe0]/90 mb-6">{pkg.blurb}</p>
 
-                <div className="flex-1 mb-[22px] space-y-0">
-                  {/* Interior */}
-                  <div className="text-[11px] font-semibold tracking-[0.18em] uppercase text-[#9bb8a3] mb-2">Interior</div>
-                  <ul className="flex flex-col gap-[7px] mb-3.5">
-                    {pkg.interior.map((item) => (
-                      <li
-                        key={item.text}
-                        className="text-[13px] flex items-start gap-2 leading-[1.45]"
-                        style={{ color: item.upgrade ? "#C9A84C" : "#8fbf9a" }}
-                      >
-                        <span style={{ color: item.upgrade ? "#C9A84C" : "#4a7a55", marginTop: 1, flexShrink: 0, fontSize: 11 }}>
-                          {item.upgrade ? "★" : "✓"}
-                        </span>
-                        {item.text}
-                      </li>
-                    ))}
-                  </ul>
+                  <div className="border-t border-[#C9A84C]/25 pt-5 flex-1">
+                    <p className="text-[11px] tracking-[0.16em] uppercase text-[#C9A84C] mb-2">
+                      {pkg.extraLabel}
+                    </p>
+                    <p className="text-[13px] leading-relaxed text-[#e8e4d8]/85 mb-5">{pkg.extra}</p>
 
-                  {/* Exterior */}
-                  <div className="text-[11px] font-semibold tracking-[0.18em] uppercase text-[#9bb8a3] mb-2">Exterior</div>
-                  <ul className="flex flex-col gap-[7px] mb-3.5">
-                    {pkg.exterior.map((item) => (
-                      <li
-                        key={item.text}
-                        className="text-[13px] flex items-start gap-2 leading-[1.45]"
-                        style={{ color: item.upgrade ? "#C9A84C" : "#8fbf9a" }}
-                      >
-                        <span style={{ color: item.upgrade ? "#C9A84C" : "#4a7a55", marginTop: 1, flexShrink: 0, fontSize: 11 }}>
-                          {item.upgrade ? "★" : "✓"}
-                        </span>
-                        {item.text}
-                      </li>
-                    ))}
-                  </ul>
+                    <p className="text-[11px] tracking-[0.16em] uppercase text-[#C9A84C] mb-3">
+                      Included with {pkg.name}
+                    </p>
+                    <ul className="flex flex-col gap-2.5">
+                      {pkg.included.map((item) => (
+                        <li key={item.text} className="flex items-start gap-2.5 text-[14px] leading-snug text-[#f0ebe0]">
+                          <span aria-hidden="true" className="text-[#C9A84C] text-[9px] mt-[5px]">◆</span>
+                          {item.href ? (
+                            <a
+                              href={item.href}
+                              onClick={(e) => scrollToId(e, item.href!.slice(1))}
+                              className="text-[#E2C47A]! underline! underline-offset-4 decoration-[#E2C47A]/50 hover:decoration-[#E2C47A] cursor-pointer"
+                            >
+                              {item.text} →
+                            </a>
+                          ) : (
+                            item.text
+                          )}
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
 
-                  {/* Included */}
-                  <div className="text-[12px] flex items-start gap-2 leading-[1.45] text-[#c8d8c0] pt-1 mt-1 border-t border-[#1a3020]">
-                    <span className="text-[#C9A84C] mt-px flex-shrink-0 text-[11px]">✦</span>
-                    Vehicle Health Check Card included
+                  <div className="pt-7">
+                    <BookNowLink
+                      href={`/book?package=${pkg.name}`}
+                      leadSource="Book Now Popup — Services Page"
+                      fixedInterest="Detailing"
+                      interestLabel={`${pkg.name} Detail`}
+                      packageName={pkg.name}
+                      className="w-full min-h-12 rounded-sm text-[13px] font-semibold tracking-[0.05em] transition-all py-3 bg-[#C9A84C]! text-[#091810]! border border-[#C9A84C]! hover:bg-[#d4b560]!"
+                    >
+                      Book {pkg.name}
+                    </BookNowLink>
                   </div>
                 </div>
+              );
+            })}
+          </div>
 
-                <BookNowLink
-                  href={`/book?package=${pkg.name}`}
-                  leadSource="Book Now Popup — Services Page"
-                  fixedInterest="Detailing"
-                  interestLabel={`${pkg.name} Detail`}
-                  packageName={pkg.name}
-                  className="w-full min-h-12 rounded-lg text-[11px] font-semibold tracking-[0.1em] uppercase transition-all py-3 bg-[#C9A84C]! text-[#091810]! border border-[#C9A84C]! hover:bg-[#d4b560]!"
-                >
-                  Book {pkg.name}
-                </BookNowLink>
-              </div>
-            );
-          })}
-        </div>
-        </div>
-
-        {/* GUARANTEE */}
-        <div className="text-center py-8 pb-10">
-          <p className="text-[13px] text-[#9bb8a3] leading-[1.75]">
-            <span className="text-[#C9A84C] font-medium">48-hour satisfaction guarantee.</span>{" "}
-            Not completely happy? We come back and make it right — free, no questions.
-          </p>
+          <div className="mt-12 pt-8 border-t border-[#C9A84C]/20 grid grid-cols-1 md:grid-cols-3 gap-7 md:gap-10 mb-14">
+            <div>
+              <p className={`${playfair.className} text-[20px] text-[#E2C47A] mb-2`}>The Crown Guarantee</p>
+              <p className="text-[14px] leading-relaxed text-[#f0ebe0]/85">
+                Not completely happy within 48 hours? We come back and make it right, free.
+              </p>
+            </div>
+            <div>
+              <p className={`${playfair.className} text-[20px] text-[#E2C47A] mb-2`}>{REVIEW_COUNT} five-star reviews</p>
+              <p className="text-[14px] leading-relaxed text-[#f0ebe0]/85">
+                Across Glendale, Pasadena, and Burbank.
+              </p>
+            </div>
+            <div>
+              <p className={`${playfair.className} text-[20px] text-[#E2C47A] mb-2`}>We come to you</p>
+              <p className="text-[14px] leading-relaxed text-[#f0ebe0]/85">
+                Your driveway, your schedule. No drop-off, no waiting room.
+              </p>
+            </div>
+          </div>
         </div>
 
         {/* OFFER */}
